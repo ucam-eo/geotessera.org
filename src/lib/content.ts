@@ -11,11 +11,48 @@ export interface ContentMeta {
   component: any;
 }
 
+const blogModules = import.meta.glob('../../content/blog/*.svx', { eager: true }) as Record<string, any>;
+const taskModules = import.meta.glob('../../content/tasks/*.svx', { eager: true }) as Record<string, any>;
+
+function extractSlug(path: string): string {
+  const filename = path.split('/').pop() ?? '';
+  return filename.replace(/\.svx$/, '');
+}
+
+function loadModules(modules: Record<string, any>, type: 'blog' | 'task'): ContentMeta[] {
+  return Object.entries(modules).map(([path, mod]) => {
+    const meta = mod.metadata ?? {};
+    const slug = extractSlug(path);
+    const tags: string[] = meta.tags ?? [];
+    const href = type === 'blog'
+      ? `/blog/${slug}`
+      : `/tasks/${tags[0] ?? 'uncategorized'}/${slug}`;
+    return {
+      title: meta.title ?? slug,
+      date: meta.date ?? '1970-01-01',
+      tags,
+      languages: meta.languages,
+      author: meta.author,
+      description: meta.description,
+      slug,
+      href,
+      type,
+      component: mod.default,
+    };
+  });
+}
+
+let _allContent: ContentMeta[] | null = null;
+
 export function getAllContent(): ContentMeta[] {
-  return [
-    { title: 'Land Classification with OSM Labels', date: '2026-03-11', tags: ['classification', 'osm'], languages: ['TypeScript', 'Python'], slug: 'osm-land-classification', href: '/tasks/classification/osm-land-classification', type: 'task', component: null },
-    { title: 'Solar Panel Detection with UNet', date: '2026-03-11', tags: ['segmentation', 'solar'], languages: ['TypeScript', 'Python'], slug: 'solar-panel-detection', href: '/tasks/segmentation/solar-panel-detection', type: 'task', component: null },
-  ];
+  if (!_allContent) {
+    const blogs = loadModules(blogModules, 'blog');
+    const tasks = loadModules(taskModules, 'task');
+    _allContent = [...blogs, ...tasks].sort(
+      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
+  }
+  return _allContent;
 }
 
 export function getBlogPosts(): ContentMeta[] {
