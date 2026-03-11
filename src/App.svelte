@@ -2,6 +2,11 @@
   import { currentRoute } from './lib/router';
   import Nav from './components/Nav.svelte';
   import Home from './pages/Home.svelte';
+  import Blog from './pages/Blog.svelte';
+  import BlogPost from './pages/BlogPost.svelte';
+  import Tasks from './pages/Tasks.svelte';
+  import TaskTag from './pages/TaskTag.svelte';
+  import TaskExample from './pages/TaskExample.svelte';
 
   let route = $derived($currentRoute);
 </script>
@@ -11,10 +16,20 @@
 <div class="page">
   {#if route.path === '/'}
     <Home />
+  {:else if route.path === '/blog'}
+    <Blog />
+  {:else if route.path === '/blog/:slug'}
+    <BlogPost slug={route.params.slug} />
+  {:else if route.path === '/tasks'}
+    <Tasks />
+  {:else if route.path === '/tasks/:tag'}
+    <TaskTag tag={route.params.tag} />
+  {:else if route.path === '/tasks/:tag/:slug'}
+    <TaskExample tag={route.params.tag} slug={route.params.slug} />
   {:else}
     <div class="placeholder">
-      <h2>{route.path}</h2>
-      <p>Coming soon</p>
+      <h2>404</h2>
+      <p>Page not found</p>
     </div>
   {/if}
 </div>
@@ -36,7 +51,7 @@
   .placeholder h2 {
     font-weight: 300;
     letter-spacing: 4px;
-    font-size: 24px;
+    font-size: 48px;
     margin-bottom: 8px;
   }
 
