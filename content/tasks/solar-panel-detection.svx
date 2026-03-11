@@ -1,0 +1,60 @@
+---
+title: "Solar Panel Detection with UNet"
+date: 2026-03-11
+tags: [segmentation, solar]
+languages: [TypeScript, Python]
+author: "TESSERA Team"
+description: "Detect solar panel installations using UNet segmentation on TESSERA embeddings"
+---
+
+# Solar Panel Detection with UNet
+
+This example shows how to run a pre-trained UNet segmentation model on TESSERA embeddings
+to detect solar panel installations from satellite imagery.
+
+## Overview
+
+The UNet model slides 64×64 patches across TESSERA embedding tiles, producing per-pixel
+probability maps. Thresholding and polygon extraction yield GeoJSON outlines of detected
+solar installations, with minimum area filtering at approximately 1 hectare.
+
+## TypeScript
+
+```typescript
+import { SegmentationSession } from '@ucam-eo/tessera-tasks';
+
+// Initialize ONNX Runtime segmentation session
+const session = new SegmentationSession({
+  modelUrl: '/models/solar-unet.onnx',
+  statsUrl: '/models/solar-stats.json',
+  patchSize: 64,
+  stride: 32,
+});
+
+// Run segmentation on loaded embeddings
+const polygons = await session.segment(embeddingRegion, {
+  threshold: 0.5,
+  minArea: 10000, // 1 hectare in m²
+});
+```
+
+## Python
+
+```python
+import geotessera
+import torch
+from geotessera.models import load_unet
+
+# Download embeddings
+gt = geotessera.GeoTessera()
+tiles = gt.download(region="cambridge.geojson", format="numpy")
+
+# Run UNet segmentation
+model = load_unet("solar-panels")
+predictions = model.predict(tiles, patch_size=64, stride=32)
+solar_polygons = predictions.to_geojson(threshold=0.5, min_area=10000)
+```
+
+---
+
+*Pre-trained model weights and full pipeline available on [GitHub](https://github.com/ucam-eo/tessera-classification).*

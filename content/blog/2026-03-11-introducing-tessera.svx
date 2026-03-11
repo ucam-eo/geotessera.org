@@ -1,0 +1,44 @@
+---
+title: "Introducing TESSERA"
+date: 2026-03-11
+tags: [announcement]
+author: "TESSERA Team"
+description: "TESSERA is a pixel-wise earth observation foundation model that generates 128-dimensional embeddings from Sentinel-1 and Sentinel-2 satellite imagery."
+---
+
+# Introducing TESSERA
+
+TESSERA (Temporal Embeddings of Surface Spectra for Earth Representation and Analysis)
+is a foundation model for earth observation. It compresses a full year of Sentinel-1 and
+Sentinel-2 satellite observations into dense, 128-dimensional per-pixel embeddings at
+10m spatial resolution.
+
+## Why embeddings?
+
+Traditional approaches to satellite image analysis require task-specific feature
+engineering. TESSERA's self-supervised embeddings provide a general-purpose representation
+that transfers across downstream tasks — from land cover classification to solar panel
+detection — with minimal additional training.
+
+## Getting started
+
+Install the Python library:
+
+```bash
+pip install geotessera
+```
+
+Download embeddings for a region:
+
+```python
+import geotessera
+
+gt = geotessera.GeoTessera()
+tiles = gt.download(region="cambridge.geojson")
+```
+
+Or explore interactively in the browser using the [TESSERA Viewer](https://github.com/ucam-eo/tze).
+
+---
+
+*Read the paper on arXiv for technical details.*
