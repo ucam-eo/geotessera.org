@@ -1,40 +1,47 @@
 <script lang="ts">
   import { currentRoute } from './lib/router';
-  import Globe from './components/Globe.svelte';
+  import Nav from './components/Nav.svelte';
+  import Home from './pages/Home.svelte';
 
   let route = $derived($currentRoute);
 </script>
 
-{#if route.path === '/'}
-  <Globe />
-{:else}
-  <main>
-    <h1>TESSERA</h1>
-    <p>Route: {route.path}</p>
-    <p>Params: {JSON.stringify(route.params)}</p>
-  </main>
-{/if}
+<Nav />
+
+<div class="page">
+  {#if route.path === '/'}
+    <Home />
+  {:else}
+    <div class="placeholder">
+      <h2>{route.path}</h2>
+      <p>Coming soon</p>
+    </div>
+  {/if}
+</div>
 
 <style>
-  main {
+  .page {
+    padding-top: var(--nav-height);
+  }
+
+  .placeholder {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    background: var(--bg-primary);
-    color: var(--text-primary);
-    font-family: var(--font-sans);
+    height: calc(100vh - var(--nav-height));
+    color: var(--text-muted);
   }
-  h1 {
-    font-weight: 200;
-    letter-spacing: 14px;
-    font-size: 48px;
+
+  .placeholder h2 {
+    font-weight: 300;
+    letter-spacing: 4px;
+    font-size: 24px;
+    margin-bottom: 8px;
   }
-  p {
+
+  .placeholder p {
     font-size: 12px;
     letter-spacing: 2px;
-    color: var(--text-muted);
-    margin-top: 8px;
   }
 </style>
