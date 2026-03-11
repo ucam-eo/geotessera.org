@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ucam-eo/maplibre-zarr-tessera": "link:../tze/packages/maplibre-zarr-tessera",
     "maplibre-gl": "^4.7.1"
   },
   "devDependencies": {

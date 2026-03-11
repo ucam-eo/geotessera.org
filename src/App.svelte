@@ -1,14 +1,19 @@
 <script lang="ts">
   import { currentRoute } from './lib/router';
+  import Globe from './components/Globe.svelte';
 
   let route = $derived($currentRoute);
 </script>
 
-<main>
-  <h1>TESSERA</h1>
-  <p>Route: {route.path}</p>
-  <p>Params: {JSON.stringify(route.params)}</p>
-</main>
+{#if route.path === '/'}
+  <Globe />
+{:else}
+  <main>
+    <h1>TESSERA</h1>
+    <p>Route: {route.path}</p>
+    <p>Params: {JSON.stringify(route.params)}</p>
+  </main>
+{/if}
 
 <style>
   main {
