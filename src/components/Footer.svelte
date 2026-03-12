@@ -17,7 +17,7 @@
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.5 2C3.12 2 2 3.12 2 4.5v2.03c0 .9.47 1.73 1.24 2.2L12 14l8.76-5.27A2.62 2.62 0 0 0 22 6.53V4.5C22 3.12 20.88 2 19.5 2h-15zm0 20C3.12 22 2 20.88 2 19.5v-2.03c0-.9.47-1.73 1.24-2.2L12 10l8.76 5.27c.77.47 1.24 1.3 1.24 2.2v2.03c0 1.38-1.12 2.5-2.5 2.5h-15z"/></svg>
     </a>
   </div>
-  <span>Brought to you by the University of Cambridge <a href="https://www.cst.cam.ac.uk/research/eeg" target="_blank" rel="noopener">Energy &amp; Environment Group</a> and the <a href="https://eo.conservation.cam.ac.uk/" target="_blank" rel="noopener">Cambridge Centre for Earth Observation</a>. This site is <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener">CC0</a> licensed.</span>
+  <span>&copy; 2025–2026, <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener">CC0</a> licensed.</span>
 </footer>
 
 <style>

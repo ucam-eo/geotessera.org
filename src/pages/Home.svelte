@@ -284,7 +284,7 @@
     <section class="panel-tall panel-coverage">
       <div class="sticky-wrap">
         <div class="panel-card open-card" class:active={coverageVisible}>
-          <h2>Coverage &amp; roadmap</h2>
+          <h2>Roadmap</h2>
           <p class="open-intro">Global terrestrial coverage at 10m resolution. Built in the open at Cambridge. <a href="/about#roadmap" use:link>Full roadmap →</a></p>
           <div class="coverage-timeline">
             {#each siteConfig.roadmap as item, i}
@@ -294,7 +294,7 @@
                 <div class="cov-content">
                   <span class="cov-version">{item.version}</span>
                   <span class="cov-status {item.status}">{item.statusLabel}</span>
-                  <span class="cov-desc">{item.description}{#if item.linkText} <a href={item.linkUrl} target="_blank" rel="noopener">{item.linkText}</a>{/if}{#if item.link2Text} and <a href={item.link2Url} target="_blank" rel="noopener">{item.link2Text}</a>{/if}</span>
+                  <span class="cov-desc">{item.description}{#if item.linkText}&nbsp;<a href={item.linkUrl} target="_blank" rel="noopener">{item.linkText}</a>{/if}{#if item.link2Text} and <a href={item.link2Url} target="_blank" rel="noopener">{item.link2Text}</a>{/if}</span>
                 </div>
               </div>
             {/each}

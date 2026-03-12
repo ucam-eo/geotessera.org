@@ -62,6 +62,26 @@
       thumb: 'https://substack-post-media.s3.amazonaws.com/public/images/ba401d6f-4183-4b04-8783-3397005bf875_1280x720.jpeg',
       type: 'podcast' as const,
     },
+    {
+      id: 'france-tv-hedgehogs',
+      title: 'Des satellites pour protéger les hérissons',
+      source: 'France Télévisions',
+      date: 'Jan 2026',
+      description: 'French national TV segment on using TESSERA satellite embeddings for hedgehog habitat detection, featuring Anil Madhavapeddy discussing conservation applications.',
+      url: 'https://crank.recoil.org/w/qaKi7kTYoD7ezxd81q3xex?start=1m49s',
+      thumb: 'https://crank.recoil.org/lazy-static/thumbnails/132d98c3-082f-40ee-837d-36fbd5b34922.jpg',
+      type: 'interview' as const,
+    },
+    {
+      id: 'recoil-crank-conservation',
+      title: 'How AI Could Transform Conservation',
+      source: 'Conservation Evidence',
+      date: 'Jan 2026',
+      description: 'Anil Madhavapeddy presents at the Conservation Evidence conference at Pembroke College about effective conservation using geospatial foundation models like TESSERA.',
+      url: 'https://crank.recoil.org/w/cheQBkBfSsZwGZP6F3jtaa',
+      thumb: 'https://crank.recoil.org/lazy-static/previews/ae4a9924-1dfe-4304-a5e3-1e2efe14dc9a.jpg',
+      type: 'talk' as const,
+    },
   ];
 
   const types = ['all', 'talk', 'interview', 'workshop', 'podcast'] as const;

@@ -77,10 +77,16 @@
   <header>
     <span class="page-label">Blog</span>
     <p class="subtitle">Updates, tutorials, and research from the TESSERA community</p>
-    <a href="/blog/feed.xml" class="feed-link" target="_blank" rel="noopener">
-      <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14"><circle cx="3.5" cy="12.5" r="2"/><path d="M1.5 6.5a7 7 0 0 1 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M1.5 1.5a12 12 0 0 1 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      Atom feed
-    </a>
+    <div class="feed-links">
+      <a href="/blog/feed.xml" class="feed-link" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14"><circle cx="3.5" cy="12.5" r="2"/><path d="M1.5 6.5a7 7 0 0 1 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M1.5 1.5a12 12 0 0 1 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        All posts
+      </a>
+      <a href="/blog/feed-original.xml" class="feed-link" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14"><circle cx="3.5" cy="12.5" r="2"/><path d="M1.5 6.5a7 7 0 0 1 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M1.5 1.5a12 12 0 0 1 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Original only
+      </a>
+    </div>
   </header>
 
   <div class="filters">
@@ -168,11 +174,16 @@
     margin-top: 6px;
   }
 
+  .feed-links {
+    display: flex;
+    gap: 16px;
+    margin-top: 12px;
+  }
+
   .feed-link {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    margin-top: 12px;
     font-size: 12px;
     letter-spacing: 1px;
     color: var(--accent-dim);

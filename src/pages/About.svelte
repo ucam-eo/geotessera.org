@@ -91,7 +91,7 @@
       {#each siteConfig.roadmap as item}
         <div class="involve-item">
           <dt><span class="roadmap-version">{item.version}</span> <span class="roadmap-status {item.status}">{item.statusLabel}</span></dt>
-          <dd>{item.description}{#if item.linkText} <a href={item.linkUrl} target="_blank" rel="noopener">{item.linkText}</a>{/if}{#if item.link2Text} and <a href={item.link2Url} target="_blank" rel="noopener">{item.link2Text}</a>{/if}</dd>
+          <dd>{item.description}{#if item.linkText}&nbsp;<a href={item.linkUrl} target="_blank" rel="noopener">{item.linkText}</a>{/if}{#if item.link2Text} and <a href={item.link2Url} target="_blank" rel="noopener">{item.link2Text}</a>{/if}</dd>
         </div>
       {/each}
     </dl>
@@ -102,7 +102,7 @@
     <h2>People</h2>
 
     <div class="people-group">
-      <h3>Faculty</h3>
+      <h3>Lead Faculty</h3>
       <div class="people-list">
         <div class="person">
           <a class="person-name" href="https://www.cst.cam.ac.uk/people/sk818" target="_blank" rel="noopener">Srinivasan Keshav</a>
@@ -128,7 +128,7 @@
       <div class="people-list">
         <div class="person">
           <a class="person-name" href="https://www.cst.cam.ac.uk/people/zf281" target="_blank" rel="noopener">Zhengpeng Feng</a>
-          <span class="person-role">PhD student</span>
+          <span class="person-role">PhD student and lead researcher</span>
         </div>
         <div class="person">
           <a class="person-name" href="https://www.cst.cam.ac.uk/people/ray25" target="_blank" rel="noopener">Robin Young</a>
@@ -157,6 +157,10 @@
         <div class="person">
           <a class="person-name" href="https://tunbury.org" target="_blank" rel="noopener">Mark Elvers</a>
           <span class="person-role">Senior software engineer</span>
+        </div>
+        <div class="person">
+          <a class="person-name" href="https://digitalflapjack.com" target="_blank" rel="noopener">Michael W. Dales</a>
+          <span class="person-role">Assistant Research Professor, Cambridge</span>
         </div>
       </div>
     </div>

@@ -56,7 +56,7 @@
       <div class="dropdown docs-dropdown">
         <button
           class="docs-btn"
-          onclick={(e) => { e.stopPropagation(); docsOpen = !docsOpen; }}
+          onclick={(e) => { e.stopPropagation(); docsOpen = !docsOpen; exploreOpen = false; }}
         >
           <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2h8l4 4v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M12 2v4h4M7 10h6M7 14h4"/></svg>
           Docs
@@ -83,7 +83,7 @@
       <div class="dropdown explore-dropdown">
         <button
           class="explore-btn"
-          onclick={(e) => { e.stopPropagation(); exploreOpen = !exploreOpen; }}
+          onclick={(e) => { e.stopPropagation(); exploreOpen = !exploreOpen; docsOpen = false; }}
         >
           <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M10 2a14 14 0 0 1 0 16M10 2a14 14 0 0 0 0 16M2.5 7.5h15M2.5 12.5h15"/></svg>
           Explore
@@ -306,7 +306,7 @@
     font-size: 10px;
     color: var(--text-faint);
     letter-spacing: 0.5px;
-    margin-top: 1px;
+    margin-top: 4px;
   }
 
   .docs-menu a:hover .docs-option-label {
@@ -379,7 +379,7 @@
     font-size: 10px;
     color: var(--text-faint);
     letter-spacing: 0.5px;
-    margin-top: 1px;
+    margin-top: 4px;
   }
 
   .explore-menu a:hover .explore-option-label {

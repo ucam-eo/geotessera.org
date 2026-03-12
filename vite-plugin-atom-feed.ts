@@ -54,8 +54,18 @@ function toISO(date: string): string {
   return new Date(date).toISOString();
 }
 
-function buildFeed(siteUrl: string, blogDir: string, links: BlogLinkEntry[]): string {
-  const entries: { title: string; date: string; author: string; description: string; url: string; tags: string[] }[] = [];
+interface FeedEntry {
+  title: string;
+  date: string;
+  author: string;
+  description: string;
+  url: string;
+  tags: string[];
+  isLocal: boolean;
+}
+
+function collectEntries(siteUrl: string, blogDir: string, links: BlogLinkEntry[]): FeedEntry[] {
+  const entries: FeedEntry[] = [];
 
   // Read .svx files
   try {
@@ -71,6 +81,7 @@ function buildFeed(siteUrl: string, blogDir: string, links: BlogLinkEntry[]): st
         description: meta.description ?? '',
         url: `${siteUrl}/blog/${slug}`,
         tags: meta.tags ?? [],
+        isLocal: true,
       });
     }
   } catch {
@@ -86,10 +97,22 @@ function buildFeed(siteUrl: string, blogDir: string, links: BlogLinkEntry[]): st
       description: link.description,
       url: link.url,
       tags: link.tags,
+      isLocal: false,
     });
   }
 
   entries.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  return entries;
+}
+
+function buildFeedXml(
+  siteUrl: string,
+  feedId: string,
+  feedTitle: string,
+  feedSubtitle: string,
+  selfUrl: string,
+  entries: FeedEntry[],
+): string {
   const updated = entries[0]?.date ?? new Date().toISOString().slice(0, 10);
 
   const xml = entries
@@ -108,11 +131,11 @@ function buildFeed(siteUrl: string, blogDir: string, links: BlogLinkEntry[]): st
 
   return `<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <id>${siteUrl}/blog</id>
-  <title>TESSERA Blog</title>
-  <subtitle>Updates, tutorials, and research from the TESSERA community</subtitle>
+  <id>${feedId}</id>
+  <title>${escXml(feedTitle)}</title>
+  <subtitle>${escXml(feedSubtitle)}</subtitle>
   <link href="${siteUrl}/blog" rel="alternate"/>
-  <link href="${siteUrl}/blog/feed.xml" rel="self"/>
+  <link href="${selfUrl}" rel="self"/>
   <updated>${toISO(updated)}</updated>
 ${xml}
 </feed>
@@ -120,28 +143,56 @@ ${xml}
 }
 
 export function atomFeedPlugin(opts: { siteUrl: string; blogDir: string; links: BlogLinkEntry[] }): Plugin {
-  const feedPath = '/blog/feed.xml';
-  let feedContent = '';
+  function buildFeeds() {
+    const all = collectEntries(opts.siteUrl, opts.blogDir, opts.links);
+    const local = all.filter((e) => e.isLocal);
+
+    const allFeed = buildFeedXml(
+      opts.siteUrl,
+      `${opts.siteUrl}/blog`,
+      'TESSERA Blog',
+      'Updates, tutorials, and research from the TESSERA community',
+      `${opts.siteUrl}/blog/feed.xml`,
+      all,
+    );
+
+    const localFeed = buildFeedXml(
+      opts.siteUrl,
+      `${opts.siteUrl}/blog/original`,
+      'TESSERA Blog — Original Content',
+      'Original posts from the TESSERA team',
+      `${opts.siteUrl}/blog/feed-original.xml`,
+      local,
+    );
+
+    return { allFeed, localFeed };
+  }
 
   return {
     name: 'atom-feed',
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
-        if (req.url === feedPath) {
-          feedContent = buildFeed(opts.siteUrl, opts.blogDir, opts.links);
+        if (req.url === '/blog/feed.xml' || req.url === '/blog/feed-original.xml') {
+          const { allFeed, localFeed } = buildFeeds();
+          const content = req.url === '/blog/feed.xml' ? allFeed : localFeed;
           res.setHeader('Content-Type', 'application/atom+xml; charset=utf-8');
-          res.end(feedContent);
+          res.end(content);
           return;
         }
         next();
       });
     },
     generateBundle() {
-      feedContent = buildFeed(opts.siteUrl, opts.blogDir, opts.links);
+      const { allFeed, localFeed } = buildFeeds();
       this.emitFile({
         type: 'asset',
         fileName: 'blog/feed.xml',
-        source: feedContent,
+        source: allFeed,
+      });
+      this.emitFile({
+        type: 'asset',
+        fileName: 'blog/feed-original.xml',
+        source: localFeed,
       });
     },
   };
