@@ -1,107 +1,91 @@
 import type { Map as MaplibreMap } from 'maplibre-gl';
 import { siteConfig } from './config';
 
-export interface GlobeStep {
+export interface Waypoint {
+  scroll: number; // in vh units
   center: [number, number];
   zoom: number;
-  label?: string;
-  sublabel?: string;
 }
 
-export const globeSteps: GlobeStep[] = [
-  {
-    center: siteConfig.map.initialCenter,
-    zoom: siteConfig.map.initialZoom,
-    label: siteConfig.title,
-    sublabel: siteConfig.subtitle,
-  },
-  {
-    center: siteConfig.map.ukCenter,
-    zoom: siteConfig.map.ukZoom,
-  },
-  {
-    center: siteConfig.map.cambridgeCenter,
-    zoom: siteConfig.map.cambridgeZoom,
-    label: '128-dimensional embeddings',
-    sublabel: 'at 10m resolution',
-  },
-  {
-    center: siteConfig.map.initialCenter,
-    zoom: siteConfig.map.initialZoom,
-    label: 'Global coverage',
-    sublabel: 'Sentinel-1 & Sentinel-2 · 2017–2025',
-  },
+// Scroll timeline: defines the mapping from scroll position (in vh) to map state.
+// Between consecutive waypoints, center/zoom are interpolated.
+// Consecutive waypoints with the same center/zoom create dwell zones.
+export const timeline: Waypoint[] = [
+  // Hero dwell
+  { scroll: 0,    center: siteConfig.map.cambridgeCenter, zoom: 12 },
+  { scroll: 1,    center: siteConfig.map.cambridgeCenter, zoom: 12 },
+  // Transition to pixel close-up
+  { scroll: 2,    center: siteConfig.map.cambridgeCenter, zoom: 16 },
+  // Dwell at pixel close-up (progressive reveal + reading time)
+  { scroll: 5,    center: siteConfig.map.cambridgeCenter, zoom: 16 },
+  // Transition to pipeline zoom
+  { scroll: 6,    center: siteConfig.map.cambridgeCenter, zoom: 14 },
+  // Dwell at pipeline zoom
+  { scroll: 8,    center: siteConfig.map.cambridgeCenter, zoom: 14 },
+  // Tasks section — gentle zoom out while reading
+  { scroll: 11,   center: siteConfig.map.cambridgeCenter, zoom: 10 },
+  // Open/sovereign section — continue zoom out
+  { scroll: 11,   center: siteConfig.map.cambridgeCenter, zoom: 10 },
+  { scroll: 15,   center: siteConfig.map.ukCenter,        zoom: 5 },
+  // Transition to coverage view (Europe)
+  { scroll: 16,   center: [-2, 52],                       zoom: 4 },
+  // Dwell at coverage view
+  { scroll: 19,   center: [-2, 52],                       zoom: 4 },
 ];
 
-export function setupAutoRotation(map: MaplibreMap) {
-  let rotating = true;
-  let frameId: number;
+export const totalScrollVh = timeline[timeline.length - 1].scroll;
 
-  function rotate() {
-    if (!rotating) return;
-    const center = map.getCenter();
-    center.lng += 0.02;
-    map.setCenter(center);
-    frameId = requestAnimationFrame(rotate);
-  }
-
-  frameId = requestAnimationFrame(rotate);
-
-  return {
-    stop() { rotating = false; cancelAnimationFrame(frameId); },
-    start() { rotating = true; rotate(); },
-  };
+function lerp(a: number, b: number, t: number): number {
+  return a + (b - a) * t;
 }
 
-export function setupScrollAnimation(map: MaplibreMap, scrollContainer: HTMLElement) {
-  let currentStep = 0;
-  let animating = false;
-  const rotation = setupAutoRotation(map);
+function getMapState(scrollVh: number): { center: [number, number]; zoom: number } {
+  const s = Math.max(0, Math.min(scrollVh, totalScrollVh));
 
-  function getScrollStep(): number {
-    const scrollTop = scrollContainer.scrollTop;
-    const vh = window.innerHeight;
-    return Math.min(Math.floor(scrollTop / vh), globeSteps.length - 1);
+  // Find the segment we're in
+  for (let i = 0; i < timeline.length - 1; i++) {
+    const from = timeline[i];
+    const to = timeline[i + 1];
+    if (s >= from.scroll && s <= to.scroll) {
+      const range = to.scroll - from.scroll;
+      const t = range > 0 ? (s - from.scroll) / range : 0;
+      return {
+        center: [lerp(from.center[0], to.center[0], t), lerp(from.center[1], to.center[1], t)],
+        zoom: lerp(from.zoom, to.zoom, t),
+      };
+    }
   }
 
-  function flyToStep(step: number) {
-    if (step === currentStep || animating) return;
-    animating = true;
-    currentStep = step;
+  // Past the end
+  const last = timeline[timeline.length - 1];
+  return { center: [...last.center], zoom: last.zoom };
+}
 
-    if (step > 0) rotation.stop();
+export function setupScrollAnimation(
+  map: MaplibreMap,
+  scrollContainer: HTMLElement,
+): () => void {
+  let rafId = 0;
 
-    const { center, zoom } = globeSteps[step];
-    map.flyTo({
-      center,
-      zoom,
-      duration: 2000,
-      essential: true,
-    });
-    map.once('moveend', () => {
-      animating = false;
-      if (currentStep === 0) rotation.start();
-      const newStep = getScrollStep();
-      if (newStep !== currentStep) {
-        flyToStep(newStep);
-      }
-    });
+  function update() {
+    const scrollTop = scrollContainer.scrollTop;
+    const vh = window.innerHeight;
+    if (vh === 0) return;
+
+    const scrollVh = scrollTop / vh;
+    const { center, zoom } = getMapState(scrollVh);
+    map.jumpTo({ center, zoom });
   }
 
   function onScroll() {
-    const step = getScrollStep();
-    if (step !== currentStep && !animating) {
-      flyToStep(step);
-    }
+    cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(update);
   }
 
   scrollContainer.addEventListener('scroll', onScroll, { passive: true });
 
-  return {
-    destroy() {
-      scrollContainer.removeEventListener('scroll', onScroll);
-      rotation.stop();
-    },
-    getCurrentStep: () => currentStep,
+  return () => {
+    scrollContainer.removeEventListener('scroll', onScroll);
+    cancelAnimationFrame(rafId);
   };
 }

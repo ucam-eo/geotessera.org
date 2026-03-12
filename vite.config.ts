@@ -11,4 +11,9 @@ export default defineConfig({
       '@ucam-eo/maplibre-zarr-tessera': path.resolve(__dirname, '../tze/packages/maplibre-zarr-tessera/src/index.ts'),
     },
   },
+  server: {
+    fs: {
+      allow: ['.', '../tze'],
+    },
+  },
 });

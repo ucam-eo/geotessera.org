@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { getAllContent } from '@/lib/content';
+  import { getBlogPosts } from '@/lib/content';
   import PostCard from '@/components/PostCard.svelte';
   import TagPill from '@/components/TagPill.svelte';
   import Footer from '@/components/Footer.svelte';
 
-  const allPosts = getAllContent();
+  const allPosts = getBlogPosts();
   const allTags = [...new Set(allPosts.flatMap((p) => p.tags))].sort();
 
   let activeTag = $state<string | null>(null);

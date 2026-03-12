@@ -10,6 +10,7 @@
 
   let { tag, slug }: Props = $props();
   let post = $derived(getContentBySlug(slug));
+  let Component = $derived(post?.component);
 </script>
 
 {#if post}
@@ -30,7 +31,9 @@
       </div>
     </header>
     <div class="content">
-      <svelte:component this={post.component} />
+      {#if Component}
+        <Component />
+      {/if}
     </div>
   </article>
 {:else}

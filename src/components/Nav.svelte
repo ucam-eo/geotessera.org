@@ -72,7 +72,7 @@
   }
 
   .wordmark {
-    font-weight: 200;
+    font-weight: 600;
     letter-spacing: 6px;
     font-size: 16px;
     color: var(--text-primary);
@@ -94,6 +94,8 @@
     cursor: pointer;
     font-family: var(--font-sans);
     padding: 4px 0;
+    margin: 0;
+    line-height: 1;
     transition: color 0.2s;
   }
 
@@ -104,6 +106,8 @@
 
   .dropdown {
     position: relative;
+    display: flex;
+    align-items: center;
   }
 
   .dropdown-menu {

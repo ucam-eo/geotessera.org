@@ -19,8 +19,8 @@ export const siteConfig = {
   map: {
     catalogUrl: 'https://dl2.geotessera.org/zarr/v1/catalog.json',
     globalPreviewUrl: 'https://dl2.geotessera.org/zarr/v1/global_rgb_2025.zarr',
-    initialCenter: [10, 30] as [number, number],
-    initialZoom: 1.5,
+    initialCenter: [0.1218, 52.2053] as [number, number],
+    initialZoom: 12,
     cambridgeCenter: [0.1218, 52.2053] as [number, number],
     cambridgeZoom: 12,
     ukCenter: [-2, 54] as [number, number],
