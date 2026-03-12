@@ -27,10 +27,9 @@ export const timeline: Waypoint[] = [
   // Open/sovereign section — continue zoom out
   { scroll: 11,   center: siteConfig.map.cambridgeCenter, zoom: 10 },
   { scroll: 15,   center: siteConfig.map.ukCenter,        zoom: 5 },
-  // Transition to coverage view (Europe)
+  // Coverage/roadmap — slow pan east across Europe
   { scroll: 16,   center: [-2, 52],                       zoom: 4 },
-  // Dwell at coverage view
-  { scroll: 19,   center: [-2, 52],                       zoom: 4 },
+  { scroll: 19,   center: [15, 50],                       zoom: 4 },
 ];
 
 export const totalScrollVh = timeline[timeline.length - 1].scroll;

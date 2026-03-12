@@ -7,6 +7,8 @@
   import { getAllContent } from '@/lib/content';
   import { siteConfig } from '@/lib/config';
   import { totalScrollVh } from '@/lib/globe';
+  import { scrollSections, activeScrollSection, registerScrollTo, unregisterScrollTo } from '@/lib/scroll-state';
+  import { onMount } from 'svelte';
 
   let scrollContainer = $state<HTMLElement>(null!);
 
@@ -53,12 +55,12 @@
   }
 
   const sections = [
-    { label: 'Hero',     start: 0 },
-    { label: 'Pixels',   start: 1 },
-    { label: 'Pipeline', start: 5 },
-    { label: 'Tasks',    start: 8 },
-    { label: 'Open',     start: 11 },
-    { label: 'Coverage', start: 15 },
+    { label: 'Home',  start: 0 },
+    { label: 'What',  start: 1 },
+    { label: 'How',   start: 5 },
+    { label: 'Why',   start: 8 },
+    { label: 'Where', start: 11 },
+    { label: 'When',  start: 15 },
   ];
 
   let activeSection = $derived(
@@ -68,18 +70,54 @@
     scrollVh >= 5 ? 2 :
     scrollVh >= 1 ? 1 : 0
   );
+
+  // Publish scroll state to nav
+  onMount(() => {
+    scrollSections.set(sections);
+    registerScrollTo((targetVh: number) => {
+      if (scrollContainer) {
+        scrollContainer.scrollTo({ top: targetVh * window.innerHeight, behavior: 'smooth' });
+      }
+    });
+
+    // Scroll to hash on load
+    const hash = window.location.hash.slice(1).toLowerCase();
+    if (hash) {
+      const target = sections.find(s => s.label.toLowerCase() === hash);
+      if (target && scrollContainer) {
+        requestAnimationFrame(() => {
+          scrollContainer.scrollTo({ top: target.start * window.innerHeight });
+        });
+      }
+    }
+
+    return () => {
+      scrollSections.set([]);
+      activeScrollSection.set(-1);
+      unregisterScrollTo();
+    };
+  });
+
+  // Update hash and store when active section changes
+  let prevSection = -1;
+  $effect(() => {
+    activeScrollSection.set(activeSection);
+    if (activeSection !== prevSection) {
+      prevSection = activeSection;
+      const label = sections[activeSection].label.toLowerCase();
+      const hash = label === 'home' ? '' : `#${label}`;
+      const url = '/' + hash;
+      if (window.location.pathname + window.location.hash !== url) {
+        history.replaceState(null, '', url);
+      }
+    }
+  });
 </script>
 
 <div class="home" bind:this={scrollContainer} onscroll={onScroll}>
   <div class="debug">
     {scrollVh.toFixed(1)}vh [{sections[activeSection].label}] opacity:{tileOpacity.toFixed(2)}
   </div>
-
-  <nav class="progress-dots" aria-label="Scroll progress">
-    {#each sections as section, i}
-      <div class="dot" class:active={i === activeSection} title={section.label}></div>
-    {/each}
-  </nav>
 
   <Globe {scrollContainer} {tileOpacity} />
 
@@ -639,33 +677,6 @@
     pointer-events: none;
   }
 
-  .progress-dots {
-    position: fixed;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 150;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    pointer-events: none;
-  }
-
-  .dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--text-faint);
-    opacity: 0.3;
-    transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease;
-  }
-
-  .dot.active {
-    opacity: 1;
-    background: var(--accent-dim);
-    transform: scale(1.5);
-  }
-
   .home {
     height: 100vh;
     overflow-y: auto;
@@ -710,7 +721,7 @@
 
   .panel-card {
     pointer-events: auto;
-    background: rgba(10, 10, 26, 0.82);
+    background: rgba(10, 10, 26, 0.95);
     backdrop-filter: blur(16px);
     border: 1px solid var(--border-subtle);
     border-radius: 12px;
@@ -752,15 +763,15 @@
   .scroll-cue {
     display: inline-block;
     margin-top: 24px;
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 2px;
-    color: var(--text-faint);
+    color: var(--text-muted);
     animation: pulse 2s ease-in-out infinite;
   }
 
   @keyframes pulse {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.8; }
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
   }
 
   .panel-card h2 {
