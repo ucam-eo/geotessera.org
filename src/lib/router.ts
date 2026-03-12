@@ -73,6 +73,7 @@ const routes: { path: string; route: Route }[] = [
   '/tasks/:tag/:slug',
   '/papers',
   '/videos',
+  '/coverage',
 ].map((path) => ({ path, route: compileRoute(path) }));
 
 export const currentRoute = derived(currentPath, ($path) => {

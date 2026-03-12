@@ -11,6 +11,7 @@
   import About from './pages/About.svelte';
   import Papers from './pages/Papers.svelte';
   import Videos from './pages/Videos.svelte';
+  import Coverage from './pages/Coverage.svelte';
 
   let route = $derived($currentRoute);
   let isHome = $derived(route.path === '/');
@@ -26,7 +27,9 @@
     <Home />
   {:else}
     <div class="content-backdrop">
-      {#if route.path === '/about'}
+      {#if route.path === '/coverage'}
+        <Coverage />
+      {:else if route.path === '/about'}
         <About />
       {:else if route.path === '/blog'}
         <Blog />

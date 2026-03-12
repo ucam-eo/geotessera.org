@@ -262,7 +262,7 @@
               </div>
               <div class="open-text">
                 <span class="open-label">Open Embeddings</span>
-                <span class="open-desc">Pre-computed embeddings are <a href="https://github.com/ucam-eo/geotessera" target="_blank" rel="noopener">CC0 licensed</a> — download and use freely. <a href="/tasks" use:link>See downstream tasks →</a></span>
+                <span class="open-desc">Pre-computed embeddings are <a href="https://github.com/ucam-eo/geotessera" target="_blank" rel="noopener">CC0 licensed</a> — download and use freely. <a href="/coverage" use:link>View coverage →</a></span>
               </div>
             </div>
             <div class="open-connector" class:revealed={openStep4}></div>
@@ -294,7 +294,7 @@
                 <div class="cov-content">
                   <span class="cov-version">{item.version}</span>
                   <span class="cov-status {item.status}">{item.statusLabel}</span>
-                  <span class="cov-desc">{item.description}{#if item.linkText}&nbsp;<a href={item.linkUrl} target="_blank" rel="noopener">{item.linkText}</a>{/if}{#if item.link2Text} and <a href={item.link2Url} target="_blank" rel="noopener">{item.link2Text}</a>{/if}</span>
+                  <span class="cov-desc">{item.description}{#if item.linkText}&nbsp;{#if item.linkUrl.startsWith('/')}<a href={item.linkUrl} use:link>{item.linkText}</a>{:else}<a href={item.linkUrl} target="_blank" rel="noopener">{item.linkText}</a>{/if}{/if}{#if item.link2Text} and {#if item.link2Url.startsWith('/')}<a href={item.link2Url} use:link>{item.link2Text}</a>{:else}<a href={item.link2Url} target="_blank" rel="noopener">{item.link2Text}</a>{/if}{/if}</span>
                 </div>
               </div>
             {/each}

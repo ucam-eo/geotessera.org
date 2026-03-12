@@ -53,6 +53,10 @@
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="12" height="12" rx="1.5"/><path d="M14 8l4-2v8l-4-2"/></svg>
         Videos
       </a>
+      <a href="/coverage" use:link class:active={path.startsWith('/coverage')} onclick={closeAll}>
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M2 10h16"/><path d="M10 2c-2.7 2.7-2.7 13.3 0 16"/><path d="M10 2c2.7 2.7 2.7 13.3 0 16"/></svg>
+        Coverage
+      </a>
       <div class="dropdown docs-dropdown">
         <button
           class="docs-btn"

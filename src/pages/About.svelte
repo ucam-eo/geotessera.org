@@ -45,7 +45,7 @@
       <li>
         <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><path d="M10 3v14M3 10h14"/></svg>
         <a href="https://github.com/ucam-eo/geotessera" target="_blank" rel="noopener">GeoTessera Embeddings<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
-        <span class="eco-desc">— Pre-computed global embeddings (CC0 license)</span>
+        <span class="eco-desc">— Pre-computed global embeddings (CC0 license). <a href="/coverage" use:link>View coverage</a></span>
       </li>
       <li>
         <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="16" height="11" rx="1.5"/><path d="M6 17h8M10 14v3"/></svg>
@@ -86,12 +86,12 @@
   <!-- Roadmap -->
   <section class="section" id="roadmap">
     <h2>Roadmap</h2>
-    <p>Current status and planned milestones for TESSERA embeddings and model development.</p>
+    <p>Current status and planned milestones for TESSERA embeddings and model development. See the <a href="/coverage" use:link>coverage map</a> for current global progress.</p>
     <dl class="involve-list">
       {#each siteConfig.roadmap as item}
         <div class="involve-item">
           <dt><span class="roadmap-version">{item.version}</span> <span class="roadmap-status {item.status}">{item.statusLabel}</span></dt>
-          <dd>{item.description}{#if item.linkText}&nbsp;<a href={item.linkUrl} target="_blank" rel="noopener">{item.linkText}</a>{/if}{#if item.link2Text} and <a href={item.link2Url} target="_blank" rel="noopener">{item.link2Text}</a>{/if}</dd>
+          <dd>{item.description}{#if item.linkText}&nbsp;{#if item.linkUrl.startsWith('/')}<a href={item.linkUrl} use:link>{item.linkText}</a>{:else}<a href={item.linkUrl} target="_blank" rel="noopener">{item.linkText}</a>{/if}{/if}{#if item.link2Text} and {#if item.link2Url.startsWith('/')}<a href={item.link2Url} use:link>{item.link2Text}</a>{:else}<a href={item.link2Url} target="_blank" rel="noopener">{item.link2Text}</a>{/if}{/if}</dd>
         </div>
       {/each}
     </dl>
@@ -198,7 +198,7 @@
     <dl class="involve-list">
       <div class="involve-item">
         <dt>Request embeddings</dt>
-        <dd>Need embeddings for a region or year (2017–2025) not yet covered? Open an <a href="https://github.com/ucam-eo/geotessera/issues/new?template=embedding-request.yml&labels=embedding-request" target="_blank" rel="noopener">embedding request</a> with your bounding box and we'll prioritise it.</dd>
+        <dd>Need embeddings for a region or year (2017–2025) not yet covered? Check the <a href="/coverage" use:link>coverage map</a> to see what's available, then open an <a href="https://github.com/ucam-eo/geotessera/issues/new?template=embedding-request.yml&labels=embedding-request" target="_blank" rel="noopener">embedding request</a> with your bounding box and we'll prioritise it.</dd>
       </div>
       <div class="involve-item">
         <dt>Contribute</dt>
