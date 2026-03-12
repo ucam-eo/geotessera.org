@@ -7,10 +7,18 @@ window.addEventListener('popstate', () => {
 });
 
 export function navigate(path: string) {
-  if (path === window.location.pathname) return;
+  const [pathname, hash] = path.split('#');
+  if (pathname === window.location.pathname && !hash) return;
   window.history.pushState(null, '', path);
-  currentPath.set(path);
-  window.scrollTo(0, 0);
+  currentPath.set(pathname);
+  if (hash) {
+    requestAnimationFrame(() => {
+      const el = document.getElementById(hash);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    });
+  } else {
+    window.scrollTo(0, 0);
+  }
 }
 
 export function link(node: HTMLAnchorElement) {

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { link } from '@/lib/router';
+  import { siteConfig } from '@/lib/config';
   import Footer from '@/components/Footer.svelte';
 </script>
 
@@ -77,19 +78,19 @@
       <h3>Faculty</h3>
       <div class="people-list">
         <div class="person">
-          <span class="person-name">Srinivasan Keshav</span>
+          <a class="person-name" href="https://www.cst.cam.ac.uk/people/sk818" target="_blank" rel="noopener">Srinivasan Keshav</a>
           <span class="person-role">Robert Sansom Professor of Computer Science, Cambridge</span>
         </div>
         <div class="person">
-          <span class="person-name">David A. Coomes</span>
+          <a class="person-name" href="https://coomeslab.org/research-group/current-members/professor-david-coomes/" target="_blank" rel="noopener">David A. Coomes</a>
           <span class="person-role">Professor of Forest Ecology, Cambridge</span>
         </div>
         <div class="person">
-          <span class="person-name">Anil Madhavapeddy</span>
+          <a class="person-name" href="https://anil.recoil.org/" target="_blank" rel="noopener">Anil Madhavapeddy</a>
           <span class="person-role">Professor of Planetary Computing, Cambridge</span>
         </div>
         <div class="person">
-          <span class="person-name">Sadiq Jaffer</span>
+          <a class="person-name" href="https://toao.com" target="_blank" rel="noopener">Sadiq Jaffer</a>
           <span class="person-role">Assistant Research Professor, Cambridge</span>
         </div>
       </div>
@@ -99,11 +100,11 @@
       <h3>Researchers</h3>
       <div class="people-list">
         <div class="person">
-          <span class="person-name">Zhengpeng Feng</span>
+          <a class="person-name" href="https://www.cst.cam.ac.uk/people/zf281" target="_blank" rel="noopener">Zhengpeng Feng</a>
           <span class="person-role">PhD student</span>
         </div>
         <div class="person">
-          <span class="person-name">Robin Young</span>
+          <a class="person-name" href="https://www.cst.cam.ac.uk/people/ray25" target="_blank" rel="noopener">Robin Young</a>
           <span class="person-role">PhD student</span>
         </div>
         <div class="person">
@@ -111,12 +112,24 @@
           <span class="person-role">PhD student</span>
         </div>
         <div class="person">
-          <span class="person-name">Madeline C. Lisaius</span>
+          <a class="person-name" href="https://mlisaius.github.io/" target="_blank" rel="noopener">Madeline C. Lisaius</a>
           <span class="person-role">Graduated PhD student</span>
         </div>
         <div class="person">
-          <span class="person-name">James Ball</span>
+          <span class="person-name">Pedro Sousa</span>
+          <span class="person-role">PhD student</span>
+        </div>
+        <div class="person">
+          <a class="person-name" href="https://patball1.github.io" target="_blank" rel="noopener">James Ball</a>
           <span class="person-role">Postdoctoral researcher</span>
+        </div>
+        <div class="person">
+          <a class="person-name" href="https://jon.recoil.org" target="_blank" rel="noopener">Jon Ludlam</a>
+          <span class="person-role">Assistant Research Professor, Cambridge</span>
+        </div>
+        <div class="person">
+          <a class="person-name" href="https://tunbury.org" target="_blank" rel="noopener">Mark Elvers</a>
+          <span class="person-role">Senior software engineer</span>
         </div>
       </div>
     </div>
@@ -125,27 +138,41 @@
       <h3>Collaborators</h3>
       <div class="people-list">
         <div class="person">
-          <span class="person-name">Silja Sormunen</span>
+          <a class="person-name" href="https://www.researchgate.net/scientific-contributions/Silja-Sormunen-2168369578" target="_blank" rel="noopener">Silja Sormunen</a>
           <span class="person-role">Researcher</span>
         </div>
         <div class="person">
-          <span class="person-name">Toby Jackson</span>
+          <a class="person-name" href="https://www.bristol.ac.uk/people/person/Toby-Jackson-0f0cc27a-9b35-479c-b2a6-7459834ca871/" target="_blank" rel="noopener">Toby Jackson</a>
           <span class="person-role">Senior research associate, University of Bristol</span>
         </div>
         <div class="person">
-          <span class="person-name">Andrew Blake</span>
+          <a class="person-name" href="https://royalsociety.org/people/andrew-blake-11097/" target="_blank" rel="noopener">Andrew Blake</a>
           <span class="person-role">Samsung AI Centre</span>
         </div>
         <div class="person">
-          <span class="person-name">Clement Atzberger</span>
+          <a class="person-name" href="https://scholar.google.com/citations?user=lBhFXdIAAAAJ" target="_blank" rel="noopener">Clement Atzberger</a>
           <span class="person-role">Professor of Remote Sensing, BOKU Vienna</span>
         </div>
         <div class="person">
-          <span class="person-name">Markus Immitzer</span>
+          <a class="person-name" href="https://scholar.google.at/citations?user=VwtoQ70AAAAJ" target="_blank" rel="noopener">Markus Immitzer</a>
           <span class="person-role">BOKU Vienna</span>
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- Roadmap -->
+  <section class="section" id="roadmap">
+    <h2>Roadmap</h2>
+    <p>Current status and planned milestones for TESSERA embeddings and model development.</p>
+    <dl class="involve-list">
+      {#each siteConfig.roadmap as item}
+        <div class="involve-item">
+          <dt><span class="roadmap-version">{item.version}</span> <span class="roadmap-status {item.status}">{item.statusLabel}</span></dt>
+          <dd>{item.description}{#if item.linkText} <a href={item.linkUrl} target="_blank" rel="noopener">{item.linkText}</a>{/if}{#if item.link2Text} and <a href={item.link2Url} target="_blank" rel="noopener">{item.link2Text}</a>{/if}</dd>
+        </div>
+      {/each}
+    </dl>
   </section>
 
   <!-- Get involved -->
@@ -158,7 +185,7 @@
       </div>
       <div class="involve-item">
         <dt>Contribute</dt>
-        <dd>Code contributions are welcome across all repositories. See the <a href="https://github.com/ucam-eo/geotessera/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">contributing guide</a> for details.</dd>
+        <dd>Code contributions are welcome across all repositories: <a href="https://github.com/ucam-eo/tessera" target="_blank" rel="noopener">tessera</a> (model training and inference), <a href="https://github.com/ucam-eo/geotessera" target="_blank" rel="noopener">geotessera</a> (Python library and embeddings access), and <a href="https://github.com/ucam-eo/geotessera.org" target="_blank" rel="noopener">geotessera.org</a> (this website — add your own examples and use cases).</dd>
       </div>
       <div class="involve-item">
         <dt>Cite TESSERA</dt>
@@ -184,6 +211,9 @@
       in computational resources and technical assistance. Satellite data is provided by the
       <a href="https://browser.dataspace.copernicus.eu/" target="_blank" rel="noopener">Copernicus programme</a>
       via Sentinel-1 and Sentinel-2.
+    </p>
+    <p>
+      This work is supported by the UKRI <a href="https://www.ukri.org/news/first-projects-from-ukris-new-interdisciplinary-scheme-announced/" target="_blank" rel="noopener">Cross Research Council Responsive Mode Pilot Scheme</a> grant "Creating foundation systems for environmental planetary intelligence". We also acknowledge compute resources from the <a href="https://www.isambard.ac.uk" target="_blank" rel="noopener">UKRI AIRR Isambard facility</a>, GPU hosting from <a href="https://www.vultr.com" target="_blank" rel="noopener">Vultr</a> and <a href="https://www.amd.com" target="_blank" rel="noopener">AMD</a>, and donations from <a href="https://www.janestreet.com" target="_blank" rel="noopener">Jane Street</a> to the University of Cambridge supporting this research.
     </p>
   </section>
 
@@ -333,6 +363,12 @@
     font-weight: 500;
     color: var(--text-primary);
     letter-spacing: 0.2px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  a.person-name:hover {
+    color: var(--accent);
   }
 
   .person-role {
@@ -366,6 +402,37 @@
     line-height: 1.7;
     color: var(--text-secondary);
     margin: 0;
+  }
+
+  /* Roadmap */
+  .roadmap-version {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+
+  .roadmap-status {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: 8px;
+  }
+
+  .roadmap-status.available {
+    color: #4ade80;
+    background: rgba(74, 222, 128, 0.1);
+  }
+
+  .roadmap-status.ongoing {
+    color: #facc15;
+    background: rgba(250, 204, 21, 0.1);
+  }
+
+  .roadmap-status.planned {
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.05);
   }
 
   @media (max-width: 640px) {

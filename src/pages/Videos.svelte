@@ -33,6 +33,16 @@
       type: 'interview' as const,
     },
     {
+      id: 'propl-embeddings',
+      title: 'Challenges in Practice: Building a Usable Library for Planetary-Scale Embeddings',
+      source: 'PROPL\'25 at ICFP/SPLASH',
+      date: 'Oct 2025',
+      description: 'Sadiq Jaffer and Robin Young present the GeoTessera library, demonstrating how foundation model embeddings democratize planetary-scale remote sensing analysis.',
+      url: 'https://watch.eeg.cl.cam.ac.uk/w/trq77gFwc8ZbUeGqyDpzN7',
+      thumb: 'https://watch.eeg.cl.cam.ac.uk/lazy-static/previews/d4c9ed4d-2d0f-41e7-8fd2-06b1dccd84d7.jpg',
+      type: 'talk' as const,
+    },
+    {
       id: 'ecosystem-resilience',
       title: 'Foundational AI to Forecast Ecosystem Resilience',
       source: 'Cambridge CL EEG',

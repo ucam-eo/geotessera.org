@@ -1,0 +1,36 @@
+---
+title: "TESSERA v1 model weights now available"
+date: 2026-03-10
+tags: [announcement]
+author: "Zhengpeng Feng"
+description: "The TESSERA v1 model weights are now publicly available, including the QAT checkpoint for quantized int8 inference."
+---
+
+# TESSERA v1 model weights now available
+
+We are pleased to announce that the TESSERA v1 model weights are now publicly available for download. Both the full-precision and quantized checkpoints can be used to generate your own embeddings from Sentinel-1 and Sentinel-2 imagery.
+
+## What's available
+
+**Full-precision checkpoint** — generates float32 embeddings, suitable for research and experimentation.
+
+**QAT checkpoint** — trained with quantization-aware training, outputs int8 embeddings with per-pixel float32 scales. This is the same model used to produce the precomputed global embeddings in the [geotessera](https://pypi.org/project/geotessera/) library. The QAT pipeline supports both CPU and GPU inference, with automatic AMX acceleration on supported hardware.
+
+Download both checkpoints from the [TESSERA v1 release on GitHub](https://github.com/ucam-eo/tessera/tree/beta_version_1.0#qat-model-weight-quantized-output).
+
+## Quantized output format
+
+The QAT model produces two files per tile:
+
+- `tile_name.npy` — int8 embedding tensor, shape `(H, W, 128)`
+- `tile_name_scales.npy` — float32 scale map, shape `(H, W)`
+
+This compact format reduces storage and memory requirements while preserving embedding quality for downstream tasks.
+
+## License
+
+All TESSERA model weights and embeddings are released under [CC0](https://creativecommons.org/publicdomain/zero/1.0/) — free for both commercial and non-commercial use. The software is MIT-licensed. While attribution is not legally required, we appreciate it.
+
+## Getting started
+
+See the full [inference pipeline documentation](https://github.com/ucam-eo/tessera/tree/beta_version_1.0) for setup instructions, or use the [geotessera](https://geotessera.readthedocs.io) Python library to work with precomputed embeddings directly.

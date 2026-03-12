@@ -241,40 +241,19 @@
       <div class="sticky-wrap">
         <div class="panel-card open-card" class:active={coverageVisible}>
           <h2>Coverage &amp; roadmap</h2>
-          <p class="open-intro">UK-wide at 10m resolution, expanding globally. Built in the open at Cambridge.</p>
+          <p class="open-intro">UK-wide at 10m resolution, expanding globally. Built in the open at Cambridge. <a href="/about#roadmap" use:link>Full roadmap →</a></p>
           <div class="coverage-timeline">
-            <div class="cov-entry" class:revealed={coverageV1}>
-              <div class="cov-marker available"></div>
-              <div class="cov-content">
-                <span class="cov-version">v1</span>
-                <span class="cov-status available">available</span>
-                <span class="cov-desc">UK coverage, 2017–2025, npy format. <a href="https://github.com/ucam-eo/geotessera/issues" target="_blank" rel="noopener">Request embeddings</a></span>
+            {#each siteConfig.roadmap as item, i}
+              {@const revealed = i === 0 ? coverageV1 : i === 1 ? coverageV1Zarr : i === 2 ? coverageV11 : coverageV2}
+              <div class="cov-entry" class:revealed>
+                <div class="cov-marker {item.status}"></div>
+                <div class="cov-content">
+                  <span class="cov-version">{item.version}</span>
+                  <span class="cov-status {item.status}">{item.statusLabel}</span>
+                  <span class="cov-desc">{item.description}{#if item.linkText} <a href={item.linkUrl} target="_blank" rel="noopener">{item.linkText}</a>{/if}{#if item.link2Text} and <a href={item.link2Url} target="_blank" rel="noopener">{item.link2Text}</a>{/if}</span>
+                </div>
               </div>
-            </div>
-            <div class="cov-entry" class:revealed={coverageV1Zarr}>
-              <div class="cov-marker ongoing"></div>
-              <div class="cov-content">
-                <span class="cov-version">v1-zarr</span>
-                <span class="cov-status ongoing">ongoing</span>
-                <span class="cov-desc">HTTP streaming via Zarr — powers <a href="https://tee.cl.cam.ac.uk" target="_blank" rel="noopener">this site</a></span>
-              </div>
-            </div>
-            <div class="cov-entry" class:revealed={coverageV11}>
-              <div class="cov-marker planned"></div>
-              <div class="cov-content">
-                <span class="cov-version">v1.1</span>
-                <span class="cov-status planned">Q2 2026</span>
-                <span class="cov-desc">Matryoshka embeddings — variable-length representations for flexible compute/accuracy trade-offs</span>
-              </div>
-            </div>
-            <div class="cov-entry" class:revealed={coverageV2}>
-              <div class="cov-marker planned"></div>
-              <div class="cov-content">
-                <span class="cov-version">v2</span>
-                <span class="cov-status planned">in training</span>
-                <span class="cov-desc">Next-generation model, supported by <a href="https://www.ukri.org/" target="_blank" rel="noopener">UKRI AI for Science</a> and <a href="https://isambard.ac.uk/" target="_blank" rel="noopener">Isambard</a></span>
-              </div>
-            </div>
+            {/each}
           </div>
         </div>
       </div>

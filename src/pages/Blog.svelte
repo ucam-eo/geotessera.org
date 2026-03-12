@@ -55,6 +55,9 @@
     conservation: 'M12 3c-4.4 0-8 3-8 6.5S7.6 16 12 16s8-3 8-6.5S16.4 3 12 3z', // leaf-ish
     ocaml: 'M4 4l6 8 6-8M4 8l6 8 6-8', // lambda
     classification: 'M3 3h6v6H3zM11 3h6v6h-6zM3 11h6v6H3zM11 11h6v6h-6z', // grid
+    release: 'M10 2v4l3 2-3 2v4a6 6 0 1 1 0-12z', // tag/release
+    python: 'M9 2c-3 0-5 1.5-5 3.5V8h6v1H4c-2 0-3 1.5-3 3.5S2 16 4 16h2v-2.5c0-2 1.5-3.5 3.5-3.5h5c1.5 0 2.5-1 2.5-2.5V5.5C17 3.5 15 2 12 2zm-1 1.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2z', // python snake
+    video: 'M4 4h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM8 7v6l5-3z', // play button
   };
 
   function getIcon(tags: string[]): string {

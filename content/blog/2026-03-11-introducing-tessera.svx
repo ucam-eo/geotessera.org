@@ -1,44 +1,29 @@
 ---
-title: "Introducing TESSERA"
-date: 2026-03-11
-tags: [announcement]
-author: "TESSERA Team"
-description: "TESSERA is a pixel-wise earth observation foundation model that generates 128-dimensional embeddings from Sentinel-1 and Sentinel-2 satellite imagery."
+title: "TESSERA accepted at CVPR 2026"
+date: 2026-02-21
+tags: [announcement, research]
+author: "Zhengpeng Feng"
+description: "Our paper introducing TESSERA, a pixel-wise foundation model for multi-modal Earth observation time series, has been accepted at CVPR 2026."
 ---
 
-# Introducing TESSERA
+# TESSERA accepted at CVPR 2026
 
-TESSERA (Temporal Embeddings of Surface Spectra for Earth Representation and Analysis)
-is a foundation model for earth observation. It compresses a full year of Sentinel-1 and
-Sentinel-2 satellite observations into dense, 128-dimensional per-pixel embeddings at
-10m spatial resolution.
+We are thrilled to announce that our paper has been accepted at CVPR 2026. TESSERA (Temporal Embeddings of Surface Spectra for Earth Representation and Analysis) is a pixel-wise foundation model for multi-modal Sentinel-1 and Sentinel-2 Earth observation time series.
 
-## Why embeddings?
+## The problem
 
-Traditional approaches to satellite image analysis require task-specific feature
-engineering. TESSERA's self-supervised embeddings provide a general-purpose representation
-that transfers across downstream tasks — from land cover classification to solar panel
-detection — with minimal additional training.
+Working with satellite EO time series is notoriously challenging — optical and microwave data are often irregular due to orbital patterns and cloud cover. Traditional compositing methods try to fix this but end up losing critical temporal information like vegetation phenology.
 
-## Getting started
+## Our approach
 
-Install the Python library:
+Instead of filtering out imperfect images, TESSERA learns robust, label-efficient embeddings from them. We advance the "Embeddings-as-Data" paradigm, using Quantization-Aware Training to compress 10m-resolution embeddings to int8, reducing storage by ~4x with near-zero performance drop. This makes planetary-scale analysis accessible and computationally feasible.
 
-```bash
-pip install geotessera
-```
+## Links
 
-Download embeddings for a region:
+- [Paper on arXiv](https://arxiv.org/abs/2506.20380)
+- [Embedding access via geotessera](https://github.com/ucam-eo/geotessera)
+- [Code and weights](https://github.com/ucam-eo/tessera)
 
-```python
-import geotessera
+*Originally [announced on LinkedIn](https://www.linkedin.com/feed/update/urn:li:activity:7430882090583445505/).*
 
-gt = geotessera.GeoTessera()
-tiles = gt.download(region="cambridge.geojson")
-```
-
-Or explore interactively in the browser using the [TESSERA Viewer](https://github.com/ucam-eo/tze).
-
----
-
-*Read the paper on arXiv for technical details.*
+A massive thank you to the incredible team: Clement Atzberger, Sadiq Jaffer, Jovana Knezevic, Madeline Lisaius, Markus Immitzer, James Ball, David Coomes, Anil Madhavapeddy, Andrew Blake, and Srinivasan Keshav. Looking forward to seeing everyone at CVPR in Denver!
