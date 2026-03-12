@@ -89,7 +89,34 @@
   let filtered = $derived(
     activeType === 'all' ? videos : videos.filter(v => v.type === activeType)
   );
+
+  const videosJsonLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'TESSERA Videos',
+    description: 'Talks, interviews, and presentations about TESSERA',
+    url: 'https://geotessera.org/videos',
+    mainEntity: videos.map(v => ({
+      '@type': 'VideoObject',
+      name: v.title,
+      description: v.description,
+      thumbnailUrl: v.thumb,
+      uploadDate: v.date,
+      url: v.url,
+    })),
+    breadcrumb: {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://geotessera.org' },
+        { '@type': 'ListItem', position: 2, name: 'Videos' },
+      ],
+    },
+  });
 </script>
+
+<svelte:head>
+  {@html `<script type="application/ld+json">${videosJsonLd}</script>`}
+</svelte:head>
 
 <div class="videos-page">
   <header>

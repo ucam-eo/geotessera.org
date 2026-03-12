@@ -23,6 +23,23 @@
   const extIcon = 'M3.5 1.5h7v7M10 2L4 8';
 </script>
 
+<svelte:head>
+  {@html `<script type="application/ld+json">${JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'TESSERA Tasks',
+    description: 'Downstream applications of TESSERA embeddings',
+    url: 'https://geotessera.org/tasks',
+    breadcrumb: {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://geotessera.org' },
+        { '@type': 'ListItem', position: 2, name: 'Tasks' },
+      ],
+    },
+  })}</script>`}
+</svelte:head>
+
 <div class="tasks-page">
   <header>
     <span class="page-label">Tasks</span>

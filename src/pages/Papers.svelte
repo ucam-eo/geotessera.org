@@ -47,7 +47,35 @@
   function getIcon(tag: string): string {
     return tagIcons[tag] ?? 'M5 2h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zM7 6h6M7 9h6M7 12h4';
   }
+
+  const papersJsonLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'TESSERA Papers',
+    description: 'Research publications behind TESSERA',
+    url: 'https://geotessera.org/papers',
+    mainEntity: papers.map(p => ({
+      '@type': 'ScholarlyArticle',
+      headline: p.title,
+      author: p.authors.split(', ').map(name => ({ '@type': 'Person', name })),
+      datePublished: p.date,
+      publisher: p.venue,
+      url: p.url,
+      sameAs: `https://doi.org/${p.doi}`,
+    })),
+    breadcrumb: {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://geotessera.org' },
+        { '@type': 'ListItem', position: 2, name: 'Papers' },
+      ],
+    },
+  });
 </script>
+
+<svelte:head>
+  {@html `<script type="application/ld+json">${papersJsonLd}</script>`}
+</svelte:head>
 
 <div class="papers-page">
   <header>

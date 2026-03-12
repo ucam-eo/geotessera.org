@@ -367,6 +367,23 @@
   });
 </script>
 
+<svelte:head>
+  {@html `<script type="application/ld+json">${JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'TESSERA Coverage Map',
+    description: 'Global coverage of TESSERA v1 embeddings for Sentinel-2 satellite imagery from 2017 to 2025',
+    url: 'https://geotessera.org/coverage',
+    breadcrumb: {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://geotessera.org' },
+        { '@type': 'ListItem', position: 2, name: 'Coverage' },
+      ],
+    },
+  })}</script>`}
+</svelte:head>
+
 <div class="coverage-page">
   <header>
     <span class="page-label">Coverage</span>

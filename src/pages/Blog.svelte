@@ -71,7 +71,27 @@
     // default: document icon
     return 'M6 2h8l4 4v12H6V2zM14 2v4h4M10 10h4M10 14h2';
   }
+
+  const blogJsonLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: 'TESSERA Blog',
+    description: 'Updates, tutorials, and research from the TESSERA community',
+    url: 'https://geotessera.org/blog',
+    publisher: { '@type': 'Organization', name: 'TESSERA', url: 'https://geotessera.org' },
+    breadcrumb: {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://geotessera.org' },
+        { '@type': 'ListItem', position: 2, name: 'Blog' },
+      ],
+    },
+  });
 </script>
+
+<svelte:head>
+  {@html `<script type="application/ld+json">${blogJsonLd}</script>`}
+</svelte:head>
 
 <div class="blog-page">
   <header>

@@ -11,7 +11,31 @@
   let { tag, slug }: Props = $props();
   let post = $derived(getContentBySlug(slug));
   let Component = $derived(post?.component);
+  let jsonLd = $derived(post ? JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline: post.title,
+    datePublished: post.date,
+    author: post.author ? { '@type': 'Person', name: post.author } : { '@type': 'Organization', name: 'TESSERA Team' },
+    publisher: { '@type': 'Organization', name: 'TESSERA', url: 'https://geotessera.org' },
+    mainEntityOfPage: `https://geotessera.org/tasks/${tag}/${slug}`,
+    breadcrumb: {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://geotessera.org' },
+        { '@type': 'ListItem', position: 2, name: 'Tasks', item: 'https://geotessera.org/tasks' },
+        { '@type': 'ListItem', position: 3, name: tag, item: `https://geotessera.org/tasks/${tag}` },
+        { '@type': 'ListItem', position: 4, name: post.title },
+      ],
+    },
+  }) : null);
 </script>
+
+<svelte:head>
+  {#if jsonLd}
+    {@html `<script type="application/ld+json">${jsonLd}</script>`}
+  {/if}
+</svelte:head>
 
 {#if post}
   <article class="example">

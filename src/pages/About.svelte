@@ -2,7 +2,26 @@
   import { link } from '@/lib/router';
   import { siteConfig } from '@/lib/config';
   import Footer from '@/components/Footer.svelte';
+
+  const aboutJsonLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: 'About TESSERA',
+    description: 'The TESSERA project at the University of Cambridge',
+    url: 'https://geotessera.org/about',
+    breadcrumb: {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://geotessera.org' },
+        { '@type': 'ListItem', position: 2, name: 'About' },
+      ],
+    },
+  });
 </script>
+
+<svelte:head>
+  {@html `<script type="application/ld+json">${aboutJsonLd}</script>`}
+</svelte:head>
 
 <div class="about-page">
   <header>
