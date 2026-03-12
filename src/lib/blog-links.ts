@@ -7,9 +7,21 @@ export interface BlogLink {
   description: string;
   url: string;
   tags: string[];
+  /** Minor posts render as a simple one-line link with no author/description */
+  minor?: boolean;
 }
 
 export const blogLinks: BlogLink[] = [
+  {
+    id: 'tech-debt-embeddings',
+    title: 'The Technical Debt of Earth Embedding Products',
+    date: '2026-02-28',
+    author: 'Isaac Corley',
+    description: '',
+    url: 'https://cloudnativegeo.org/blog/2026/02/the-technical-debt-of-earth-embedding-products/',
+    tags: ['community'],
+    minor: true,
+  },
   {
     id: 'gpu-vs-cpu',
     title: 'GPU vs CPU for ONNX Inference: NVIDIA L4 vs AMD EPYC 9965',

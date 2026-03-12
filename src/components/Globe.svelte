@@ -9,9 +9,10 @@
   interface Props {
     scrollContainer?: HTMLElement;
     tileOpacity?: number;
+    scrollScale?: number;
   }
 
-  let { scrollContainer, tileOpacity = 0 }: Props = $props();
+  let { scrollContainer, tileOpacity = 0, scrollScale = 1 }: Props = $props();
 
   let container: HTMLDivElement;
   let mapInstance = $state<maplibregl.Map | null>(null);
@@ -82,7 +83,7 @@
   // Set up scroll animation reactively
   $effect(() => {
     if (mapInstance && scrollContainer) {
-      const cleanup = setupScrollAnimation(mapInstance, scrollContainer);
+      const cleanup = setupScrollAnimation(mapInstance, scrollContainer, scrollScale);
       return cleanup;
     }
   });

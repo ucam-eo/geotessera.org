@@ -1,12 +1,13 @@
 <script lang="ts">
   import { siteConfig } from '@/lib/config';
   import { currentPath, link } from '@/lib/router';
-  import { scrollSections, activeScrollSection, scrollToSection } from '@/lib/scroll-state';
+  import { scrollSections, activeScrollSection, homePastStory, scrollToSection } from '@/lib/scroll-state';
 
   let path = $derived($currentPath);
   let sections = $derived($scrollSections);
   let active = $derived($activeScrollSection);
   let onHome = $derived(path === '/');
+  let scrolledToAbout = $derived($homePastStory);
 
   let docsOpen = $state(false);
   let exploreOpen = $state(false);
@@ -32,7 +33,7 @@
       <span></span><span></span><span></span>
     </button>
     <div class="nav-links" class:mobile-open={mobileOpen}>
-      <a href="/about" use:link class:active={path.startsWith('/about')} onclick={closeAll}>
+      <a href="/about" use:link class:active={path.startsWith('/about') || scrolledToAbout} onclick={closeAll}>
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="7" r="3.5"/><path d="M3.5 17.5a6.5 6.5 0 0 1 13 0"/></svg>
         About
       </a>
@@ -61,7 +62,7 @@
           Docs
         </button>
         {#if docsOpen}
-          <div class="dropdown-menu docs-menu" onclick={(e) => e.stopPropagation()}>
+          <div class="dropdown-menu docs-menu" role="menu" tabindex="-1" onkeydown={(e) => { if (e.key === 'Escape') closeDropdown(); }} onclick={(e) => e.stopPropagation()}>
             <a href={siteConfig.docs} target="_blank" rel="noopener" onclick={closeAll}>
               <svg class="docs-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4a1 1 0 0 1 1-1h4l2 2h6a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"/></svg>
               <div>
@@ -88,7 +89,7 @@
           Explore
         </button>
         {#if exploreOpen}
-          <div class="dropdown-menu explore-menu" onclick={(e) => e.stopPropagation()}>
+          <div class="dropdown-menu explore-menu" role="menu" tabindex="-1" onkeydown={(e) => { if (e.key === 'Escape') closeDropdown(); }} onclick={(e) => e.stopPropagation()}>
             <a href="https://tee.cl.cam.ac.uk" target="_blank" rel="noopener" onclick={closeAll}>
               <svg class="explore-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="16" height="11" rx="1.5"/><path d="M6 17h8M10 14v3"/></svg>
               <div>
@@ -110,7 +111,7 @@
   </nav>
 </header>
 
-{#if onHome && sections.length > 0}
+{#if onHome && sections.length > 0 && !scrolledToAbout}
   <div class="scroll-bar">
     {#each sections as section, i}
       {#if i > 0}
@@ -195,13 +196,13 @@
     color: #fff;
   }
 
-  .nav-links a.active, .nav-links button.active {
+  .nav-links a.active {
     color: var(--accent);
     border-bottom: 2px solid var(--accent);
     padding-bottom: 2px;
   }
 
-  .nav-links a.active svg, .nav-links button.active svg {
+  .nav-links a.active svg {
     opacity: 1;
     color: var(--accent);
   }

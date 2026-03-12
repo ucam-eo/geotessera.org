@@ -63,6 +63,7 @@ function getMapState(scrollVh: number): { center: [number, number]; zoom: number
 export function setupScrollAnimation(
   map: MaplibreMap,
   scrollContainer: HTMLElement,
+  scale: number = 1,
 ): () => void {
   let rafId = 0;
 
@@ -71,7 +72,8 @@ export function setupScrollAnimation(
     const vh = window.innerHeight;
     if (vh === 0) return;
 
-    const scrollVh = scrollTop / vh;
+    // Convert physical scroll to desktop-equivalent scrollVh
+    const scrollVh = (scrollTop / vh) / scale;
     const { center, zoom } = getMapState(scrollVh);
     map.jumpTo({ center, zoom });
   }

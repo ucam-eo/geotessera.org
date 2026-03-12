@@ -1,29 +1,28 @@
 <script lang="ts">
   import Globe from '@/components/Globe.svelte';
-  import OpenSection from '@/components/OpenSection.svelte';
-  import PostCard from '@/components/PostCard.svelte';
-  import Footer from '@/components/Footer.svelte';
-  import { link } from '@/lib/router';
-  import { getAllContent } from '@/lib/content';
+  import About from '@/pages/About.svelte';
+  import { link, base } from '@/lib/router';
   import { siteConfig } from '@/lib/config';
   import { totalScrollVh } from '@/lib/globe';
-  import { scrollSections, activeScrollSection, registerScrollTo, unregisterScrollTo } from '@/lib/scroll-state';
+  import { scrollSections, activeScrollSection, homePastStory, registerScrollTo, unregisterScrollTo } from '@/lib/scroll-state';
   import { onMount } from 'svelte';
 
   let scrollContainer = $state<HTMLElement>(null!);
 
   let scrollTop = $state(0);
   let vh = $state(0);
-  let scrollVh = $derived(vh > 0 ? scrollTop / vh : 0);
+  let isMobile = $state(typeof window !== 'undefined' && window.innerWidth < 768);
+  // On mobile, compress all scroll distances by this factor
+  let scale = $derived(isMobile ? 0.5 : 1);
+  let scrollVh = $derived(vh > 0 ? scrollTop / vh / scale : 0);
 
   // Fade tessera tiles: 0 at scroll=0, full (0.6) by scroll=1vh
   let tileOpacity = $derived(Math.min(Math.max(scrollVh, 0), 1) * 0.6);
 
-  // Panel visibility thresholds (in vh of scroll)
-  // These match the timeline dwell zones in globe.ts
+  // Panel visibility thresholds (in vh of scroll, unscaled — scale is applied to scrollVh)
   let pixelVisible = $derived(scrollVh >= 1);
-  let pixelRevealLeft = $derived(scrollVh >= 2);   // left half of diagram
-  let pixelRevealRight = $derived(scrollVh >= 2.5);   // right half of diagram
+  let pixelRevealLeft = $derived(scrollVh >= 2);
+  let pixelRevealRight = $derived(scrollVh >= 2.5);
   let pipelineVisible = $derived(scrollVh >= 5);
   let tasksVisible = $derived(scrollVh >= 8);
   let openVisible = $derived(scrollVh >= 11);
@@ -37,31 +36,21 @@
   let coverageV11 = $derived(scrollVh >= 16.5);
   let coverageV2 = $derived(scrollVh >= 17);
 
-  // Panel heights (must sum to totalScrollVh * 100vh for the story)
-  // Hero:     scroll 0-1     → 100vh
-  // Pixels:   scroll 1-5     → 400vh  (extra dwell after right panel appears)
-  // Pipeline: scroll 5-8     → 300vh
-  // Tasks:    scroll 8-11    → 300vh  (gentle zoom out)
-  // Open:     scroll 11-15   → 400vh  (progressive reveal of 4 steps)
-  // Coverage: scroll 15-19   → 400vh  (timeline progressive reveal)
-  // Total: 1900vh, minus 100vh overlap = 1800vh effective
-
-  const allContent = getAllContent();
-  const latest = allContent.slice(0, 2);
-
   function onScroll() {
     scrollTop = scrollContainer?.scrollTop ?? 0;
     vh = window.innerHeight;
+    isMobile = window.innerWidth < 768;
   }
 
-  const sections = [
+  // Section starts use scaled values so the scroll-bar nav works on mobile
+  let sections = $derived([
     { label: 'Home',  start: 0 },
-    { label: 'What',  start: 1 },
-    { label: 'How',   start: 5 },
-    { label: 'Why',   start: 8 },
-    { label: 'Where', start: 11 },
-    { label: 'When',  start: 15 },
-  ];
+    { label: 'What',  start: 1 * scale },
+    { label: 'How',   start: 5 * scale },
+    { label: 'Why',   start: 8 * scale },
+    { label: 'Where', start: 11 * scale },
+    { label: 'When',  start: 15 * scale },
+  ]);
 
   let activeSection = $derived(
     scrollVh >= 15 ? 5 :
@@ -94,28 +83,39 @@
     return () => {
       scrollSections.set([]);
       activeScrollSection.set(-1);
+      homePastStory.set(false);
       unregisterScrollTo();
     };
   });
 
+  // Detect when user scrolls past the story into the about section
+  let pastStory = $derived(scrollVh >= 19);
+  $effect(() => { homePastStory.set(pastStory); });
+
   // Update hash and store when active section changes
   let prevSection = -1;
+  let prevUrl = '';
   $effect(() => {
     activeScrollSection.set(activeSection);
-    if (activeSection !== prevSection) {
-      prevSection = activeSection;
-      const label = sections[activeSection].label.toLowerCase();
-      const hash = label === 'home' ? '' : `#${label}`;
-      const url = '/' + hash;
-      if (window.location.pathname + window.location.hash !== url) {
-        history.replaceState(null, '', url);
+    const newUrl = pastStory
+      ? (base || '') + '/about'
+      : (() => {
+          const label = sections[activeSection].label.toLowerCase();
+          const hash = label === 'home' ? '' : `#${label}`;
+          return (base || '') + '/' + hash;
+        })();
+    if (newUrl !== prevUrl) {
+      prevUrl = newUrl;
+      if (activeSection !== prevSection || pastStory) {
+        prevSection = activeSection;
+        history.replaceState(null, '', newUrl);
       }
     }
   });
 </script>
 
 <div class="home" bind:this={scrollContainer} onscroll={onScroll}>
-  <Globe {scrollContainer} {tileOpacity} />
+  <Globe {scrollContainer} {tileOpacity} scrollScale={scale} />
 
   <div class="story">
     <!-- Hero: scroll 0–1vh (100vh) -->
@@ -151,8 +151,8 @@
     <section class="panel-tall panel-pipeline">
       <div class="sticky-wrap">
         <div class="panel-card wide-card" class:active={pipelineVisible}>
-          <h2>How are embeddings made?</h2>
-          <p>Millions of Sentinel-1 (radar) and Sentinel-2 (optical) satellite passes over a year are fed through a self-supervised encoder. No human labels needed — the model learns by comparing random temporal views of the same pixel.</p>
+          <h2>How are embeddings made? <a class="info-link" href="https://arxiv.org/abs/2506.20380" target="_blank" rel="noopener" title="Read the CVPR 2026 paper"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M7 6h6M7 9h6M7 12h4"/></svg></a></h2>
+          <p>Millions of Sentinel-1 (radar) and Sentinel-2 (optical) satellite passes over a year are fed through a self-supervised encoder. No human labels are needed during training — the model learns by comparing random temporal views of the same pixel. As a result, downstream tasks require far fewer labels to achieve high accuracy.</p>
           <div class="diagram">
             {@html pipelineDiagram}
           </div>
@@ -177,9 +177,11 @@
             </div>
           </div>
           <div class="task-links">
-            {#each siteConfig.tasks as task}
-              <a href="/tasks/{task.tag}" use:link class="task-link">{task.name}</a>
-            {/each}
+            <a href="/tasks#classification" use:link class="task-link">Classification</a>
+            <a href="/tasks#segmentation" use:link class="task-link">Segmentation</a>
+            <a href="/tasks#regression" use:link class="task-link">Regression</a>
+            <a href="/tasks#getting-started" use:link class="task-link">Getting started</a>
+            <a href="/papers" use:link class="task-link">Papers</a>
           </div>
         </div>
       </div>
@@ -241,7 +243,7 @@
       <div class="sticky-wrap">
         <div class="panel-card open-card" class:active={coverageVisible}>
           <h2>Coverage &amp; roadmap</h2>
-          <p class="open-intro">UK-wide at 10m resolution, expanding globally. Built in the open at Cambridge. <a href="/about#roadmap" use:link>Full roadmap →</a></p>
+          <p class="open-intro">Global terrestrial coverage at 10m resolution. Built in the open at Cambridge. <a href="/about#roadmap" use:link>Full roadmap →</a></p>
           <div class="coverage-timeline">
             {#each siteConfig.roadmap as item, i}
               {@const revealed = i === 0 ? coverageV1 : i === 1 ? coverageV1Zarr : i === 2 ? coverageV11 : coverageV2}
@@ -261,26 +263,9 @@
   </div>
 
   <div class="content">
-    <OpenSection />
-
-    <section class="latest">
-      <div class="section-header">
-        <span class="section-label">LATEST</span>
-        <a href="/blog" use:link>View all →</a>
-      </div>
-      <div class="grid">
-        {#each latest as post}
-          <PostCard
-            title={post.title}
-            href={post.href}
-            tags={post.tags}
-            languages={post.languages}
-          />
-        {/each}
-      </div>
-    </section>
-
-    <Footer />
+    <div class="content-backdrop">
+      <About />
+    </div>
   </div>
 </div>
 
@@ -528,7 +513,7 @@
   <line x1="30" y1="34" x2="460" y2="34" stroke="#1e293b" stroke-width="0.5"/>
   <rect x="16" y="46" width="130" height="108" rx="5" fill="#0f172a" stroke="#4b5563" stroke-width="0.6"/>
   <text x="81" y="64" text-anchor="middle" fill="#f59e0b" font-size="12" font-family="monospace" font-weight="bold">Sentinel-2</text>
-  <text x="81" y="78" text-anchor="middle" fill="#9ca3af" font-size="9" font-family="monospace">optical \u2022 13 bands</text>
+  <text x="81" y="78" text-anchor="middle" fill="#9ca3af" font-size="9" font-family="monospace">spectral \u2022 10 bands</text>
   <g transform="translate(26,88)">
     <rect x="0" y="0" width="66" height="5" rx="1.5" fill="#065f46" opacity="0.6"/>
     <rect x="0" y="7" width="66" height="5" rx="1.5" fill="#0d9488" opacity="0.5"/>
@@ -569,7 +554,7 @@
     <rect x="62" y="0" width="48" height="18" rx="3" fill="#1e293b" stroke="#00e5ff" stroke-width="0.5"/>
     <text x="86" y="13" text-anchor="middle" fill="#d1d5db" font-size="9" font-family="monospace">view B</text>
     <text x="55" y="32" text-anchor="middle" fill="#6b7280" font-size="8" font-family="monospace">random temporal samples</text>
-    <rect x="16" y="40" width="78" height="18" rx="3" fill="#1e293b" stroke="#f59e0b" stroke-width="0.5"/>
+    <rect x="6" y="40" width="98" height="18" rx="3" fill="#1e293b" stroke="#f59e0b" stroke-width="0.5"/>
     <text x="55" y="53" text-anchor="middle" fill="#f59e0b" font-size="9" font-family="monospace">cross-correlation</text>
     <text x="55" y="70" text-anchor="middle" fill="#6b7280" font-size="8" font-family="monospace">no labels needed</text>
   </g>
@@ -608,12 +593,12 @@
   </g>
   <text x="419" y="200" text-anchor="middle" fill="#00e5ff" font-size="13" font-family="monospace" font-weight="bold">128 dim</text>
   <text x="419" y="214" text-anchor="middle" fill="#9ca3af" font-size="9" font-family="monospace">int8 values</text>
-  <text x="419" y="234" text-anchor="middle" fill="#d1d5db" font-size="9" font-family="monospace">\u2022 annual summary</text>
-  <text x="419" y="248" text-anchor="middle" fill="#d1d5db" font-size="9" font-family="monospace">\u2022 global coverage</text>
-  <text x="419" y="262" text-anchor="middle" fill="#d1d5db" font-size="9" font-family="monospace">\u2022 downloadable</text>
-  <text x="419" y="276" text-anchor="middle" fill="#d1d5db" font-size="9" font-family="monospace">\u2022 stored as Zarr</text>
-  <text x="419" y="290" text-anchor="middle" fill="#d1d5db" font-size="9" font-family="monospace">\u2022 label-efficient</text>
-  <text x="419" y="304" text-anchor="middle" fill="#d1d5db" font-size="9" font-family="monospace">\u2022 preserve temporal signal</text>
+  <text x="419" y="234" text-anchor="middle" fill="#d1d5db" font-size="9" font-family="monospace">annual summary</text>
+  <text x="419" y="248" text-anchor="middle" fill="#d1d5db" font-size="9" font-family="monospace">global coverage</text>
+  <text x="419" y="262" text-anchor="middle" fill="#d1d5db" font-size="9" font-family="monospace">downloadable</text>
+  <text x="419" y="276" text-anchor="middle" fill="#d1d5db" font-size="9" font-family="monospace">stored as Zarr</text>
+  <text x="419" y="290" text-anchor="middle" fill="#d1d5db" font-size="9" font-family="monospace">label-efficient</text>
+  <text x="419" y="304" text-anchor="middle" fill="#d1d5db" font-size="9" font-family="monospace">preserve temporality</text>
   <rect x="16" y="320" width="458" height="48" rx="5" fill="#0f172a" opacity="0.7"/>
   <g transform="translate(26,328)">
     <rect x="0" y="0" width="12" height="12" fill="#134e4a" stroke="#0d9488" stroke-width="0.5" opacity="0.7"/>
@@ -670,6 +655,15 @@
   .panel-tasks     { height: 300vh; }
   .panel-open      { height: 400vh; }
   .panel-coverage  { height: 400vh; }
+
+  @media (max-width: 767px) {
+    .panel-hero     { height: 50vh; }
+    .panel-pixels   { height: 200vh; }
+    .panel-pipeline { height: 150vh; }
+    .panel-tasks     { height: 150vh; }
+    .panel-open      { height: 200vh; }
+    .panel-coverage  { height: 200vh; }
+  }
 
   .sticky-wrap {
     position: sticky;
@@ -742,6 +736,23 @@
     font-size: 20px;
     color: var(--text-primary);
     margin-bottom: 12px;
+  }
+
+  .info-link {
+    display: inline-block;
+    vertical-align: middle;
+    pointer-events: auto;
+    opacity: 0.4;
+    transition: opacity 0.2s;
+  }
+
+  .info-link:hover {
+    opacity: 1;
+  }
+
+  .info-link svg {
+    width: 16px;
+    height: 16px;
   }
 
   .panel-card p {
@@ -1040,35 +1051,62 @@
   .content {
     position: relative;
     z-index: 1;
-    background: var(--bg-primary);
   }
 
-  .latest {
-    padding: 32px;
-    border-top: 1px solid var(--border-subtle);
+  .content-backdrop {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(10, 10, 26, 0.9);
+    min-height: 100vh;
   }
 
-  .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
+  @media (max-width: 959px) {
+    .content-backdrop {
+      max-width: 100%;
+      background: var(--bg-primary);
+    }
   }
 
-  .section-label {
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: var(--text-faint);
-  }
+  @media (max-width: 767px) {
+    .panel-card {
+      padding: 20px 16px;
+      border-radius: 8px;
+      max-width: 100%;
+    }
 
-  .section-header a {
-    font-size: 11px;
-    color: var(--accent-dim);
-  }
+    .sticky-wrap {
+      padding: 16px;
+    }
 
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    .title {
+      font-size: 32px;
+      letter-spacing: 6px;
+    }
+
+    .panel-card h2 {
+      font-size: 16px;
+    }
+
+    .diagram-split {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .diagram-divider {
+      width: 100%;
+      height: 1px;
+    }
+
+    .open-card {
+      max-width: 100%;
+    }
+
+    .wide-card {
+      max-width: 100%;
+    }
+
+    .task-links {
+      gap: 6px;
+    }
   }
 </style>

@@ -1,5 +1,6 @@
 <script lang="ts">
   import Footer from '@/components/Footer.svelte';
+  import { link } from '@/lib/router';
 
   const arxivHtml = 'https://arxiv.org/html/2506.20380v6';
   const tutorials = 'https://geotessera.readthedocs.io/en/latest/tutorials.html';
@@ -34,7 +35,7 @@
     <a href="#segmentation">Segmentation</a>
     <a href="#regression">Regression</a>
     <a href="#getting-started">Getting started</a>
-    <a href="#papers">Papers</a>
+    <a href="/papers" use:link>Papers</a>
   </nav>
 
   <!-- Approaches overview -->
@@ -242,33 +243,6 @@
     </ul>
   </section>
 
-  <!-- Papers -->
-  <section class="task-section" id="papers">
-    <h2>
-      <svg class="section-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={icons.paper}/></svg>
-      <a href="#papers">Papers</a>
-    </h2>
-    <p class="task-desc">
-      The benchmarks above are evaluated in these publications. All six benchmarks spanning classification, segmentation, and regression are from the CVPR paper; the SSRN paper extends to wildfire detection, biomass prediction, and carbon market stocking indices.
-    </p>
-    <ul class="example-list">
-      <li>
-        <svg class="li-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={icons.paper}/></svg>
-        <div>
-          <a href="https://arxiv.org/abs/2506.20380" target="_blank" rel="noopener">TESSERA: Temporal Embeddings of Surface Spectra for Earth Representation and Analysis<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
-          <span class="ex-author">Feng et al., CVPR 2026</span>
-        </div>
-      </li>
-      <li>
-        <svg class="li-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={icons.paper}/></svg>
-        <div>
-          <a href="https://ssrn.com/abstract=6142416" target="_blank" rel="noopener">Applications of the TESSERA Geospatial Foundation Model to Diverse Environmental Mapping Tasks<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
-          <span class="ex-author">Feng et al., SSRN preprint</span>
-        </div>
-      </li>
-    </ul>
-  </section>
-
   <Footer />
 </div>
 
@@ -300,25 +274,31 @@
   .jump-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px 16px;
+    gap: 8px;
     margin-bottom: 36px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--border-subtle);
+    padding: 14px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   }
 
   .jump-links a {
     display: flex;
     align-items: center;
     gap: 5px;
-    font-size: 13px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border: 1px solid var(--accent-border);
+    border-radius: 20px;
     color: var(--text-muted);
     text-decoration: none;
-    letter-spacing: 0.5px;
-    transition: color 0.2s;
+    transition: all 0.2s;
   }
 
   .jump-links a:hover {
-    color: var(--accent);
+    color: var(--accent-dim);
+    border-color: var(--accent-dim);
   }
 
   /* Task sections */
@@ -386,15 +366,13 @@
   /* Example lists */
   .example-list {
     list-style: none;
-    border-top: 1px solid var(--border-subtle);
   }
 
   .example-list li {
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border-subtle);
+    padding: 6px 0;
     font-size: 14px;
     line-height: 1.6;
   }

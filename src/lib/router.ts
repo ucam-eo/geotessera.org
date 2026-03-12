@@ -1,15 +1,27 @@
 import { writable, derived } from 'svelte/store';
 
-export const currentPath = writable(window.location.pathname);
+/** Strip Vite's base path to get the app-relative pathname. */
+export const base = (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '');
+
+function stripBase(pathname: string): string {
+  if (base && pathname.startsWith(base)) {
+    const stripped = pathname.slice(base.length);
+    return stripped || '/';
+  }
+  return pathname;
+}
+
+export const currentPath = writable(stripBase(window.location.pathname));
 
 window.addEventListener('popstate', () => {
-  currentPath.set(window.location.pathname);
+  currentPath.set(stripBase(window.location.pathname));
 });
 
 export function navigate(path: string) {
   const [pathname, hash] = path.split('#');
-  if (pathname === window.location.pathname && !hash) return;
-  window.history.pushState(null, '', path);
+  const fullPath = base + (pathname === '/' ? '/' : pathname) + (hash ? `#${hash}` : '');
+  if (fullPath === window.location.pathname + window.location.hash && !hash) return;
+  window.history.pushState(null, '', fullPath);
   currentPath.set(pathname);
   if (hash) {
     requestAnimationFrame(() => {

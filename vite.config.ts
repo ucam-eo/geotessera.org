@@ -5,6 +5,7 @@ import { atomFeedPlugin } from './vite-plugin-atom-feed';
 import { blogLinks } from './src/lib/blog-links';
 
 export default defineConfig({
+  base: process.env.VITE_BASE ?? '/',
   plugins: [
     svelte(),
     atomFeedPlugin({

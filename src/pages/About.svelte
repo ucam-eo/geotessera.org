@@ -70,6 +70,20 @@
     </ul>
   </section>
 
+  <!-- Roadmap -->
+  <section class="section" id="roadmap">
+    <h2>Roadmap</h2>
+    <p>Current status and planned milestones for TESSERA embeddings and model development.</p>
+    <dl class="involve-list">
+      {#each siteConfig.roadmap as item}
+        <div class="involve-item">
+          <dt><span class="roadmap-version">{item.version}</span> <span class="roadmap-status {item.status}">{item.statusLabel}</span></dt>
+          <dd>{item.description}{#if item.linkText} <a href={item.linkUrl} target="_blank" rel="noopener">{item.linkText}</a>{/if}{#if item.link2Text} and <a href={item.link2Url} target="_blank" rel="noopener">{item.link2Text}</a>{/if}</dd>
+        </div>
+      {/each}
+    </dl>
+  </section>
+
   <!-- People -->
   <section class="section" id="people">
     <h2>People</h2>
@@ -159,20 +173,6 @@
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- Roadmap -->
-  <section class="section" id="roadmap">
-    <h2>Roadmap</h2>
-    <p>Current status and planned milestones for TESSERA embeddings and model development.</p>
-    <dl class="involve-list">
-      {#each siteConfig.roadmap as item}
-        <div class="involve-item">
-          <dt><span class="roadmap-version">{item.version}</span> <span class="roadmap-status {item.status}">{item.statusLabel}</span></dt>
-          <dd>{item.description}{#if item.linkText} <a href={item.linkUrl} target="_blank" rel="noopener">{item.linkText}</a>{/if}{#if item.link2Text} and <a href={item.link2Url} target="_blank" rel="noopener">{item.link2Text}</a>{/if}</dd>
-        </div>
-      {/each}
-    </dl>
   </section>
 
   <!-- Get involved -->

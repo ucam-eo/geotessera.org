@@ -11,6 +11,8 @@ export interface ContentMeta {
   component: any;
   /** External link posts have no component — they link offsite */
   externalUrl?: string;
+  /** Minor posts render as a simple one-line link */
+  minor?: boolean;
 }
 
 import { blogLinks } from './blog-links';
@@ -60,6 +62,7 @@ function loadBlogLinks(): ContentMeta[] {
     type: 'blog' as const,
     component: null,
     externalUrl: link.url,
+    minor: link.minor,
   }));
 }
 

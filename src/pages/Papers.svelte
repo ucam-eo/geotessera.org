@@ -36,6 +36,17 @@
       tag: 'method',
     },
   ];
+
+  /** Icon per tag */
+  const tagIcons: Record<string, string> = {
+    'foundation model': 'M10 2L3 7v6l7 5 7-5V7z',
+    'applications': 'M3 3h6v6H3zM11 3h6v6h-6zM3 11h6v6H3zM11 11h6v6h-6z',
+    'method': 'M8 2v3M4.9 4.9l2.1 2.1M2 8h3M4.9 11.1l2.1-2.1M8 14v-3M11.1 11.1l-2.1-2.1M14 8h-3M11.1 4.9L9 7',
+  };
+
+  function getIcon(tag: string): string {
+    return tagIcons[tag] ?? 'M5 2h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zM7 6h6M7 9h6M7 12h4';
+  }
 </script>
 
 <div class="papers-page">
@@ -44,21 +55,35 @@
     <p class="subtitle">Research publications behind TESSERA</p>
   </header>
 
-  <div class="paper-list">
+  <div class="timeline">
     {#each papers as paper}
-      <div class="paper-card" id={paper.id}>
-        <div class="paper-tag">{paper.tag}</div>
-        <h3><a href={paper.url} target="_blank" rel="noopener">{paper.title}</a><a class="anchor" href={`#${paper.id}`}>#</a></h3>
-        <p class="paper-authors">{paper.authors}</p>
-        <div class="paper-meta">
-          <span class="paper-venue">{paper.venue}</span>
-          <span class="paper-sep">&middot;</span>
-          <span class="paper-date">{paper.date}</span>
-          <span class="paper-sep">&middot;</span>
-          <a class="paper-doi" href={`https://doi.org/${paper.doi}`} target="_blank" rel="noopener">{paper.doi}</a>
+      <div class="timeline-entry" id={paper.id}>
+        <div class="timeline-rail">
+          <a class="timeline-icon" href={`#${paper.id}`} aria-label={paper.title}>
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={getIcon(paper.tag)}/></svg>
+          </a>
+          <div class="timeline-line"></div>
         </div>
-        <p class="paper-desc">{paper.description}</p>
-        <a href={paper.url} target="_blank" rel="noopener" class="paper-link">Read paper &rarr;</a>
+        <div class="timeline-content">
+          <div class="paper-venue-line">
+            <span class="paper-venue">{paper.venue}</span>
+            <span class="paper-date">{paper.date}</span>
+          </div>
+          <h3><a href={paper.url} target="_blank" rel="noopener">{paper.title}<svg class="external-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a></h3>
+          <p class="paper-authors">{paper.authors}</p>
+          <p class="paper-desc">{paper.description}</p>
+          <div class="paper-links">
+            <a href={paper.url} target="_blank" rel="noopener" class="paper-action">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2h6a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zM6 5h4M6 7.5h4M6 10h2.5"/></svg>
+              Read paper
+            </a>
+            <a href={`https://doi.org/${paper.doi}`} target="_blank" rel="noopener" class="paper-doi">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 9.5a3 3 0 0 0 4.2.3l1.5-1.5a3 3 0 0 0-4.2-4.2L6.5 5.5"/><path d="M9.5 6.5a3 3 0 0 0-4.2-.3L3.8 7.7a3 3 0 0 0 4.2 4.2l1.5-1.5"/></svg>
+              {paper.doi}
+            </a>
+            <span class="paper-tag">{paper.tag}</span>
+          </div>
+        </div>
       </div>
     {/each}
   </div>
@@ -73,7 +98,7 @@
     padding: 48px 32px;
   }
 
-  header { margin-bottom: 32px; }
+  header { margin-bottom: 28px; }
 
   .page-label {
     font-weight: 300;
@@ -84,104 +109,92 @@
   }
 
   .subtitle {
-    font-size: 13px;
-    letter-spacing: 1px;
+    font-size: 14px;
+    letter-spacing: 0.5px;
     color: var(--text-muted);
     margin-top: 6px;
   }
 
-  .paper-list {
+  /* Timeline layout */
+  .timeline {
     display: flex;
     flex-direction: column;
-    gap: 16px;
   }
 
-  .paper-card {
-    display: block;
-    border: 1px solid var(--border-subtle);
-    border-radius: 10px;
-    padding: 24px 28px;
-    background: rgba(15, 23, 42, 0.5);
-    transition: border-color 0.2s, background 0.2s;
+  .timeline-entry {
+    display: flex;
+    gap: 0;
     scroll-margin-top: calc(var(--nav-height) + 16px);
   }
 
-  .paper-card:hover {
-    border-color: var(--accent-border);
-    background: rgba(15, 23, 42, 0.8);
+  .timeline-rail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40px;
+    flex-shrink: 0;
+    padding-top: 3px;
   }
 
-  .paper-tag {
-    display: inline-block;
-    font-size: 9px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--accent-dim);
+  .timeline-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
     background: rgba(0, 229, 255, 0.08);
-    border: 1px solid rgba(0, 229, 255, 0.15);
-    padding: 2px 10px;
-    border-radius: 3px;
-    margin-bottom: 12px;
-  }
-
-  .paper-card h3 {
-    font-size: 17px;
-    font-weight: 500;
-    line-height: 1.4;
-    margin-bottom: 8px;
-  }
-
-  .paper-card h3 a {
-    color: var(--text-primary);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
     text-decoration: none;
-    transition: color 0.2s;
+    transition: background 0.2s, border-color 0.2s;
   }
 
-  .anchor {
-    color: var(--text-faint) !important;
-    font-size: 14px;
-    font-weight: 400;
-    margin-left: 8px;
-    opacity: 0;
-    transition: opacity 0.2s;
+  .timeline-entry:hover .timeline-icon,
+  .timeline-icon:hover {
+    background: rgba(0, 229, 255, 0.15);
+    border-color: rgba(0, 229, 255, 0.4);
   }
 
-  .paper-card:hover .anchor {
-    opacity: 1;
-  }
-
-  .anchor:hover {
-    color: var(--accent-dim) !important;
-  }
-
-  .paper-card:hover h3 a {
+  .timeline-icon svg {
+    width: 14px;
+    height: 14px;
     color: var(--accent-dim);
+    opacity: 0.8;
   }
 
-  .paper-authors {
-    font-size: 12px;
-    color: var(--text-muted);
-    line-height: 1.5;
-    margin-bottom: 8px;
+  .timeline-line {
+    width: 1px;
+    flex: 1;
+    background: rgba(0, 229, 255, 0.1);
+    min-height: 12px;
   }
 
-  .paper-meta {
+  .timeline-entry:last-child .timeline-line {
+    background: none;
+  }
+
+  .timeline-content {
+    flex: 1;
+    padding: 0 0 32px 12px;
+    min-width: 0;
+  }
+
+  /* Venue + date line */
+  .paper-venue-line {
     display: flex;
     gap: 8px;
-    align-items: center;
-    margin-bottom: 12px;
+    align-items: baseline;
+    margin-bottom: 4px;
   }
 
   .paper-venue {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text-secondary);
-    letter-spacing: 0.3px;
-  }
-
-  .paper-sep {
-    color: var(--text-faint);
-    font-size: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent-dim);
+    opacity: 0.8;
   }
 
   .paper-date {
@@ -190,36 +203,111 @@
     letter-spacing: 0.5px;
   }
 
-  .paper-doi {
-    font-size: 11px;
-    color: var(--text-muted);
-    letter-spacing: 0.3px;
+  /* Title */
+  .timeline-content h3 {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+
+  .timeline-content h3 a {
+    color: var(--text-primary);
     text-decoration: none;
     transition: color 0.2s;
   }
 
-  .paper-doi:hover {
+  .timeline-entry:hover h3 a {
     color: var(--accent-dim);
-    text-decoration: underline;
   }
 
-  .paper-desc {
+  .external-icon {
+    display: inline;
+    width: 12px;
+    height: 12px;
+    vertical-align: middle;
+    margin-left: 5px;
+    opacity: 0.3;
+  }
+
+  /* Authors */
+  .paper-authors {
     font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+
+  /* Description */
+  .paper-desc {
+    font-size: 14px;
     line-height: 1.7;
     color: var(--text-secondary);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
 
-  .paper-link {
+  /* Links row */
+  .paper-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .paper-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
     font-size: 12px;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     color: var(--accent-dim);
     text-decoration: none;
-    opacity: 0;
+    opacity: 0.7;
     transition: opacity 0.2s;
   }
 
-  .paper-card:hover .paper-link {
+  .paper-action:hover {
     opacity: 1;
+  }
+
+  .paper-action svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .paper-doi {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-family: var(--font-mono, monospace);
+    letter-spacing: 0.3px;
+    color: var(--text-muted);
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.2s, color 0.2s;
+  }
+
+  .paper-doi:hover {
+    opacity: 1;
+    color: var(--accent-dim);
+  }
+
+  .paper-doi svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .paper-tag {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    opacity: 0.5;
+  }
+
+  .paper-tag::before {
+    content: '#';
+    opacity: 0.5;
   }
 </style>

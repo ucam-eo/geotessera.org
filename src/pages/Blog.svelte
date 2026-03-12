@@ -90,15 +90,17 @@
     {#each grouped as group}
       <div class="month-header">{group.month}</div>
       {#each group.posts as post}
-        <div class="timeline-entry" class:is-link={!!post.externalUrl} id={post.slug}>
+        <div class="timeline-entry" class:is-link={!!post.externalUrl} class:is-minor={!!post.minor} id={post.slug}>
           <div class="timeline-rail">
-            <a class="timeline-icon" href={`#${post.slug}`}>
+            <a class="timeline-icon" href={`#${post.slug}`} aria-label={post.title}>
               <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={getIcon(post.tags)}/></svg>
             </a>
             <div class="timeline-line"></div>
           </div>
           <div class="timeline-content">
-            {#if post.externalUrl}
+            {#if post.minor && post.externalUrl}
+              <a href={post.externalUrl} target="_blank" rel="noopener" class="minor-link">{post.title}<svg class="external-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
+            {:else if post.externalUrl}
               <div class="link-row">
                 <a href={post.externalUrl} target="_blank" rel="noopener" class="link-title">{post.title}<span class="nowrap">&thinsp;<svg class="external-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></span></a>
                 <span class="link-meta">
@@ -439,6 +441,47 @@
     line-height: 1.6;
     color: var(--text-muted);
     margin: 4px 0 0;
+  }
+
+  /* Minor posts — compact one-liner */
+  .is-minor .timeline-icon {
+    width: 18px;
+    height: 18px;
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .is-minor .timeline-icon svg {
+    width: 9px;
+    height: 9px;
+    color: var(--text-faint);
+  }
+
+  .is-minor:hover .timeline-icon {
+    background: rgba(0, 229, 255, 0.08);
+    border-color: rgba(0, 229, 255, 0.2);
+  }
+
+  .is-minor .timeline-content {
+    padding-bottom: 10px;
+  }
+
+  .minor-link {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s, color 0.2s;
+    line-height: 1.4;
+  }
+
+  .minor-link:hover {
+    opacity: 1;
+    color: var(--accent-dim);
+  }
+
+  .minor-link .external-icon {
+    opacity: 0.3;
   }
 
   .empty {
