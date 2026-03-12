@@ -13,6 +13,16 @@ export interface BlogLink {
 
 export const blogLinks: BlogLink[] = [
   {
+    id: 'core-stack-hackathon',
+    title: 'TESSERA and CoRE Stack Hackathon on Geospatial AI',
+    date: '2026-02-19',
+    author: 'CoRE Stack',
+    description: '',
+    url: 'https://core-stack.org/tessera-and-core-stack-hackathon-on-geospatial-ai/',
+    tags: ['community', 'hackathon'],
+    minor: true,
+  },
+  {
     id: 'tech-debt-embeddings',
     title: 'The Technical Debt of Earth Embedding Products',
     date: '2026-02-28',

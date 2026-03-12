@@ -60,6 +60,35 @@ function getMapState(scrollVh: number): { center: [number, number]; zoom: number
   return { center: [...last.center], zoom: last.zoom };
 }
 
+/**
+ * Returns a value 0–1 indicating how actively the map is transitioning.
+ * 0 = dwelling at a waypoint, 1 = mid-transition between waypoints.
+ * Used to fade the TESSERA overlay and reveal the satellite basemap during pans.
+ */
+export function getTransitionIntensity(scrollVh: number): number {
+  const s = Math.max(0, Math.min(scrollVh, totalScrollVh));
+
+  for (let i = 0; i < timeline.length - 1; i++) {
+    const from = timeline[i];
+    const to = timeline[i + 1];
+    if (s >= from.scroll && s <= to.scroll) {
+      const range = to.scroll - from.scroll;
+      if (range === 0) return 0;
+
+      // Check if center or zoom actually changes in this segment
+      const centerMoves =
+        from.center[0] !== to.center[0] || from.center[1] !== to.center[1];
+      const zoomMoves = from.zoom !== to.zoom;
+      if (!centerMoves && !zoomMoves) return 0;
+
+      // Triangle wave: 0 at edges, 1 at midpoint
+      const t = (s - from.scroll) / range;
+      return 1 - Math.abs(2 * t - 1);
+    }
+  }
+  return 0;
+}
+
 export function setupScrollAnimation(
   map: MaplibreMap,
   scrollContainer: HTMLElement,

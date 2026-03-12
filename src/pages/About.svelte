@@ -70,6 +70,19 @@
     </ul>
   </section>
 
+  <!-- Projects -->
+  <section class="section" id="projects">
+    <h2>Projects</h2>
+    <p>Ongoing research projects applying TESSERA embeddings to real-world environmental mapping at scale.</p>
+    <ul class="eco-list">
+      <li>
+        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-4.4 0-8 3-8 6.5S7.6 16 12 16s8-3 8-6.5S16.4 3 12 3z"/></svg>
+        <a href="https://ucam-eo.github.io/habitat-mapping/" target="_blank" rel="noopener">Mapping Earth's Habitats with Foundation Models<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
+        <span class="eco-desc">— Species-level ecosystem mapping at 10m resolution, spanning alpine tree species in Italy, neotropical vegetation, and UK landscape restoration</span>
+      </li>
+    </ul>
+  </section>
+
   <!-- Roadmap -->
   <section class="section" id="roadmap">
     <h2>Roadmap</h2>

@@ -3,8 +3,9 @@ export const siteConfig = {
   subtitle: 'A pixel-wise earth observation foundation model',
   social: {
     github: 'https://github.com/ucam-eo',
-    twitter: 'https://twitter.com/avsm',
-    bluesky: 'https://bsky.app/profile/eeg.cl.cam.ac.uk',
+    bluesky: 'https://bsky.app/profile/geotessera.org',
+    twitter: 'https://x.com/geotessera',
+    zulip: 'https://eeg.zulipchat.com',
   },
   tasks: [
     { name: 'Classification', tag: 'classification', description: 'Categorize land cover types from satellite embeddings' },

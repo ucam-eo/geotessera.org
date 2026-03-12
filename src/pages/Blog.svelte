@@ -60,6 +60,10 @@
     video: 'M4 4h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM8 7v6l5-3z', // play button
   };
 
+  function domain(url: string): string {
+    try { return new URL(url).hostname.replace(/^www\./, ''); } catch { return ''; }
+  }
+
   function getIcon(tags: string[]): string {
     for (const t of tags) {
       if (tagIcons[t]) return tagIcons[t];
@@ -99,7 +103,7 @@
           </div>
           <div class="timeline-content">
             {#if post.minor && post.externalUrl}
-              <a href={post.externalUrl} target="_blank" rel="noopener" class="minor-link">{post.title}<svg class="external-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
+              <a href={post.externalUrl} target="_blank" rel="noopener" class="minor-link"><span class="minor-title">{post.title}</span><span class="minor-domain">{domain(post.externalUrl)}</span><svg class="external-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
             {:else if post.externalUrl}
               <div class="link-row">
                 <a href={post.externalUrl} target="_blank" rel="noopener" class="link-title">{post.title}<span class="nowrap">&thinsp;<svg class="external-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></span></a>
@@ -467,17 +471,32 @@
   }
 
   .minor-link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
     font-size: 13px;
-    color: var(--text-muted);
     text-decoration: none;
     opacity: 0.7;
-    transition: opacity 0.2s, color 0.2s;
+    transition: opacity 0.2s;
     line-height: 1.4;
   }
 
   .minor-link:hover {
     opacity: 1;
+  }
+
+  .minor-title {
+    color: var(--text-secondary);
+  }
+
+  .minor-link:hover .minor-title {
     color: var(--accent-dim);
+  }
+
+  .minor-domain {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.3px;
   }
 
   .minor-link .external-icon {

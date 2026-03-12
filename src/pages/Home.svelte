@@ -3,7 +3,7 @@
   import About from '@/pages/About.svelte';
   import { link, base } from '@/lib/router';
   import { siteConfig } from '@/lib/config';
-  import { totalScrollVh } from '@/lib/globe';
+  import { totalScrollVh, getTransitionIntensity } from '@/lib/globe';
   import { scrollSections, activeScrollSection, homePastStory, registerScrollTo, unregisterScrollTo } from '@/lib/scroll-state';
   import { onMount } from 'svelte';
 
@@ -16,8 +16,50 @@
   let scale = $derived(isMobile ? 0.5 : 1);
   let scrollVh = $derived(vh > 0 ? scrollTop / vh / scale : 0);
 
-  // Fade tessera tiles: 0 at scroll=0, full (0.6) by scroll=1vh
-  let tileOpacity = $derived(Math.min(Math.max(scrollVh, 0), 1) * 0.6);
+  // Fade tessera tiles: ramp from 0 to 0.6 by scroll=1vh, then continue
+  // rising to 0.95 by scroll=11vh so they stay visible when zoomed out.
+  // During map transitions, fade down to reveal satellite basemap underneath,
+  // then smoothly recover to full opacity on a timer when scrolling pauses.
+  let baseOpacity = $derived(
+    scrollVh <= 0 ? 0 :
+    scrollVh <= 1 ? scrollVh * 0.6 :
+    Math.min(0.6 + (scrollVh - 1) * 0.035, 0.95)
+  );
+  let transitionFade = $derived(getTransitionIntensity(scrollVh));
+  let recoveryAmount = $state(0); // 0 = no recovery, 1 = fully recovered
+  let recoveryTimer = 0;
+  let recoveryRaf = 0;
+  let recoveryStart = 0;
+  const RECOVERY_DELAY = 300;  // ms before recovery begins
+  const RECOVERY_DURATION = 1500; // ms to fade back to full
+
+  $effect(() => {
+    // When transition intensity changes, reset recovery
+    if (transitionFade > 0.05) {
+      recoveryAmount = 0;
+      cancelAnimationFrame(recoveryRaf);
+      clearTimeout(recoveryTimer);
+      recoveryTimer = window.setTimeout(() => {
+        recoveryStart = performance.now();
+        function animate() {
+          const elapsed = performance.now() - recoveryStart;
+          recoveryAmount = Math.min(elapsed / RECOVERY_DURATION, 1);
+          if (recoveryAmount < 1) {
+            recoveryRaf = requestAnimationFrame(animate);
+          }
+        }
+        recoveryRaf = requestAnimationFrame(animate);
+      }, RECOVERY_DELAY);
+    } else {
+      // No transition — full opacity, clear timers
+      recoveryAmount = 1;
+      clearTimeout(recoveryTimer);
+      cancelAnimationFrame(recoveryRaf);
+    }
+  });
+
+  let effectiveFade = $derived(transitionFade * (1 - recoveryAmount));
+  let tileOpacity = $derived(baseOpacity * (1 - effectiveFade * 0.85));
 
   // Panel visibility thresholds (in vh of scroll, unscaled — scale is applied to scrollVh)
   let pixelVisible = $derived(scrollVh >= 1);
@@ -210,7 +252,7 @@
               </div>
               <div class="open-text">
                 <span class="open-label">Open Training</span>
-                <span class="open-desc">Self-supervised encoder is <a href="https://github.com/ucam-eo/tessera" target="_blank" rel="noopener">MIT licensed</a> — inspect, modify, retrain</span>
+                <span class="open-desc">Self-supervised encoder is <a href="https://github.com/ucam-eo/tessera" target="_blank" rel="noopener">MIT licensed</a> — inspect, modify, retrain. <a href="/blog/2026-03-10-tessera-v1-weights" use:link>Beta weights available →</a></span>
               </div>
             </div>
             <div class="open-connector" class:revealed={openStep3}></div>
@@ -220,7 +262,7 @@
               </div>
               <div class="open-text">
                 <span class="open-label">Open Embeddings</span>
-                <span class="open-desc">Pre-computed embeddings are <a href="https://github.com/ucam-eo/geotessera" target="_blank" rel="noopener">CC0 licensed</a> — download and use freely</span>
+                <span class="open-desc">Pre-computed embeddings are <a href="https://github.com/ucam-eo/geotessera" target="_blank" rel="noopener">CC0 licensed</a> — download and use freely. <a href="/tasks" use:link>See downstream tasks →</a></span>
               </div>
             </div>
             <div class="open-connector" class:revealed={openStep4}></div>

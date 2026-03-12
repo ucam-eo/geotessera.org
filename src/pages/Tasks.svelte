@@ -1,6 +1,6 @@
 <script lang="ts">
   import Footer from '@/components/Footer.svelte';
-  import { link } from '@/lib/router';
+
 
   const arxivHtml = 'https://arxiv.org/html/2506.20380v6';
   const tutorials = 'https://geotessera.readthedocs.io/en/latest/tutorials.html';
@@ -17,6 +17,7 @@
     paper:          'M5 2h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zM7 6h6M7 9h6M7 12h4',
     code:           'M7 7l-4 3 4 3M13 7l4 3-4 3M9 17l2-14',
     python:         'M9 2c-3 0-5 1.5-5 3.5V8h6v1H4c-2 0-3 1.5-3 3.5S2 16 4 16h2v-2.5c0-2 1.5-3.5 3.5-3.5h5c1.5 0 2.5-1 2.5-2.5V5.5C17 3.5 15 2 12 2zm-1 1.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2z',
+    globe:          'M10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm0 2a6 6 0 0 1 4.9 9.4L5.6 4.1A6 6 0 0 1 10 4z',
   };
 
   const extIcon = 'M3.5 1.5h7v7M10 2L4 8';
@@ -35,7 +36,6 @@
     <a href="#segmentation">Segmentation</a>
     <a href="#regression">Regression</a>
     <a href="#getting-started">Getting started</a>
-    <a href="/papers" use:link>Papers</a>
   </nav>
 
   <!-- Approaches overview -->
