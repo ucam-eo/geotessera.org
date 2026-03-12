@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import path from 'path';
 import { atomFeedPlugin } from './vite-plugin-atom-feed';
+import { sitemapPlugin } from './vite-plugin-sitemap';
 import { blogLinks } from './src/lib/blog-links';
 
 export default defineConfig({
@@ -12,6 +13,11 @@ export default defineConfig({
       siteUrl: 'https://geotessera.org',
       blogDir: path.resolve(__dirname, 'content/blog'),
       links: blogLinks,
+    }),
+    sitemapPlugin({
+      siteUrl: 'https://geotessera.org',
+      staticRoutes: ['/', '/about', '/blog', '/tasks', '/papers', '/videos', '/coverage'],
+      blogDir: path.resolve(__dirname, 'content/blog'),
     }),
   ],
   resolve: {

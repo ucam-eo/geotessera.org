@@ -1,9 +1,10 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import * as THREE from 'three';
   import { feature } from 'topojson-client';
   import { link } from '@/lib/router';
   import Footer from '@/components/Footer.svelte';
+
+  let THREE: typeof import('three');
 
   const DATA_BASE = 'https://ucam-eo.github.io/tessera-coverage-map';
   const COUNTRIES_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
@@ -29,13 +30,13 @@
   let tooltipMessage = $state('');
 
   // Internal state
-  let overlayMaterial: THREE.MeshBasicMaterial | null = null;
-  let overlayMesh: THREE.Mesh | null = null;
-  let coverageData: { tiles: Record<string, number[]>; years: number[]; metadata: any } | null = null;
+  let overlayMaterial: any = null;
+  let overlayMesh: any = null;
+  let coverageData = $state<{ tiles: Record<string, number[]>; years: number[]; metadata: any } | null>(null);
   let textureImageData: ImageData | null = null;
   let countriesGeoJson: any = null;
   let tileCountryCache = new Map<string, string | null>();
-  let raycaster: THREE.Raycaster | null = null;
+  let raycaster: any = null;
   let lastHoveredTile: string | null = null;
   let resizeObserver: ResizeObserver | null = null;
 
@@ -289,7 +290,11 @@
   // --- Globe init ---
 
   async function initGlobe() {
-    const Globe = (await import('globe.gl')).default;
+    const [{ default: Globe }, threeModule] = await Promise.all([
+      import('globe.gl'),
+      import('three'),
+    ]);
+    THREE = threeModule;
 
     globeInstance = Globe()(containerEl)
       .globeImageUrl('')
@@ -537,13 +542,6 @@
 
   .section p:last-child {
     margin-bottom: 0;
-  }
-
-  .section strong {
-    color: var(--text-primary);
-    font-weight: 500;
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
-    font-size: 13px;
   }
 
   .section a {

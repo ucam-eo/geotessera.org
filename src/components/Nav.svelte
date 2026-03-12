@@ -2,6 +2,7 @@
   import { siteConfig } from '@/lib/config';
   import { currentPath, link } from '@/lib/router';
   import { scrollSections, activeScrollSection, homePastStory, scrollToSection } from '@/lib/scroll-state';
+  import SocialIcons from './SocialIcons.svelte';
 
   let path = $derived($currentPath);
   let sections = $derived($scrollSections);
@@ -57,73 +58,62 @@
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M2 10h16"/><path d="M10 2c-2.7 2.7-2.7 13.3 0 16"/><path d="M10 2c2.7 2.7 2.7 13.3 0 16"/></svg>
         Coverage
       </a>
-      <div class="dropdown docs-dropdown">
+      <div class="dropdown">
         <button
-          class="docs-btn"
+          class="dd-btn docs-btn"
           onclick={(e) => { e.stopPropagation(); docsOpen = !docsOpen; exploreOpen = false; }}
         >
           <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2h8l4 4v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M12 2v4h4M7 10h6M7 14h4"/></svg>
           Docs
         </button>
         {#if docsOpen}
-          <div class="dropdown-menu docs-menu" role="menu" tabindex="-1" onkeydown={(e) => { if (e.key === 'Escape') closeDropdown(); }} onclick={(e) => e.stopPropagation()}>
+          <div class="dropdown-menu dd-rich-menu" role="menu" tabindex="-1" onkeydown={(e) => { if (e.key === 'Escape') closeDropdown(); }} onclick={(e) => e.stopPropagation()}>
             <a href={siteConfig.docs} target="_blank" rel="noopener" onclick={closeAll}>
-              <svg class="docs-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4a1 1 0 0 1 1-1h4l2 2h6a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"/></svg>
+              <svg class="dd-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4a1 1 0 0 1 1-1h4l2 2h6a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"/></svg>
               <div>
-                <span class="docs-option-label">Geotessera Docs <svg class="external-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></span>
-                <span class="docs-option-desc">API reference &amp; data documentation</span>
+                <span class="dd-label">Geotessera Docs <svg class="external-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></span>
+                <span class="dd-desc">API reference &amp; data documentation</span>
               </div>
             </a>
             <a href="https://tee.cl.cam.ac.uk/user_guide.html" target="_blank" rel="noopener" onclick={closeAll}>
-              <svg class="docs-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="16" height="11" rx="1.5"/><path d="M6 17h8M10 14v3"/></svg>
+              <svg class="dd-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="16" height="11" rx="1.5"/><path d="M6 17h8M10 14v3"/></svg>
               <div>
-                <span class="docs-option-label">TEE User Guide <svg class="external-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></span>
-                <span class="docs-option-desc">Guide for the Embeddings Explorer</span>
+                <span class="dd-label">TEE User Guide <svg class="external-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></span>
+                <span class="dd-desc">Guide for the Embeddings Explorer</span>
               </div>
             </a>
           </div>
         {/if}
       </div>
-      <div class="dropdown explore-dropdown">
+      <div class="dropdown">
         <button
-          class="explore-btn"
+          class="dd-btn explore-btn"
           onclick={(e) => { e.stopPropagation(); exploreOpen = !exploreOpen; docsOpen = false; }}
         >
           <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M10 2a14 14 0 0 1 0 16M10 2a14 14 0 0 0 0 16M2.5 7.5h15M2.5 12.5h15"/></svg>
           Explore
         </button>
         {#if exploreOpen}
-          <div class="dropdown-menu explore-menu" role="menu" tabindex="-1" onkeydown={(e) => { if (e.key === 'Escape') closeDropdown(); }} onclick={(e) => e.stopPropagation()}>
+          <div class="dropdown-menu dd-rich-menu" role="menu" tabindex="-1" onkeydown={(e) => { if (e.key === 'Escape') closeDropdown(); }} onclick={(e) => e.stopPropagation()}>
             <a href="https://tee.cl.cam.ac.uk" target="_blank" rel="noopener" onclick={closeAll}>
-              <svg class="explore-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="16" height="11" rx="1.5"/><path d="M6 17h8M10 14v3"/></svg>
+              <svg class="dd-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="16" height="11" rx="1.5"/><path d="M6 17h8M10 14v3"/></svg>
               <div>
-                <span class="explore-option-label">Hosted</span>
-                <span class="explore-option-desc">Full viewer at tee.cl.cam.ac.uk</span>
+                <span class="dd-label">Hosted</span>
+                <span class="dd-desc">Full viewer at tee.cl.cam.ac.uk</span>
               </div>
             </a>
             <a href="https://tze.geotessera.org" target="_blank" rel="noopener" onclick={closeAll}>
-              <svg class="explore-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M10 2a14 14 0 0 1 0 16M10 2a14 14 0 0 0 0 16M2.5 10h15"/></svg>
+              <svg class="dd-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M10 2a14 14 0 0 1 0 16M10 2a14 14 0 0 0 0 16M2.5 10h15"/></svg>
               <div>
-                <span class="explore-option-label">Browser</span>
-                <span class="explore-option-desc">Lightweight in-browser explorer</span>
+                <span class="dd-label">Browser</span>
+                <span class="dd-desc">Lightweight in-browser explorer</span>
               </div>
             </a>
           </div>
         {/if}
       </div>
       <div class="nav-social">
-        <a href={siteConfig.social.github} target="_blank" rel="noopener" aria-label="GitHub">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.607.069-.607 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.337-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
-        </a>
-        <a href={siteConfig.social.bluesky} target="_blank" rel="noopener" aria-label="Bluesky">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.785 2.627 3.588 3.476 6.182 3.21-4.037.6-7.588 2.048-3.413 7.24C7.478 25.67 9.93 21.34 12 18.67c2.07 2.67 4.523 7 8.607 2.027 4.175-5.192.625-6.64-3.413-7.24 2.594.266 5.397-.583 6.182-3.21.246-.828.624-5.788.624-6.479 0-.688-.139-1.86-.902-2.203-.659-.3-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8z"/></svg>
-        </a>
-        <a href={siteConfig.social.twitter} target="_blank" rel="noopener" aria-label="X / Twitter">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </a>
-        <a href={siteConfig.social.zulip} target="_blank" rel="noopener" aria-label="Zulip">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.5 2C3.12 2 2 3.12 2 4.5v2.03c0 .9.47 1.73 1.24 2.2L12 14l8.76-5.27A2.62 2.62 0 0 0 22 6.53V4.5C22 3.12 20.88 2 19.5 2h-15zm0 20C3.12 22 2 20.88 2 19.5v-2.03c0-.9.47-1.73 1.24-2.2L12 10l8.76 5.27c.77.47 1.24 1.3 1.24 2.2v2.03c0 1.38-1.12 2.5-2.5 2.5h-15z"/></svg>
-        </a>
+        <SocialIcons />
       </div>
     </div>
   </nav>
@@ -257,15 +247,19 @@
     background: rgba(0, 200, 255, 0.05);
   }
 
-  .docs-btn {
-    background: rgba(255, 255, 255, 0.06) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  /* Shared dropdown button base */
+  .dd-btn {
     border-radius: 5px !important;
     padding: 5px 14px !important;
-    color: var(--text-secondary) !important;
     font-weight: 500 !important;
     letter-spacing: 1.5px !important;
     transition: background 0.2s, border-color 0.2s, color 0.2s !important;
+  }
+
+  .docs-btn {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    color: var(--text-secondary) !important;
   }
 
   .docs-btn:hover {
@@ -274,12 +268,25 @@
     color: #fff !important;
   }
 
-  .docs-menu {
+  .explore-btn {
+    background: rgba(0, 229, 255, 0.12) !important;
+    border: 1px solid rgba(0, 229, 255, 0.3) !important;
+    color: var(--accent-dim) !important;
+  }
+
+  .explore-btn:hover {
+    background: rgba(0, 229, 255, 0.2) !important;
+    border-color: rgba(0, 229, 255, 0.5) !important;
+    color: #fff !important;
+  }
+
+  /* Rich dropdown menu (shared by docs and explore) */
+  .dd-rich-menu {
     min-width: 240px !important;
     right: -8px !important;
   }
 
-  .docs-menu a {
+  .dd-rich-menu a {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
@@ -287,7 +294,7 @@
     padding: 10px 16px !important;
   }
 
-  .docs-icon {
+  .dd-icon {
     width: 20px !important;
     height: 20px !important;
     flex-shrink: 0;
@@ -295,7 +302,7 @@
     opacity: 0.8 !important;
   }
 
-  .docs-option-label {
+  .dd-label {
     display: flex;
     align-items: center;
     gap: 4px;
@@ -305,7 +312,7 @@
     letter-spacing: 1px;
   }
 
-  .docs-option-desc {
+  .dd-desc {
     display: block;
     font-size: 10px;
     color: var(--text-faint);
@@ -313,15 +320,15 @@
     margin-top: 4px;
   }
 
-  .docs-menu a:hover .docs-option-label {
+  .dd-rich-menu a:hover .dd-label {
     color: var(--accent-dim);
   }
 
-  .docs-menu a:hover .docs-icon {
+  .dd-rich-menu a:hover .dd-icon {
     color: var(--accent-dim);
   }
 
-  .docs-menu a:hover .docs-option-desc {
+  .dd-rich-menu a:hover .dd-desc {
     color: var(--text-muted);
   }
 
@@ -332,92 +339,23 @@
     vertical-align: middle;
   }
 
-  .explore-btn {
-    background: rgba(0, 229, 255, 0.12) !important;
-    border: 1px solid rgba(0, 229, 255, 0.3) !important;
-    border-radius: 5px !important;
-    padding: 5px 14px !important;
-    color: var(--accent-dim) !important;
-    font-weight: 500 !important;
-    letter-spacing: 1.5px !important;
-    transition: background 0.2s, border-color 0.2s, color 0.2s !important;
-  }
-
-  .explore-btn:hover {
-    background: rgba(0, 229, 255, 0.2) !important;
-    border-color: rgba(0, 229, 255, 0.5) !important;
-    color: #fff !important;
-  }
-
-  .explore-menu {
-    min-width: 240px !important;
-    right: 0 !important;
-  }
-
-  .explore-menu a {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    gap: 10px !important;
-    padding: 10px 16px !important;
-  }
-
-  .explore-icon {
-    width: 20px !important;
-    height: 20px !important;
-    flex-shrink: 0;
-    color: var(--accent-dim);
-    opacity: 0.8 !important;
-  }
-
-  .explore-option-label {
-    display: block;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text-primary);
-    letter-spacing: 1px;
-  }
-
-  .explore-option-desc {
-    display: block;
-    font-size: 10px;
-    color: var(--text-faint);
-    letter-spacing: 0.5px;
-    margin-top: 4px;
-  }
-
-  .explore-menu a:hover .explore-option-label {
-    color: var(--accent-dim);
-  }
-
-  .explore-menu a:hover .explore-option-desc {
-    color: var(--text-muted);
-  }
-
   /* Social icons in nav */
   .nav-social {
-    display: flex;
-    align-items: center;
-    gap: 10px;
     margin-left: 8px;
     padding-left: 14px;
     border-left: 1px solid rgba(255, 255, 255, 0.08);
   }
 
-  .nav-social a {
-    display: flex;
-    color: var(--text-muted);
+  .nav-social :global(.social-links) {
+    gap: 10px;
+  }
+
+  .nav-social :global(.social-links a) {
     opacity: 0.55;
-    transition: opacity 0.2s, color 0.2s;
     padding: 0 !important;
   }
 
-  .nav-social a:hover {
-    opacity: 1;
-    color: var(--accent-dim);
-  }
-
-  .nav-social svg {
+  .nav-social :global(.social-links svg) {
     width: 14px;
     height: 14px;
   }
@@ -579,7 +517,7 @@
       padding: 10px 20px 10px 44px !important;
     }
 
-    .docs-btn, .explore-btn {
+    .dd-btn {
       border-radius: 0 !important;
       border-left: none !important;
       border-right: none !important;
@@ -595,10 +533,13 @@
       padding-left: 0;
       border-left: none;
       padding: 8px 20px;
+    }
+
+    .nav-social :global(.social-links) {
       gap: 16px;
     }
 
-    .nav-social svg {
+    .nav-social :global(.social-links svg) {
       width: 16px;
       height: 16px;
     }

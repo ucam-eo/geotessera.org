@@ -24,11 +24,44 @@
     <!-- Fediverse / Bluesky -->
     <meta property="fediverse:creator" content="@geotessera.org" />
 
+    <link rel="canonical" href="https://geotessera.org" />
+    <meta name="theme-color" content="#0a0a1a" />
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
     <link rel="alternate" type="application/atom+xml" title="TESSERA Blog" href="/blog/feed.xml" />
     <link rel="alternate" type="application/atom+xml" title="TESSERA Blog — Original Content" href="/blog/feed-original.xml" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ResearchProject",
+      "name": "TESSERA",
+      "alternateName": "Temporal Embeddings of Surface Spectra for Earth Representation and Analysis",
+      "url": "https://geotessera.org",
+      "logo": "https://geotessera.org/android-chrome-512x512.png",
+      "description": "TESSERA compresses a year of satellite imagery into dense per-pixel embeddings at 10m resolution. Open data, open weights, open embeddings.",
+      "parentOrganization": {
+        "@type": "CollegeOrUniversity",
+        "name": "University of Cambridge",
+        "url": "https://www.cam.ac.uk"
+      },
+      "sameAs": [
+        "https://github.com/ucam-eo",
+        "https://bsky.app/profile/geotessera.org",
+        "https://x.com/geotessera"
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="app"></div>
