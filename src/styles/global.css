@@ -1,17 +1,17 @@
 :root {
   --bg-primary: #0a0a1a;
-  --bg-card: rgba(255, 255, 255, 0.02);
-  --bg-card-hover: rgba(255, 255, 255, 0.04);
-  --border-subtle: rgba(255, 255, 255, 0.04);
-  --border-light: rgba(255, 255, 255, 0.06);
-  --accent: rgb(0, 200, 255);
-  --accent-dim: rgba(0, 200, 255, 0.6);
-  --accent-faint: rgba(0, 200, 255, 0.1);
-  --accent-border: rgba(0, 200, 255, 0.2);
-  --text-primary: rgba(255, 255, 255, 0.95);
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --text-muted: rgba(255, 255, 255, 0.4);
-  --text-faint: rgba(255, 255, 255, 0.2);
+  --bg-card: rgba(255, 255, 255, 0.03);
+  --bg-card-hover: rgba(255, 255, 255, 0.06);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-light: rgba(255, 255, 255, 0.12);
+  --accent: rgb(0, 210, 255);
+  --accent-dim: rgba(0, 210, 255, 0.8);
+  --accent-faint: rgba(0, 210, 255, 0.12);
+  --accent-border: rgba(0, 210, 255, 0.25);
+  --text-primary: rgba(255, 255, 255, 0.97);
+  --text-secondary: rgba(255, 255, 255, 0.82);
+  --text-muted: rgba(255, 255, 255, 0.55);
+  --text-faint: rgba(255, 255, 255, 0.35);
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --nav-height: 52px;
 }

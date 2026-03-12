@@ -115,10 +115,6 @@
 </script>
 
 <div class="home" bind:this={scrollContainer} onscroll={onScroll}>
-  <div class="debug">
-    {scrollVh.toFixed(1)}vh [{sections[activeSection].label}] opacity:{tileOpacity.toFixed(2)}
-  </div>
-
   <Globe {scrollContainer} {tileOpacity} />
 
   <div class="story">
@@ -663,19 +659,6 @@
 </script>
 
 <style>
-  .debug {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 200;
-    background: rgba(0, 0, 0, 0.8);
-    color: #0f0;
-    font-family: monospace;
-    font-size: 11px;
-    padding: 4px 10px;
-    white-space: nowrap;
-    pointer-events: none;
-  }
 
   .home {
     height: 100vh;

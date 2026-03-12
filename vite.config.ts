@@ -1,9 +1,18 @@
 import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import path from 'path';
+import { atomFeedPlugin } from './vite-plugin-atom-feed';
+import { blogLinks } from './src/lib/blog-links';
 
 export default defineConfig({
-  plugins: [svelte()],
+  plugins: [
+    svelte(),
+    atomFeedPlugin({
+      siteUrl: 'https://geotessera.org',
+      blogDir: path.resolve(__dirname, 'content/blog'),
+      links: blogLinks,
+    }),
+  ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

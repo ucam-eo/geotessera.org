@@ -45,11 +45,14 @@ function compileRoute(path: string): Route {
 
 const routes: { path: string; route: Route }[] = [
   '/',
+  '/about',
   '/blog',
   '/blog/:slug',
   '/tasks',
   '/tasks/:tag',
   '/tasks/:tag/:slug',
+  '/papers',
+  '/videos',
 ].map((path) => ({ path, route: compileRoute(path) }));
 
 export const currentRoute = derived(currentPath, ($path) => {

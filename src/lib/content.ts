@@ -9,7 +9,11 @@ export interface ContentMeta {
   href: string;
   type: 'blog' | 'task';
   component: any;
+  /** External link posts have no component — they link offsite */
+  externalUrl?: string;
 }
+
+import { blogLinks } from './blog-links';
 
 const blogModules = import.meta.glob('../../content/blog/*.svx', { eager: true }) as Record<string, any>;
 const taskModules = import.meta.glob('../../content/tasks/*.svx', { eager: true }) as Record<string, any>;
@@ -44,11 +48,27 @@ function loadModules(modules: Record<string, any>, type: 'blog' | 'task'): Conte
 
 let _allContent: ContentMeta[] | null = null;
 
+function loadBlogLinks(): ContentMeta[] {
+  return blogLinks.map((link) => ({
+    title: link.title,
+    date: link.date,
+    tags: link.tags,
+    author: link.author,
+    description: link.description,
+    slug: link.id,
+    href: link.url,
+    type: 'blog' as const,
+    component: null,
+    externalUrl: link.url,
+  }));
+}
+
 export function getAllContent(): ContentMeta[] {
   if (!_allContent) {
     const blogs = loadModules(blogModules, 'blog');
+    const links = loadBlogLinks();
     const tasks = loadModules(taskModules, 'task');
-    _allContent = [...blogs, ...tasks].sort(
+    _allContent = [...blogs, ...links, ...tasks].sort(
       (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
     );
   }
