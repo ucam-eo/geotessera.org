@@ -55,7 +55,7 @@ export const siteConfig = {
   docs: 'https://geotessera.readthedocs.io/',
   map: {
     catalogUrl: 'https://dl2.geotessera.org/zarr/v1/catalog.json',
-    globalPreviewUrl: 'https://dl2.geotessera.org/zarr/v1/global_rgb_2025.zarr',
+    globalPreviewUrl: 'https://dl2.geotessera.org/zarr/v1/2025.zarr/global_rgb',
     initialCenter: [0.1218, 52.2053] as [number, number],
     initialZoom: 12,
     cambridgeCenter: [0.1218, 52.2053] as [number, number],
