@@ -115,18 +115,31 @@ function buildFeedXml(
 ): string {
   const updated = entries[0]?.date ?? new Date().toISOString().slice(0, 10);
 
+  // Stagger entries that share the same date so each <updated> is unique.
+  // Entries are already sorted newest-first; within a date, offset by 1 hour each.
+  const dateCounts = new Map<string, number>();
+
   const xml = entries
-    .map(
-      (e) => `  <entry>
+    .map((e) => {
+      const dateKey = e.date;
+      const offset = dateCounts.get(dateKey) ?? 0;
+      dateCounts.set(dateKey, offset + 1);
+      const d = new Date(dateKey);
+      d.setUTCHours(23 - offset);
+      const entryUpdated = d.toISOString();
+
+      const summaryLine = e.description
+        ? `\n    <summary>${escXml(e.description)}</summary>`
+        : '';
+      return `  <entry>
     <id>${escXml(e.url)}</id>
     <title>${escXml(e.title)}</title>
     <link href="${escXml(e.url)}" rel="alternate"/>
-    <updated>${toISO(e.date)}</updated>
-    <author><name>${escXml(e.author)}</name></author>
-    <summary>${escXml(e.description)}</summary>
+    <updated>${entryUpdated}</updated>
+    <author><name>${escXml(e.author)}</name></author>${summaryLine}
     ${e.tags.map((t) => `<category term="${escXml(t)}"/>`).join('\n    ')}
-  </entry>`,
-    )
+  </entry>`;
+    })
     .join('\n');
 
   return `<?xml version="1.0" encoding="utf-8"?>
