@@ -4,11 +4,15 @@ import { writable, derived } from 'svelte/store';
 export const base = (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '');
 
 function stripBase(pathname: string): string {
-  if (base && pathname.startsWith(base)) {
-    const stripped = pathname.slice(base.length);
-    return stripped || '/';
+  let p = pathname;
+  if (base && p.startsWith(base)) {
+    p = p.slice(base.length) || '/';
   }
-  return pathname;
+  // Strip trailing slash so /blog/ matches the /blog route
+  if (p !== '/' && p.endsWith('/')) {
+    p = p.slice(0, -1);
+  }
+  return p;
 }
 
 export const currentPath = writable(stripBase(window.location.pathname));
