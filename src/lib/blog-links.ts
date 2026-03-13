@@ -13,6 +13,15 @@ export interface BlogLink {
 
 export const blogLinks: BlogLink[] = [
   {
+    id: 'tee-v3.2.0',
+    title: 'TEE v3.2.0: GPU-accelerated U-Net classifier and flip augmentation',
+    date: '2026-03-13',
+    author: 'Srinivasan Keshav',
+    description: 'Adds a GPU-accelerated U-Net classifier operating on full 2D embedding grids via PyTorch with CUDA, MPS, and CPU support. Introduces 4\u00d7 flip augmentation for Spatial MLP 3\u00d73 and 5\u00d75 variants, plus improved error handling for non-JSON server responses.',
+    url: 'https://github.com/ucam-eo/TEE/releases/tag/v3.2.0',
+    tags: ['release', 'web'],
+  },
+  {
     id: 'core-stack-hackathon',
     title: 'TESSERA and CoRE Stack Hackathon on Geospatial AI',
     date: '2026-02-19',
