@@ -320,6 +320,16 @@ export const blogLinks: BlogLink[] = [
     tags: ['research', 'conservation'],
   },
   {
+    id: 'silage-storage-tessera',
+    title: 'Finding silage storage with TESSERA embeddings',
+    date: '2025-09-05',
+    author: 'Samuel Barrett',
+    description: '',
+    url: 'https://www.linkedin.com/posts/samuel-barrett-b86b85171_finding-silage-storage-with-tessera-embeddings-ugcPost-7369734079144955908-kdzM',
+    tags: ['social', 'classification'],
+    minor: true,
+  },
+  {
     id: 'tee-v3.0.0',
     title: 'TEE v3.0.0: Validation panel and client-side UMAP',
     date: '2026-03-09',
