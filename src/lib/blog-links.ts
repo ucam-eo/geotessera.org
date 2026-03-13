@@ -13,6 +13,15 @@ export interface BlogLink {
 
 export const blogLinks: BlogLink[] = [
   {
+    id: 'oxcaml-inference',
+    title: 'ONNX inference engine using OxCaml\'s SIMD intrinsics',
+    date: '2026-03-13',
+    author: 'Mark Elvers',
+    description: 'Building a zero-allocation ONNX inference engine for the TESSERA model using OxCaml\'s unboxed float32 types and SIMD intrinsics. Achieves ~200ms single-threaded latency, within 2.2x of ONNX Runtime.',
+    url: 'https://www.tunbury.org/2026/03/13/oxcaml-inference/',
+    tags: ['engineering'],
+  },
+  {
     id: 'tee-v3.2.0',
     title: 'TEE v3.2.0: GPU-accelerated U-Net classifier and flip augmentation',
     date: '2026-03-13',

@@ -31,7 +31,7 @@ export const siteConfig = {
       version: 'v1-zarr',
       status: 'ongoing' as const,
       statusLabel: 'in development',
-      description: 'HTTP streaming via Zarr — actively being developed.',
+      description: 'HTTP streaming via Zarr — currently transcoding tiles, which will take some time.',
       linkText: 'Zulip thread',
       linkUrl: 'https://eeg.zulipchat.com/#narrow/channel/527258-Tessera/topic/zarr.20file.20format/with/578418959',
     },
