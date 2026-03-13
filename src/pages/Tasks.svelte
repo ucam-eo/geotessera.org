@@ -81,14 +81,14 @@
       <li>
         <svg class="li-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={icons.paper}/></svg>
         <div>
-          <a href="{arxivHtml}#S4.SS2.SSS0.Px1" target="_blank" rel="noopener">TreeSatAI-TS — Tree Species Classification<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
+          <a href="{arxivHtml}#S4.SS2.SSS0.Px1" target="_blank" rel="noopener">TreeSatAI-TS — Tree Species Classification&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
           <span class="ex-desc">— Patch-based classification of tree species in Germany using multi-temporal embeddings.</span>
         </div>
       </li>
       <li>
         <svg class="li-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={icons.paper}/></svg>
         <div>
-          <a href="{arxivHtml}#S4.SS2.SSS0.Px2" target="_blank" rel="noopener">Austrian Crop Classification<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
+          <a href="{arxivHtml}#S4.SS2.SSS0.Px2" target="_blank" rel="noopener">Austrian Crop Classification&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
           <span class="ex-desc">— Pixel-wise crop type classification from annual satellite observations in Austria.</span>
         </div>
       </li>
@@ -99,7 +99,7 @@
       <li>
         <svg class="li-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={icons.solar}/></svg>
         <div>
-          <a href="https://toao.com/blog/earth-observation-budget-solar-farms-tiny-model" target="_blank" rel="noopener">Finding Solar Farms with a 42k-Parameter Model<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
+          <a href="https://toao.com/blog/earth-observation-budget-solar-farms-tiny-model" target="_blank" rel="noopener">Finding Solar Farms with a 42k-Parameter Model&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
           <span class="ex-author">Sadiq Jaffer</span>
           <span class="ex-desc">— Detecting and mapping solar farms across the UK using a compact neural network on TESSERA embeddings.</span>
         </div>
@@ -107,7 +107,7 @@
       <li>
         <svg class="li-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={icons.leaf}/></svg>
         <div>
-          <a href="https://toao.com/blog/can-we-really-see-brambles-from-space" target="_blank" rel="noopener">Can a model trained on satellite data really find brambles on the ground?<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
+          <a href="https://toao.com/blog/can-we-really-see-brambles-from-space" target="_blank" rel="noopener">Can a model trained on satellite data really find brambles on the ground?&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
           <span class="ex-author">Sadiq Jaffer</span>
           <span class="ex-desc">— A field validation study testing TESSERA-based bramble prediction against ground truth.</span>
         </div>
@@ -119,7 +119,7 @@
       <li>
         <svg class="li-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={icons.python}/></svg>
         <div>
-          <a href="{tutorials}#tutorial-2-point-sampling-workflow" target="_blank" rel="noopener">Point Sampling Workflow<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
+          <a href="{tutorials}#tutorial-2-point-sampling-workflow" target="_blank" rel="noopener">Point Sampling Workflow&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
           <span class="ex-desc">— Sample embeddings at specific coordinates for point-based classification tasks.</span>
         </div>
       </li>
@@ -141,14 +141,14 @@
       <li>
         <svg class="li-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={icons.paper}/></svg>
         <div>
-          <a href="{arxivHtml}#S4.SS3.SSS0.Px1" target="_blank" rel="noopener">PASTIS-R — Field Parcel Segmentation<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
+          <a href="{arxivHtml}#S4.SS3.SSS0.Px1" target="_blank" rel="noopener">PASTIS-R — Field Parcel Segmentation&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
           <span class="ex-desc">— Delineation of agricultural field boundaries in France.</span>
         </div>
       </li>
       <li>
         <svg class="li-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={icons.paper}/></svg>
         <div>
-          <a href="{arxivHtml}#S4.SS3.SSS0.Px2" target="_blank" rel="noopener">Austrian Crop Segmentation<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
+          <a href="{arxivHtml}#S4.SS3.SSS0.Px2" target="_blank" rel="noopener">Austrian Crop Segmentation&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
           <span class="ex-desc">— Regional crop type semantic segmentation at field level in Austria.</span>
         </div>
       </li>
@@ -159,7 +159,7 @@
       <li>
         <svg class="li-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={icons.code}/></svg>
         <div>
-          <a href="https://github.com/sadiqj/tessera-cnn-example" target="_blank" rel="noopener">TESSERA CNN/UNet Example<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
+          <a href="https://github.com/sadiqj/tessera-cnn-example" target="_blank" rel="noopener">TESSERA CNN/UNet Example&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
           <span class="ex-author">Sadiq Jaffer</span>
           <span class="ex-desc">— Example CNN and UNet architectures for downstream classification and segmentation tasks.</span>
         </div>
@@ -171,7 +171,7 @@
       <li>
         <svg class="li-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={icons.python}/></svg>
         <div>
-          <a href="{tutorials}#tutorial-3-gis-integration-workflow" target="_blank" rel="noopener">GIS Integration Workflow<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
+          <a href="{tutorials}#tutorial-3-gis-integration-workflow" target="_blank" rel="noopener">GIS Integration Workflow&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
           <span class="ex-desc">— Integrate TESSERA data with GIS tools for land cover mapping and spatial analysis.</span>
         </div>
       </li>
@@ -193,14 +193,14 @@
       <li>
         <svg class="li-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={icons.paper}/></svg>
         <div>
-          <a href="{arxivHtml}#S4.SS4.SSS0.Px1" target="_blank" rel="noopener">Biomassters — Above-Ground Biomass Estimation<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
+          <a href="{arxivHtml}#S4.SS4.SSS0.Px1" target="_blank" rel="noopener">Biomassters — Above-Ground Biomass Estimation&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
           <span class="ex-desc">— Predicting forest above-ground biomass in tonnes per hectare in Finland.</span>
         </div>
       </li>
       <li>
         <svg class="li-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={icons.tree}/></svg>
         <div>
-          <a href="{arxivHtml}#S4.SS4.SSS0.Px2" target="_blank" rel="noopener">Borneo Canopy Height<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
+          <a href="{arxivHtml}#S4.SS4.SSS0.Px2" target="_blank" rel="noopener">Borneo Canopy Height&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
           <span class="ex-desc">— Estimating forest canopy height in metres from satellite embeddings in Malaysia.</span>
         </div>
       </li>
@@ -211,7 +211,7 @@
       <li>
         <svg class="li-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={icons.python}/></svg>
         <div>
-          <a href="{tutorials}#tutorial-4-large-scale-analysis" target="_blank" rel="noopener">Large-Scale Analysis<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
+          <a href="{tutorials}#tutorial-4-large-scale-analysis" target="_blank" rel="noopener">Large-Scale Analysis&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
           <span class="ex-desc">— Work with large regions efficiently, handling tiling and batch processing of embeddings.</span>
         </div>
       </li>
@@ -231,28 +231,28 @@
       <li>
         <svg class="li-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={icons.python}/></svg>
         <div>
-          <a href="{tutorials}#tutorial-1-basic-data-analysis" target="_blank" rel="noopener">Basic Data Analysis<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
+          <a href="{tutorials}#tutorial-1-basic-data-analysis" target="_blank" rel="noopener">Basic Data Analysis&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
           <span class="ex-desc">— Load TESSERA embeddings for a location and explore the data structure, dimensions, and basic statistics.</span>
         </div>
       </li>
       <li>
         <svg class="li-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={icons.python}/></svg>
         <div>
-          <a href="{tutorials}#tutorial-6-custom-analysis-workflows" target="_blank" rel="noopener">Custom Analysis Workflows<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
+          <a href="{tutorials}#tutorial-6-custom-analysis-workflows" target="_blank" rel="noopener">Custom Analysis Workflows&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
           <span class="ex-desc">— Build custom pipelines including PCA dimensionality reduction on TESSERA embeddings.</span>
         </div>
       </li>
       <li>
         <svg class="li-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={icons.python}/></svg>
         <div>
-          <a href="{tutorials}#tutorial-7-cloud-native-analysis-with-zarr" target="_blank" rel="noopener">Cloud-Native Analysis with Zarr<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
+          <a href="{tutorials}#tutorial-7-cloud-native-analysis-with-zarr" target="_blank" rel="noopener">Cloud-Native Analysis with Zarr&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
           <span class="ex-desc">— Access TESSERA data directly from cloud storage using the Zarr format for scalable workflows.</span>
         </div>
       </li>
       <li>
         <svg class="li-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={icons.code}/></svg>
         <div>
-          <a href="https://github.com/sadiqj/tessera-cnn-example" target="_blank" rel="noopener">CNN/UNet Architecture Example<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
+          <a href="https://github.com/sadiqj/tessera-cnn-example" target="_blank" rel="noopener">CNN/UNet Architecture Example&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
           <span class="ex-author">Sadiq Jaffer</span>
           <span class="ex-desc">— Reference implementations of CNN and UNet architectures for downstream tasks on TESSERA embeddings.</span>
         </div>
@@ -433,5 +433,11 @@
   .ex-desc {
     color: var(--text-muted);
     font-size: 13px;
+  }
+
+  @media (max-width: 768px) {
+    .tasks-page {
+      padding: 32px 16px;
+    }
   }
 </style>

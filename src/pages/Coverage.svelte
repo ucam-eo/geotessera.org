@@ -626,6 +626,12 @@
     font-style: italic;
   }
 
+  @media (max-width: 768px) {
+    .coverage-page {
+      padding: 32px 16px;
+    }
+  }
+
   @media (max-width: 640px) {
     .globe-container {
       aspect-ratio: 1;

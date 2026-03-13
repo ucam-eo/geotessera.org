@@ -53,37 +53,37 @@
     <ul class="eco-list">
       <li>
         <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0-1.4l-1.6-1.6a1 1 0 0 0-1.4 0l-2 2 3 3zM3 13.5V17h3.5L13.4 10l-3-3z"/></svg>
-        <a href="https://github.com/ucam-eo/tessera" target="_blank" rel="noopener">Tessera Training<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
+        <a href="https://github.com/ucam-eo/tessera" target="_blank" rel="noopener">Tessera Training&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
         <span class="eco-desc">— Foundation model training code (MIT)</span>
       </li>
       <li>
         <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4"/></svg>
-        <a href="https://pypi.org/project/geotessera/" target="_blank" rel="noopener">GeoTessera on PyPI<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
+        <a href="https://pypi.org/project/geotessera/" target="_blank" rel="noopener">GeoTessera on PyPI&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
         <span class="eco-desc">— <code>pip install geotessera</code>, Python library for embeddings</span>
       </li>
       <li>
         <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><path d="M10 3v14M3 10h14"/></svg>
-        <a href="https://github.com/ucam-eo/geotessera" target="_blank" rel="noopener">GeoTessera Embeddings<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
+        <a href="https://github.com/ucam-eo/geotessera" target="_blank" rel="noopener">GeoTessera Embeddings&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
         <span class="eco-desc">— Pre-computed global embeddings (CC0 license). <a href="/coverage" use:link>View coverage</a></span>
       </li>
       <li>
         <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="16" height="11" rx="1.5"/><path d="M6 17h8M10 14v3"/></svg>
-        <a href="https://github.com/ucam-eo/tee" target="_blank" rel="noopener">TEE<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
+        <a href="https://github.com/ucam-eo/tee" target="_blank" rel="noopener">TEE&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
         <span class="eco-desc">— TESSERA Embeddings Explorer, interactive map viewer</span>
       </li>
       <li>
         <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l6 8 6-8"/><path d="M4 8l6 8 6-8"/></svg>
-        <a href="https://github.com/ucam-eo/geotessera-examples" target="_blank" rel="noopener">Examples<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
+        <a href="https://github.com/ucam-eo/geotessera-examples" target="_blank" rel="noopener">Examples&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
         <span class="eco-desc">— Solar panel detection, UMAP visualisation, and more</span>
       </li>
       <li>
         <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M10 2a14 14 0 0 1 0 16M10 2a14 14 0 0 0 0 16M2.5 10h15"/></svg>
-        <a href="https://github.com/ucam-eo/tessera-interactive-map" target="_blank" rel="noopener">Interactive Notebook<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
+        <a href="https://github.com/ucam-eo/tessera-interactive-map" target="_blank" rel="noopener">Interactive Notebook&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
         <span class="eco-desc">— Jupyter notebook for interactive exploration</span>
       </li>
       <li>
         <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2h8l4 4v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M12 2v4h4M7 10h6M7 14h4"/></svg>
-        <a href="https://geotessera.readthedocs.io/" target="_blank" rel="noopener">Documentation<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
+        <a href="https://geotessera.readthedocs.io/" target="_blank" rel="noopener">Documentation&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
         <span class="eco-desc">— API reference and data documentation</span>
       </li>
     </ul>
@@ -96,7 +96,7 @@
     <ul class="eco-list">
       <li>
         <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-4.4 0-8 3-8 6.5S7.6 16 12 16s8-3 8-6.5S16.4 3 12 3z"/></svg>
-        <a href="https://ucam-eo.github.io/habitat-mapping/" target="_blank" rel="noopener">Mapping Earth's Habitats with Foundation Models<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
+        <a href="https://ucam-eo.github.io/habitat-mapping/" target="_blank" rel="noopener">Mapping Earth's Habitats with Foundation Models&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
         <span class="eco-desc">— Species-level ecosystem mapping at 10m resolution, spanning alpine tree species in Italy, neotropical vegetation, and UK landscape restoration</span>
       </li>
     </ul>
@@ -469,6 +469,22 @@
   .roadmap-status.planned {
     color: var(--text-muted);
     background: rgba(255, 255, 255, 0.05);
+  }
+
+  @media (max-width: 768px) {
+    .about-page {
+      padding: 32px 16px;
+    }
+
+    .eco-list li {
+      gap: 8px;
+      padding: 8px 0;
+      font-size: 13px;
+    }
+
+    .involve-item {
+      padding: 10px 0;
+    }
   }
 
   @media (max-width: 640px) {

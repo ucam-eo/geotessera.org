@@ -150,4 +150,20 @@
     height: 60vh;
     color: var(--text-muted);
   }
+
+  @media (max-width: 768px) {
+    .example {
+      padding: 32px 16px;
+    }
+
+    h1 {
+      font-size: 22px;
+      letter-spacing: 1px;
+    }
+
+    .content :global(pre) {
+      padding: 12px;
+      font-size: 12px;
+    }
+  }
 </style>

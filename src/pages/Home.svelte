@@ -1111,13 +1111,18 @@
 
   @media (max-width: 767px) {
     .panel-card {
-      padding: 20px 16px;
+      padding: 16px 14px;
       border-radius: 8px;
       max-width: 100%;
+      max-height: calc(100vh - var(--nav-height) - 40px);
+      overflow: hidden;
     }
 
     .sticky-wrap {
       padding: 16px;
+      align-items: flex-start;
+      padding-top: calc(var(--nav-height) + 12px);
+      padding-bottom: 12px;
     }
 
     .title {
@@ -1127,6 +1132,14 @@
 
     .panel-card h2 {
       font-size: 16px;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .panel-card p {
+      font-size: 12px;
+      line-height: 1.7;
+      margin-bottom: 8px;
     }
 
     .diagram-split {
@@ -1134,9 +1147,30 @@
       gap: 8px;
     }
 
+    .diagram-half {
+      max-height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .diagram-half :global(svg) {
+      max-height: 160px;
+      width: auto;
+    }
+
     .diagram-divider {
       width: 100%;
       height: 1px;
+    }
+
+    .diagram {
+      margin: 8px 0;
+    }
+
+    .caption {
+      font-size: 11px !important;
+      line-height: 1.5 !important;
     }
 
     .open-card {
@@ -1147,8 +1181,55 @@
       max-width: 100%;
     }
 
+    .open-step {
+      padding: 10px 12px;
+      gap: 10px;
+    }
+
+    .open-icon {
+      width: 22px;
+      height: 22px;
+    }
+
+    .open-label {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+    }
+
+    .open-desc {
+      font-size: 11px;
+    }
+
+    .open-connector {
+      height: 10px;
+    }
+
+    .open-intro {
+      font-size: 12px !important;
+      margin-bottom: 12px !important;
+    }
+
+    .cov-entry {
+      padding: 8px 0;
+      gap: 10px;
+    }
+
+    .cov-version {
+      font-size: 12px;
+    }
+
+    .cov-desc {
+      font-size: 11px;
+    }
+
     .task-links {
       gap: 6px;
+      margin-top: 10px;
+    }
+
+    .task-link {
+      font-size: 9px;
+      padding: 3px 8px;
     }
   }
 </style>

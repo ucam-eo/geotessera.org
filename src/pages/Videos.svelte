@@ -377,6 +377,12 @@
     margin: 0;
   }
 
+  @media (max-width: 768px) {
+    .videos-page {
+      padding: 32px 16px;
+    }
+  }
+
   @media (max-width: 640px) {
     .video-card {
       flex-direction: column;

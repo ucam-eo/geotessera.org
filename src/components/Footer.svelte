@@ -34,4 +34,10 @@
   footer a:hover {
     color: var(--accent-dim);
   }
+
+  @media (max-width: 768px) {
+    footer {
+      padding: 20px 16px;
+    }
+  }
 </style>

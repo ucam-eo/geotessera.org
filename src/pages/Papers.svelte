@@ -130,7 +130,7 @@
             <span class="paper-venue">{paper.venue}</span>
             <span class="paper-date">{paper.date}</span>
           </div>
-          <h3><a href={paper.url} target="_blank" rel="noopener">{paper.title}<svg class="external-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a></h3>
+          <h3><a href={paper.url} target="_blank" rel="noopener">{paper.title}&#8288;<svg class="external-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a></h3>
           <p class="paper-authors">{paper.authors}</p>
           <p class="paper-desc">{paper.description}</p>
           <div class="paper-links">
@@ -370,5 +370,42 @@
   .paper-tag::before {
     content: '#';
     opacity: 0.5;
+  }
+
+  @media (max-width: 768px) {
+    .papers-page {
+      padding: 32px 16px;
+    }
+
+    .timeline-rail {
+      width: 28px;
+    }
+
+    .timeline-icon {
+      width: 22px;
+      height: 22px;
+    }
+
+    .timeline-icon svg {
+      width: 11px;
+      height: 11px;
+    }
+
+    .timeline-content {
+      padding-left: 10px;
+      padding-bottom: 24px;
+    }
+
+    .timeline-content h3 {
+      font-size: 15px;
+    }
+
+    .paper-links {
+      gap: 8px;
+    }
+
+    .paper-doi {
+      font-size: 10px;
+    }
   }
 </style>

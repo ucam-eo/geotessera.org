@@ -540,4 +540,69 @@
     font-size: 14px;
     padding-left: 52px;
   }
+
+  @media (max-width: 768px) {
+    .blog-page {
+      padding: 32px 16px;
+    }
+
+    .timeline-rail {
+      width: 28px;
+    }
+
+    .timeline-icon {
+      width: 22px;
+      height: 22px;
+    }
+
+    .timeline-icon svg {
+      width: 11px;
+      height: 11px;
+    }
+
+    .is-link .timeline-icon {
+      width: 18px;
+      height: 18px;
+    }
+
+    .is-link .timeline-icon svg {
+      width: 9px;
+      height: 9px;
+    }
+
+    .is-minor .timeline-icon {
+      width: 14px;
+      height: 14px;
+    }
+
+    .is-minor .timeline-icon svg {
+      width: 7px;
+      height: 7px;
+    }
+
+    .month-header {
+      padding-left: 36px;
+    }
+
+    .timeline-content {
+      padding-left: 10px;
+      padding-bottom: 20px;
+    }
+
+    .timeline-content h3 {
+      font-size: 16px;
+    }
+
+    .is-link .timeline-content {
+      padding-bottom: 14px;
+    }
+
+    .is-minor .timeline-content {
+      padding-bottom: 8px;
+    }
+
+    .empty {
+      padding-left: 36px;
+    }
+  }
 </style>
