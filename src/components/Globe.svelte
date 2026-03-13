@@ -1,7 +1,7 @@
 <script lang="ts">
   import maplibregl from 'maplibre-gl';
   import 'maplibre-gl/dist/maplibre-gl.css';
-  import { registerZarrProtocol } from '@ucam-eo/maplibre-zarr-tessera';
+  import { registerZarrProtocol } from '@ucam-eo/maplibre-tessera';
   import { siteConfig } from '@/lib/config';
   import { setupScrollAnimation } from '@/lib/globe';
   import { onMount } from 'svelte';

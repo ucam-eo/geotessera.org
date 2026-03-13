@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@ucam-eo/maplibre-zarr-tessera": "link:../tze/packages/maplibre-zarr-tessera",
+    "@ucam-eo/maplibre-tessera": "link:../tze/packages/maplibre-tessera",
     "globe.gl": "^2.45.0",
     "maplibre-gl": "^4.7.1",
     "three": "^0.183.2",

@@ -1,6 +1,6 @@
 <script lang="ts">
   import maplibregl from 'maplibre-gl';
-  import { registerZarrProtocol } from '@ucam-eo/maplibre-zarr-tessera';
+  import { registerZarrProtocol } from '@ucam-eo/maplibre-tessera';
   import { siteConfig } from '@/lib/config';
   import { onMount } from 'svelte';
   import { currentPath } from '@/lib/router';

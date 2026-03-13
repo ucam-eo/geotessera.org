@@ -12,9 +12,9 @@ importers:
 
   .:
     dependencies:
-      '@ucam-eo/maplibre-zarr-tessera':
-        specifier: link:../tze/packages/maplibre-zarr-tessera
-        version: link:../tze/packages/maplibre-zarr-tessera
+      '@ucam-eo/maplibre-tessera':
+        specifier: link:../tze/packages/maplibre-tessera
+        version: link:../tze/packages/maplibre-tessera
       globe.gl:
         specifier: ^2.45.0
         version: 2.45.0
