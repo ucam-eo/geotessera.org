@@ -82,9 +82,19 @@
       thumb: 'https://crank.recoil.org/lazy-static/previews/ae4a9924-1dfe-4304-a5e3-1e2efe14dc9a.jpg',
       type: 'talk' as const,
     },
+    {
+      id: 'ieee-grss-webinar',
+      title: 'TESSERA: Precomputed FAIR Global Pixel Embeddings for Earth Representation and Analysis',
+      source: 'IEEE GRSS',
+      date: 'Dec 2025',
+      description: 'IEEE Geoscience and Remote Sensing Society webinar presenting TESSERA\'s approach to precomputed FAIR global pixel embeddings for Earth observation analysis.',
+      url: 'https://www.youtube.com/watch?v=J-QLuX9xcsI',
+      thumb: 'https://i.ytimg.com/vi/J-QLuX9xcsI/mqdefault.jpg',
+      type: 'webinar' as const,
+    },
   ];
 
-  const types = ['all', 'talk', 'interview', 'workshop', 'podcast'] as const;
+  const types = ['all', 'talk', 'interview', 'workshop', 'podcast', 'webinar'] as const;
   let activeType = $state<string>('all');
   let filtered = $derived(
     activeType === 'all' ? videos : videos.filter(v => v.type === activeType)

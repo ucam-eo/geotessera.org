@@ -58,6 +58,7 @@
     release: 'M10 2v4l3 2-3 2v4a6 6 0 1 1 0-12z', // tag/release
     python: 'M9 2c-3 0-5 1.5-5 3.5V8h6v1H4c-2 0-3 1.5-3 3.5S2 16 4 16h2v-2.5c0-2 1.5-3.5 3.5-3.5h5c1.5 0 2.5-1 2.5-2.5V5.5C17 3.5 15 2 12 2zm-1 1.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2z', // python snake
     video: 'M4 4h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM8 7v6l5-3z', // play button
+    social: 'M4 3h12a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-4l-4 3v-3H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z', // speech bubble
   };
 
   function domain(url: string): string {
