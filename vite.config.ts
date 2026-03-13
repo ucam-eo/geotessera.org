@@ -14,7 +14,7 @@ import { blogLinks } from './src/lib/blog-links';
 function spa404Plugin(routes: string[]): Plugin {
   return {
     name: 'spa-404',
-    closeBundle() {
+    writeBundle() {
       const dist = path.resolve(__dirname, 'dist');
       const index = path.join(dist, 'index.html');
       fs.copyFileSync(index, path.join(dist, '404.html'));
