@@ -3,15 +3,16 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "packageManager": "pnpm@10.32.1",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@ucam-eo/maplibre-tessera": "link:../tze/packages/maplibre-tessera",
+    "@ucam-eo/maplibre-tessera": "github:ucam-eo/tze#1a90e0a0f5a53691c2930cb39b85f05af19c0ad8&path:packages/maplibre-tessera",
     "globe.gl": "^2.45.0",
-    "maplibre-gl": "^4.7.1",
+    "maplibre-gl": "^5.20.1",
     "three": "^0.183.2",
     "topojson-client": "^3.1.0"
   },
@@ -24,9 +25,14 @@
     "vite": "^8.0.0"
   },
   "pnpm": {
+    "onlyBuiltDependencies": [
+      "@ucam-eo/maplibre-tessera",
+      "@ucam-eo/tessera"
+    ],
     "overrides": {
-      "zarrita": "github:avsm/zarrita.js#coalesce&path:packages/zarrita",
-      "@zarrita/storage": "github:avsm/zarrita.js#coalesce&path:packages/@zarrita-storage"
+      "@ucam-eo/tessera": "github:ucam-eo/tze#1a90e0a0f5a53691c2930cb39b85f05af19c0ad8&path:packages/tessera",
+      "zarrita": "github:avsm/zarrita.js#a51753a73c9a4d889a0d3218ddd236bd52200d86&path:packages/zarrita",
+      "@zarrita/storage": "github:avsm/zarrita.js#a51753a73c9a4d889a0d3218ddd236bd52200d86&path:packages/@zarrita-storage"
     }
   }
 }
