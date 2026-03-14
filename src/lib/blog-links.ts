@@ -13,6 +13,16 @@ export interface BlogLink {
 
 export const blogLinks: BlogLink[] = [
   {
+    id: 'pixels-to-patches-pooling',
+    title: 'Paper: From Pixels to Patches — Pooling Strategies for Earth Embeddings',
+    date: '2026-03-02',
+    author: 'Isaac Corley et al.',
+    description: 'Introduces EuroSAT-Embed, a dataset of 81k embedding GeoTIFFs from three models, and evaluates 13 pooling approaches. Recommends Generalized Mean Pooling as an efficient alternative to mean pooling, reducing geographic generalization gap by up to 40%.',
+    url: 'https://arxiv.org/abs/2603.02080',
+    tags: ['research', 'community'],
+    minor: true,
+  },
+  {
     id: 'oxcaml-inference',
     title: 'ONNX inference engine using OxCaml\'s SIMD intrinsics',
     date: '2026-03-13',
