@@ -52,8 +52,9 @@
         sources: {
           'satellite': {
             type: 'raster',
-            tiles: ['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],
+            tiles: ['https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2021_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg'],
             tileSize: 256,
+            attribution: 'Sentinel-2 cloudless by <a href="https://s2maps.eu">EOX</a> (contains modified Copernicus Sentinel data 2021)',
           },
           'tessera-preview': {
             type: 'raster',
