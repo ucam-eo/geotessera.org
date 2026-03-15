@@ -13,6 +13,15 @@ export interface BlogLink {
 
 export const blogLinks: BlogLink[] = [
   {
+    id: 'tessera-zarr-v3-layout',
+    title: 'Streaming millions of TESSERA tiles over HTTP with Zarr v3',
+    date: '2026-03-14',
+    author: 'Anil Madhavapeddy',
+    description: 'How TESSERA restructured its geospatial embeddings from millions of individual files into sharded Zarr v3 stores, enabling efficient HTTP streaming via range requests for both single-pixel mobile queries and large-scale regional analysis.',
+    url: 'https://anil.recoil.org/notes/tessera-zarr-v3-layout',
+    tags: ['engineering'],
+  },
+  {
     id: 'pixels-to-patches-pooling',
     title: 'Paper: From Pixels to Patches — Pooling Strategies for Earth Embeddings',
     date: '2026-03-02',
