@@ -57,15 +57,38 @@
         <span class="eco-desc">— Foundation model training code (MIT)</span>
       </li>
       <li>
-        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4"/></svg>
-        <a href="https://pypi.org/project/geotessera/" target="_blank" rel="noopener">GeoTessera on PyPI&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
-        <span class="eco-desc">— <code>pip install geotessera</code>, Python library for embeddings</span>
-      </li>
-      <li>
         <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><path d="M10 3v14M3 10h14"/></svg>
         <a href="https://github.com/ucam-eo/geotessera" target="_blank" rel="noopener">GeoTessera Embeddings&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
         <span class="eco-desc">— Pre-computed global embeddings (CC0 license). <a href="/coverage" use:link>View coverage</a></span>
       </li>
+    </ul>
+
+    <h3 class="eco-subheading">Language libraries</h3>
+    <ul class="eco-list">
+      <li>
+        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4"/></svg>
+        <a href="https://pypi.org/project/geotessera/" target="_blank" rel="noopener">Python&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
+        <span class="eco-desc">— <code>pip install geotessera</code> <span class="eco-badge mature">mature</span></span>
+      </li>
+      <li>
+        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4"/></svg>
+        <a href="https://lassa-sentinel.github.io/GeoTessera/" target="_blank" rel="noopener">R&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
+        <span class="eco-desc">— Community contribution by <a href="https://www.microsoft.com/en-us/research/people/sdwfrost/" target="_blank" rel="noopener">Simon Frost</a> <span class="eco-badge contributed">contributed</span></span>
+      </li>
+      <li>
+        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4"/></svg>
+        <span class="eco-link-muted">OCaml</span>
+        <span class="eco-desc">— In development by the core team <span class="eco-badge dev">in development</span></span>
+      </li>
+      <li>
+        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4"/></svg>
+        <span class="eco-link-muted">TypeScript</span>
+        <span class="eco-desc">— In development, powering the <a href="/viewer" use:link>interactive map viewer</a> <span class="eco-badge dev">in development</span></span>
+      </li>
+    </ul>
+
+    <h3 class="eco-subheading">Tools &amp; resources</h3>
+    <ul class="eco-list">
       <li>
         <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="16" height="11" rx="1.5"/><path d="M6 17h8M10 14v3"/></svg>
         <a href="https://github.com/ucam-eo/tee" target="_blank" rel="noopener">TEE&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
@@ -358,6 +381,45 @@
   .eco-desc {
     color: var(--text-muted);
     font-size: 13px;
+  }
+
+  .eco-subheading {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 20px;
+    margin-bottom: 8px;
+  }
+
+  .eco-link-muted {
+    font-weight: 500;
+    color: var(--text-muted);
+  }
+
+  .eco-badge {
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 1px 6px;
+    border-radius: 8px;
+    margin-left: 4px;
+  }
+
+  .eco-badge.mature {
+    color: #4ade80;
+    background: rgba(74, 222, 128, 0.1);
+  }
+
+  .eco-badge.contributed {
+    color: #60a5fa;
+    background: rgba(96, 165, 250, 0.1);
+  }
+
+  .eco-badge.dev {
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.05);
   }
 
   .eco-desc code {

@@ -1,0 +1,36 @@
+---
+title: "GeoTessera R library now available"
+date: 2026-03-16
+tags: [announcement, community, rlang]
+author: "Anil Madhavapeddy"
+description: "Simon Frost from Microsoft Research has contributed an R port of the geotessera library, bringing TESSERA embeddings to the R ecosystem."
+---
+
+# GeoTessera R library available
+
+[Simon Frost](https://www.microsoft.com/en-us/research/people/sdwfrost/) from Microsoft Research has built an [R port](https://lassa-sentinel.github.io/GeoTessera/) of the [geotessera](https://pypi.org/project/geotessera/) library. The new [GeoTessera R package](https://lassa-sentinel.github.io/GeoTessera/) makes it easy for R users to integrate 10m-resolution geospatial embeddings into their existing workflows.
+
+The R library mirrors the functionality of the Python package, letting you retrieve numpy tiles, extract embeddings, and export data from R:
+
+```r
+library(GeoTessera)
+gt <- geotessera()
+tiles <- gt$get_tiles(bbox = c(-0.2, 51.4, 0.1, 51.6), year = 2024)
+gt$export_embedding_geotiffs(tiles = tiles, output_dir = "london_tiles")
+```
+
+The package builds on R geospatial libraries including `sf`, `terra`, and `arrow`, and follows the R6 class conventions familiar to R users.
+
+We welcome other community contributions in any language. The underlying data is currently served over HTTP as numpy files, but we are curently porting to [Zarr v3 over HTTP](https://anil.recoil.org/notes/tessera-zarr-v3-layout). Supporting either is fine depending on your needs.
+
+## Get started
+
+Install the R package from GitHub:
+
+```r
+remotes::install_github("lassa-sentinel/GeoTessera")
+```
+
+Full documentation is available at [lassa-sentinel.github.io/GeoTessera](https://lassa-sentinel.github.io/GeoTessera/).
+
+If you're building tools or libraries on top of TESSERA embeddings, we'd love to hear about it — come say hello on [Zulip](https://eeg.zulipchat.com) or open an issue or discussion on [GitHub](https://github.com/ucam-eo/geotessera).
