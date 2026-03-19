@@ -17,8 +17,18 @@ function stripBase(pathname: string): string {
 
 export const currentPath = writable(stripBase(window.location.pathname));
 
+/** Notify Matomo of a client-side navigation. */
+function trackPageView() {
+  const _paq = (window as any)._paq;
+  if (!_paq) return;
+  _paq.push(['setCustomUrl', window.location.href]);
+  _paq.push(['setDocumentTitle', document.title]);
+  _paq.push(['trackPageView']);
+}
+
 window.addEventListener('popstate', () => {
   currentPath.set(stripBase(window.location.pathname));
+  trackPageView();
 });
 
 export function navigate(path: string) {
@@ -35,6 +45,7 @@ export function navigate(path: string) {
   } else {
     window.scrollTo(0, 0);
   }
+  trackPageView();
 }
 
 export function link(node: HTMLAnchorElement) {
