@@ -125,6 +125,24 @@
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
   }
 
+  .content :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid var(--border-light);
+    margin: 8px 0;
+  }
+
+  .content :global(.compare) {
+    max-width: 100%;
+  }
+
+  .content :global(.compare img) {
+    border: none;
+    border-radius: 0;
+    margin: 0;
+  }
+
   .content :global(a) { color: var(--accent-dim); }
 
   .content :global(hr) {

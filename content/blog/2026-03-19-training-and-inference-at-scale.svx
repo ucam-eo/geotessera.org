@@ -1,0 +1,98 @@
+---
+title: "Planetary scale training and inference with AMD and Vultr"
+date: 2026-03-19
+tags: [engineering, announcement]
+author: "Anil Madhavapeddy"
+description: "How we used AMD Accelerator Cloud and Vultr's MI325X GPU clusters to train the TESSERA v1 model and generate 250TB of global embeddings."
+draft: true
+---
+
+<script>
+  import ImageCompare from '../../src/components/ImageCompare.svelte';
+  import CropUmap from '../../src/components/CropUmap.svelte';
+</script>
+
+Building the core TESSERA foundation model is only half the challenge; we also have to run it over every 10-metre pixel of the Earth's land surface, for every year from 2017 to 2025, to produce the ready-to-use "map tiles" embeddings that make TESSERA more oven ready. Here's how we did the first major run with the [AMD Accelerator Cloud](https://aac.amd.com/), and then Vultr's bare-metal AMD MIX3xx infrastructure.
+
+## Training TESSERA v1
+
+TESSERA is [trained](https://arxiv.org/abs/2506.20380) using a modified [Barlow Twins](https://arxiv.org/abs/2103.03230) self-supervised learning objective. The model has parallel Transformer-based encoders  (one for [Sentinel-2 optical](https://dataspace.copernicus.eu/data-collections/copernicus-sentinel-missions/sentinel-2) data and one for [Sentinel-1 radar](https://sentinels.copernicus.eu/copernicus/sentinel-1)) whose outputs are fused by a [multilayer perceptron](https://en.wikipedia.org/wiki/Multilayer_perceptron) into a single 128-dimensional embedding per 10m2 pixel. The full model has around 1.4 billion parameters, though the vast majority are in the projector network that is discarded after training. This leaves the encoder itself as a lean 46 million parameters; pretty small for a learnt observational model of the Earth's land!
+
+### Visualising the pipeline
+
+The training dataset is where we get into serious systems scale. We build up a matrix of images for every 10m2 that form a cross-seasonal view of that particular point, called a "d-pixel".
+Here's what a few of these d-pixel tile looks like as they moves through the system:
+
+**Same location, different seasons** — drag the slider to compare a slightly cloudy winter capture (left) with a summer observation (right). The landscape looks completely different across seasons due to vegetation phenology, crop cycles, and land management all change the spectral signature. TESSERA's spectral-temporal encoder learns to integrate these variations rather than discard them.
+
+<ImageCompare
+  leftSrc="/blog/tessera-1.png"
+  rightSrc="/blog/tessera-2.png"
+  leftLabel="Winter (cloudy)"
+  rightLabel="Summer"
+  alt="Sentinel-2 images of the same UK location in different seasons"
+/>
+
+**From raw imagery to embedding** — drag the slider to compare the summer Sentinel-2 image (left) with the TESSERA embedding visualised in false colour (right). The first three dimensions of the 128-dimensional embedding are mapped to RGB. Each colour represents a distinct combination of temporal and spectral characteristics. Individual field boundaries, riparian zones, urban fabric, and forest types are all clearly resolved — far more structure and detail than any single satellite image can show.
+
+<ImageCompare
+  leftSrc="/blog/tessera-2.png"
+  rightSrc="/blog/tessera-3.png"
+  leftLabel="Sentinel-2"
+  rightLabel="TESSERA embedding"
+  alt="Sentinel-2 image compared with TESSERA false-colour embedding"
+/>
+
+The training pipeline comprises roughly ~800 million d-pixels drawn from ~3000 globally distributed [MGRS](https://en.wikipedia.org/wiki/Military_Grid_Reference_System) tiles, downsampled 400:1 from the full Sentinel archive. The self-supervised trick is that we randomly sample cloud-free subsets of each d-pixel's time series and train the model to produce the same embedding regardless of which subset it sees. This forces the model to learn representations that are invariant to cloud cover and temporal gaps, which overcome the biggest hassle when processing satellite data 'manually'.
+
+Last summer, AMD gave us early access to the **AMD Accelerator Cloud** to train the model. We trained for a single epoch on 16 AMD Instinct MI300X GPUs (192 GB HBM3 each), consuming approximately 6,200 GPU hours. The stack was PyTorch with [Fully Sharded Data Parallel](https://docs.pytorch.org/tutorials/intermediate/FSDP_tutorial.html) and [Automatic Mixed Precision](https://docs.pytorch.org/tutorials/recipes/recipes/amp_recipe.html), running on [ROCm](https://www.amd.com/en/products/software/rocm.html). We used a per-GPU batch size of 2k d-pixels and a global batch size of 32k with a custom data shuffling pipeline to ensure each mini-batch contained d-pixels from diverse geographic locations and acquisition conditions. This remixing was critical for preventing the model from overfitting to regional characteristics and let us train a global foundation model for anywhere on the planet.
+
+## But inference is the really hard part
+
+The model training happens once, but then (unlike a language model) we needed to generate map tiles for every 10m land pixel on Earth (approximately 1.5 trillion pixels/year). The global embeddings for 2024 alone therefore amount to roughly 250TB of storage. But if we can do this once, then we save vast amounts of work for all of the downstream users, since most of the pretraining has already been completed and the use of the map tiles often requires just a CPU (not even a GPU) for simple tasks.
+
+Consider what the pipeline must do for a single tile (a full [walkthrough is available](https://www.tunbury.org/2026/02/25/teserra-pipeline/)): each Sentinel-2 tile covers a 100km2 region at 10m resolution (about 120 million pixels). For every pixel, the pipeline must:
+
+1. **Assemble** the d-pixel to gather the full annual time series of observations (S1+S2) for that 10m location. These must be co-registered and resampled to the same 10m grid.
+
+2. **Download/filter** from the the Sentinel archives (via Microsoft Planetary Computer or AWS) and download cloud masks (the Scene Classification Layer) for every S2 pass over the year, identify the most cloud-free dates and then download the spectral bands for those dates. For S1, both ascending (evening) and descending (morning) passes are collected and merged.
+
+3. **Stack** across the year per pixel and select exactly 40 S1 and S2 timesteps or  where fewer than 40 clean observations exist, sample with replacement. The result is a d-pixel shaped `[40, 11]` for Sentinel-2 (10 bands + day-of-year) and `[40, 3]` for Sentinel-1 (VV + VH + day-of-year), with values normalised using global statistics.
+
+4. **Inference* on the d-pixel using only the 46M-parameter encoder, to the compact 128-dimensional output (the false colour tile above visualises this).
+
+5. **Quantize** the embedding to int8 using our quantization-aware training pipeline, producing 128 int8s and a float32 scale factor per pixel. This is a very large compression factor over the raw input and makes global storage feasible.
+
+This pipeline means the bottleneck isn't just GPU compute, but also the network and storage bandwidth. Every tile requires downloading and processing gigabytes of raw satellite imagery before a single forward pass!
+
+### Crop clustering in embedding space
+
+One way to see the power of TESSERA's learned representations is to visualise how the 128-dimensional embeddings cluster for different land uses. The interactive 3D UMAP below projects TESSERA embeddings for over 210k hexagonal cells from England's [CROME 2024](https://www.data.gov.uk/dataset/be5d88c9-acfb-4052-bf6b-ee9a416cfe60/crop-map-of-england-crome-2024) crop map into three dimensions. Each point is coloured by its "crop class". Click on the fullscreen button below (top right) and click any point to jump to its location on the satellite map.
+
+Crops with similar seasonal growth patterns (e.g. winter wheat and winter barley) form tight, nearby clusters, demonstrating that the model has learned to capture fine-grained phenological variation purely from self-supervised training on the raw spectral-temporal signal.
+
+<CropUmap />
+
+## Scaling inference with Vultr and AMD MI325X
+
+Now back to the computation! For the global inference runs, we initially used the Cambridge [Dawn cluster](https://www.hpc.cam.ac.uk/d-w-n), which generated a 100-300 GB of tiles per day, depending on external load factors. We soon switched over to use six Vultr bare-metal nodes, each equipped with eight AMD Instinct MI325X GPUs and AMD EPYC CPUs. That's around 12 terabytes of VRAM across the 48 GPUs, and we continued to use ROCm with PyTorch.
+
+With thie setup, we produced roughly **3 TB of compressed embeddings per day**:  equivalent to covering the land mass of Italy every day! The global land surface for a single year takes several months of continuous processing, and so we setup the [dynamic coverage map](/coverage) to let our users monitor the progress of their favourite regions.
+
+The pipeline is structured so that the EPYC CPU cores handle the data assembly by querying STAC catalogues, downloading Sentinel COGs, reprojecting and resampling, and building d-pixel matrices. Then the the MI325X GPUs run the encoder inference with the assembled data. We ended up getting rate throttled on downloading satellite data from our primary sources, and so had to set up some temporary VMs on Azure to do some batching there (kindly sponsored by [Tarides](https://tarides.com).
+
+In summary, the data preparation is I/O-heavy and really benefited from the high core counts and memory bandwidth of the EPYC platform (we regularly saw load averages of 200+ on each host), while the GPU inference benefits from the large HBM3e capacity that allows generous batch sizes so we weren't constantly just shuffling data around from the CPU to the GPU.
+
+## An OCaml inference alternative
+
+In parallel, we have been developing an [OCaml implementation of the inference pipeline](https://www.tunbury.org/2026/02/15/ocaml-tessera/), replacing the Python stack with native OCaml bindings to ONNX Runtime. Early benchmarks on the same hardware (AMD EPYC 9965, NVIDIA L4) show that an OCaml + ONNX Runtime + CUDA path is the fastest configuration tested (about 20% faster than Python + PyTorch + CUDA on the same dataset), likely due to less data marshalling overhead. The OCaml pipeline produces embedding results that are effectively identical to the Python version, differing only in floating-point rounding at quantization boundaries (well within margins of error).
+
+The OCaml pipeline replaces Python's numpy, rasterio, pystac-client, and stackstac with native OCaml libraries: [ocaml-npy](https://github.com/mtelvers/ocaml-npy) for array I/O, [stac-client](https://github.com/mtelvers/stac-client) for STAC catalogue queries with Planetary Computer SAS token signing, [ocaml-tiff](https://github.com/geocaml/ocaml-tiff) for GeoTIFF reading, and extended [ocaml-gdal](https://github.com/geocaml/ocaml-gdal) bindings for reprojection and remote COG access. Model inference uses [ocaml-onnxruntime](https://github.com/mtelvers/ocaml-onnxruntime) bindings with a thin C shim to ONNX Runtime's C API. This is all very experimental, but we're enjoying optimsing the inference stack end to end all the way to the fast GPUs.
+
+## What's next
+
+We used the Vultr machines to generate embeddings for all of Europe from 2017 to 2025, and have almost completed the whole of the USA as well (our two most requested regions from users).  After that we're focusing on Indian region embeddings for the full range.  As we complete each year, the embeddings are published through the [geotessera](https://pypi.org/project/geotessera/) library and are free to use under CC0 for any purpose.
+
+We're really grateful to AMD and Vultr for the hardware access that made the inference on TESSERA v1 possible. In particular, thanks to Joseph Cowell, Rowan Pavlovic, and Kieran Mansley at AMD for their technical support. Thanks especially to Kasia Hilborne and Duncan Ng at Vultr not only for the MI325X bare-metal infrastructure sponsorship, but also their enthusiasm for the project and our environmental goals!
+
+For more on the model architecture and downstream results, see our [CVPR 2026 paper](https://arxiv.org/abs/2506.20380). Thanks to Sadiq Jaffer for creating the crop umap above, and Zhengpeng Feng, David Coomes and Srinivasan Keshav on contributions to this post!

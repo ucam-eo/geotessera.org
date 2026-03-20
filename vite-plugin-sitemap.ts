@@ -1,5 +1,5 @@
 import type { Plugin } from 'vite';
-import { readdirSync } from 'fs';
+import { readdirSync, readFileSync } from 'fs';
 import { join } from 'path';
 
 interface SitemapOpts {
@@ -16,6 +16,9 @@ export function sitemapPlugin(opts: SitemapOpts): Plugin {
     try {
       const files = readdirSync(opts.blogDir).filter((f) => f.endsWith('.svx'));
       for (const file of files) {
+        const content = readFileSync(join(opts.blogDir, file), 'utf-8');
+        const draftMatch = content.match(/^---\n[\s\S]*?\ndraft:\s*(true|false)[\s\S]*?\n---/);
+        if (draftMatch && draftMatch[1] === 'true') continue;
         const slug = file.replace(/\.svx$/, '');
         urls.push(`/blog/${slug}`);
       }

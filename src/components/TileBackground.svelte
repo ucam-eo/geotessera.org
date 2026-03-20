@@ -9,6 +9,7 @@
   let map: maplibregl.Map | null = null;
   let isDesktop = $state(false);
 
+
   // Random UK locations — spread across interesting TESSERA coverage areas
   const ukLocations: [number, number][] = [
     [-1.26, 51.75],   // Oxford

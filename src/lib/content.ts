@@ -13,6 +13,8 @@ export interface ContentMeta {
   externalUrl?: string;
   /** Minor posts render as a simple one-line link */
   minor?: boolean;
+  /** Draft posts are accessible by slug but hidden from listings, feeds, and sitemap */
+  draft?: boolean;
 }
 
 import { blogLinks } from './blog-links';
@@ -44,6 +46,7 @@ function loadModules(modules: Record<string, any>, type: 'blog' | 'task'): Conte
       href,
       type,
       component: mod.default,
+      draft: meta.draft === true || meta.draft === 'true',
     };
   });
 }
@@ -79,7 +82,7 @@ export function getAllContent(): ContentMeta[] {
 }
 
 export function getBlogPosts(): ContentMeta[] {
-  return getAllContent().filter((c) => c.type === 'blog');
+  return getAllContent().filter((c) => c.type === 'blog' && !c.draft);
 }
 
 export function getTaskExamples(): ContentMeta[] {
@@ -87,7 +90,7 @@ export function getTaskExamples(): ContentMeta[] {
 }
 
 export function getContentByTag(tag: string): ContentMeta[] {
-  return getAllContent().filter((c) => c.tags.includes(tag));
+  return getAllContent().filter((c) => c.tags.includes(tag) && !c.draft);
 }
 
 export function getContentBySlug(slug: string): ContentMeta | undefined {

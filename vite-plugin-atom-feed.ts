@@ -18,6 +18,7 @@ interface SvxMeta {
   author?: string;
   description?: string;
   tags?: string[];
+  draft?: string | boolean;
 }
 
 function parseFrontmatter(content: string): SvxMeta {
@@ -73,6 +74,7 @@ function collectEntries(siteUrl: string, blogDir: string, links: BlogLinkEntry[]
     for (const file of files) {
       const content = readFileSync(join(blogDir, file), 'utf-8');
       const meta = parseFrontmatter(content);
+      if (meta.draft === true || meta.draft === 'true') continue;
       const slug = file.replace(/\.svx$/, '');
       entries.push({
         title: meta.title ?? slug,
