@@ -47,6 +47,7 @@
       <div class="meta">
         {#if post.author}<span>{post.author}</span>{/if}
         <span>{post.date}</span>
+        {#if post.draft}<span class="draft-badge">DRAFT</span>{/if}
       </div>
     </header>
     <div class="content">
@@ -90,7 +91,19 @@
     font-size: 12px;
     color: var(--text-muted);
     display: flex;
+    align-items: center;
     gap: 12px;
+  }
+
+  .draft-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #f59e0b;
+    background: rgba(245, 158, 11, 0.12);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    padding: 2px 8px;
+    border-radius: 4px;
   }
 
   .content {
