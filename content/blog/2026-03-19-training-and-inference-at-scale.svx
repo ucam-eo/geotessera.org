@@ -47,6 +47,14 @@ The training pipeline comprises roughly ~800 million d-pixels drawn from ~3000 g
 
 Last summer, AMD gave us early access to the **AMD Accelerator Cloud** to train the model. We trained for a single epoch on 16 AMD Instinct MI300X GPUs (192 GB HBM3 each), consuming approximately 6,200 GPU hours. The stack was PyTorch with [Fully Sharded Data Parallel](https://docs.pytorch.org/tutorials/intermediate/FSDP_tutorial.html) and [Automatic Mixed Precision](https://docs.pytorch.org/tutorials/recipes/recipes/amp_recipe.html), running on [ROCm](https://www.amd.com/en/products/software/rocm.html). We used a per-GPU batch size of 2k d-pixels and a global batch size of 32k with a custom data shuffling pipeline to ensure each mini-batch contained d-pixels from diverse geographic locations and acquisition conditions. This remixing was critical for preventing the model from overfitting to regional characteristics and let us train a global foundation model for anywhere on the planet.
 
+### Crop clustering in embedding space
+
+One way to see the power of TESSERA's learned representations is to visualise how the 128-dimensional embeddings cluster for different land uses. The interactive 3D UMAP below projects TESSERA embeddings for over 210k hexagonal cells from England's [CROME 2024](https://www.data.gov.uk/dataset/be5d88c9-acfb-4052-bf6b-ee9a416cfe60/crop-map-of-england-crome-2024) crop map into three dimensions. Each point is coloured by its "crop class". Click on the fullscreen button below (top right) and click any point to jump to its location on the satellite map.
+
+Crops with similar seasonal growth patterns (e.g. winter wheat and winter barley) form tight, nearby clusters, demonstrating that the model has learned to capture fine-grained phenological variation purely from self-supervised training on the raw spectral-temporal signal.
+
+<CropUmap />
+
 ## But inference is the really hard part
 
 The model training happens once, but then (unlike a language model) we needed to generate map tiles for every 10m land pixel on Earth (approximately 1.5 trillion pixels/year). The global embeddings for 2024 alone therefore amount to roughly 250TB of storage. But if we can do this once, then we save vast amounts of work for all of the downstream users, since most of the pretraining has already been completed and the use of the map tiles often requires just a CPU (not even a GPU) for simple tasks.
@@ -65,17 +73,9 @@ Consider what the pipeline must do for a single tile (a full [walkthrough is ava
 
 This pipeline means the bottleneck isn't just GPU compute, but also the network and storage bandwidth. Every tile requires downloading and processing gigabytes of raw satellite imagery before a single forward pass!
 
-### Crop clustering in embedding space
-
-One way to see the power of TESSERA's learned representations is to visualise how the 128-dimensional embeddings cluster for different land uses. The interactive 3D UMAP below projects TESSERA embeddings for over 210k hexagonal cells from England's [CROME 2024](https://www.data.gov.uk/dataset/be5d88c9-acfb-4052-bf6b-ee9a416cfe60/crop-map-of-england-crome-2024) crop map into three dimensions. Each point is coloured by its "crop class". Click on the fullscreen button below (top right) and click any point to jump to its location on the satellite map.
-
-Crops with similar seasonal growth patterns (e.g. winter wheat and winter barley) form tight, nearby clusters, demonstrating that the model has learned to capture fine-grained phenological variation purely from self-supervised training on the raw spectral-temporal signal.
-
-<CropUmap />
-
 ## Scaling inference with Vultr and AMD MI325X
 
-Now back to the computation! For the global inference runs, we initially used the Cambridge [Dawn cluster](https://www.hpc.cam.ac.uk/d-w-n), which generated a 100-300 GB of tiles per day, depending on external load factors. We soon switched over to use six Vultr bare-metal nodes, each equipped with eight AMD Instinct MI325X GPUs and AMD EPYC CPUs. That's around 12 terabytes of VRAM across the 48 GPUs, and we continued to use ROCm with PyTorch.
+For the global inference runs, we initially used the Cambridge [Dawn cluster](https://www.hpc.cam.ac.uk/d-w-n), which generated a 100-300 GB of tiles per day, depending on external load factors. We soon switched over to use six Vultr bare-metal nodes, each equipped with eight AMD Instinct MI325X GPUs and AMD EPYC CPUs. That's around 12 terabytes of VRAM across the 48 GPUs, and we continued to use ROCm with PyTorch.
 
 With thie setup, we produced roughly **3 TB of compressed embeddings per day**:  equivalent to covering the land mass of Italy every day! The global land surface for a single year takes several months of continuous processing, and so we setup the [dynamic coverage map](/coverage) to let our users monitor the progress of their favourite regions.
 
