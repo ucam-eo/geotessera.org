@@ -346,10 +346,9 @@
   }
 
   .eco-list li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
     padding: 10px 0;
+    padding-left: 26px;
+    position: relative;
     border-bottom: 1px solid var(--border-subtle);
     font-size: 14px;
     line-height: 1.6;
@@ -358,7 +357,9 @@
   .eco-icon {
     width: 16px;
     height: 16px;
-    flex-shrink: 0;
+    position: absolute;
+    left: 0;
+    top: 13px;
     color: var(--accent-dim);
     opacity: 0.6;
   }
@@ -381,6 +382,10 @@
     opacity: 0.35;
     vertical-align: middle;
     margin-left: 3px;
+  }
+
+  @media (max-width: 768px) {
+    .ext { display: none; }
   }
 
   .eco-desc {
@@ -544,8 +549,7 @@
     }
 
     .eco-list li {
-      gap: 8px;
-      padding: 8px 0;
+      padding: 8px 0 8px 26px;
       font-size: 13px;
     }
 

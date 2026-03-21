@@ -359,6 +359,10 @@
     opacity: 0.4;
   }
 
+  @media (max-width: 768px) {
+    .external-icon { display: none; }
+  }
+
   .post-meta {
     display: flex;
     gap: 8px;

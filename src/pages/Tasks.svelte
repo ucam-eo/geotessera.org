@@ -1,6 +1,6 @@
 <script lang="ts">
   import Footer from '@/components/Footer.svelte';
-
+  import CropUmap from '@/components/CropUmap.svelte';
 
   const arxivHtml = 'https://arxiv.org/html/2506.20380v6';
   const tutorials = 'https://geotessera.readthedocs.io/en/latest/tutorials.html';
@@ -112,7 +112,17 @@
           <span class="ex-desc">— A field validation study testing TESSERA-based bramble prediction against ground truth.</span>
         </div>
       </li>
+      <li>
+        <svg class="li-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={icons.globe}/></svg>
+        <div>
+          <span class="ex-title">CROME-TESSERA 3D Crop UMAP</span>
+          <span class="ex-author">Sadiq Jaffer</span>
+          <span class="ex-desc">— Interactive 3D UMAP of 210k crop cells from England's CROME 2024, coloured by crop class and linked to satellite imagery. <a href="#umap-fullscreen" class="fullscreen-reveal" onclick={(e) => { e.preventDefault(); const el = document.querySelector('.umap-wrapper'); if (el) (el as HTMLElement).requestFullscreen(); }}>Click here for a fullscreen version.</a></span>
+        </div>
+      </li>
     </ul>
+
+    <CropUmap />
 
     <h3 class="sub-heading">Tutorials</h3>
     <ul class="example-list">
@@ -430,9 +440,23 @@
     margin-top: 2px;
   }
 
+  .ex-title {
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
   .ex-desc {
     color: var(--text-muted);
     font-size: 13px;
+  }
+
+  .fullscreen-reveal {
+    color: var(--accent-dim);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .fullscreen-reveal:hover {
+    text-decoration: underline;
   }
 
   @media (max-width: 768px) {
