@@ -100,6 +100,11 @@
         <span class="eco-desc">— Solar panel detection, UMAP visualisation, and more</span>
       </li>
       <li>
+        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3v4l3 2"/><circle cx="10" cy="10" r="7"/></svg>
+        <a href="https://isaac.earth/geospatial-skills" target="_blank" rel="noopener">Geospatial Skills for Claude&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
+        <span class="eco-desc">— Claude Code skills for working with TESSERA via Python and R, by <a href="https://github.com/isaaccorley" target="_blank" rel="noopener">Isaac Corley</a> <span class="eco-badge contributed">contributed</span></span>
+      </li>
+      <li>
         <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M10 2a14 14 0 0 1 0 16M10 2a14 14 0 0 0 0 16M2.5 10h15"/></svg>
         <a href="https://github.com/ucam-eo/tessera-interactive-map" target="_blank" rel="noopener">Interactive Notebook&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
         <span class="eco-desc">— Jupyter notebook for interactive exploration</span>

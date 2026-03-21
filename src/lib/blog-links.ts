@@ -13,6 +13,15 @@ export interface BlogLink {
 
 export const blogLinks: BlogLink[] = [
   {
+    id: 'geospatial-skills-claude',
+    title: 'Claude Code skills for geospatial analysis with TESSERA',
+    date: '2026-03-20',
+    author: 'Isaac Corley',
+    description: 'A set of Claude Code skills for working with TESSERA embeddings via the Python and R libraries, enabling AI-assisted geospatial analysis workflows.',
+    url: 'https://isaac.earth/geospatial-skills',
+    tags: ['community', 'engineering'],
+  },
+  {
     id: 'tessera-zarr-v3-layout',
     title: 'Streaming millions of TESSERA tiles over HTTP with Zarr v3',
     date: '2026-03-14',
