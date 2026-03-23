@@ -12,7 +12,7 @@ draft: true
   import CropUmap from '../../src/components/CropUmap.svelte';
 </script>
 
-We managed to train a major new foundation model at a University, but (unlike LLMs) also had to run it over every 10-metre pixel of the Earth's land surface for every year from 2017 to 2025. This is because the TESSERA geospatial mode supports ready-to-use "map tiles" that make using it for mapping as easy as possible. This post describes how we did the first major run, first training with the [AMD Accelerator Cloud](https://aac.amd.com/), and then later inferring on [Vultr](https://vultr.com)'s bare-metal AMD MIX3xx infrastructure that they kindly gave us early access to.
+We managed to train a major new foundation model at a University, but (unlike LLMs) also had to run it over every 10-metre pixel of the Earth's land surface for every year from 2017 to 2025. This is because the TESSERA geospatial mode supports ready-to-use "map tiles" that make using it for mapping as easy as possible. This post describes how we did the first major run, first training with the [AMD Accelerator Cloud](https://aac.amd.com/), and then later inferring on [Vultr](https://vultr.com)'s bare-metal AMD MI325X infrastructure that they kindly gave us early access to.
 
 ## Training TESSERA v1
 
