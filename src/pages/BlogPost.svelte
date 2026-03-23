@@ -146,6 +146,23 @@
     margin: 8px 0;
   }
 
+  .content :global(.img-caption) {
+    margin: 20px 0;
+  }
+
+  .content :global(.img-caption figcaption) {
+    font-size: 13px;
+    font-style: italic;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+
+  .content :global(.img-caption figcaption strong) {
+    font-style: normal;
+    color: var(--text-secondary);
+  }
+
   .content :global(.compare) {
     max-width: 100%;
   }
@@ -154,6 +171,20 @@
     border: none;
     border-radius: 0;
     margin: 0;
+  }
+
+  .content :global(blockquote) {
+    margin: 16px 0;
+    padding: 12px 20px;
+    border-left: 3px solid var(--accent-dim);
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .content :global(blockquote p) {
+    margin-bottom: 0;
   }
 
   .content :global(a) { color: var(--accent-dim); }

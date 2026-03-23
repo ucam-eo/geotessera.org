@@ -23,8 +23,8 @@ TESSERA is [trained](https://arxiv.org/abs/2506.20380) using a modified [Barlow 
 The training dataset is where we get into serious systems scale. We build up a matrix of images for every 10m2 that form a cross-seasonal view of that particular point, called a "d-pixel".
 Here's what a few of these d-pixel tiles look like as they move through the system:
 
-**Same location, different seasons** — drag the slider to compare a slightly cloudy winter capture (left) with a summer observation (right). The landscape looks completely different across seasons due to vegetation phenology, crop cycles, and land management all change the spectral signature. TESSERA's spectral-temporal encoder learns to integrate these variations rather than discard them.
-
+<figure class="img-caption">
+<figcaption><strong>Same location, different seasons</strong> — drag the slider to compare a slightly cloudy winter capture (left) with a summer observation (right). The landscape looks completely different across seasons due to vegetation phenology, crop cycles, and land management all change the spectral signature. TESSERA's spectral-temporal encoder learns to integrate these variations rather than discard them.</figcaption>
 <ImageCompare
   leftSrc="/blog/tessera-1.png"
   rightSrc="/blog/tessera-2.png"
@@ -32,9 +32,10 @@ Here's what a few of these d-pixel tiles look like as they move through the syst
   rightLabel="Summer"
   alt="Sentinel-2 images of the same UK location in different seasons"
 />
+</figure>
 
-**From raw imagery to embedding** — drag the slider to compare the summer Sentinel-2 image (left) with the TESSERA embedding visualised in false colour (right). The first three dimensions of the 128-dimensional embedding are mapped to RGB. Each colour represents a distinct combination of temporal and spectral characteristics. Individual field boundaries, riparian zones, urban fabric, and forest types are all clearly resolved — far more structure and detail than any single satellite image can show.
-
+<figure class="img-caption">
+<figcaption><strong>From raw imagery to embedding</strong> — drag the slider to compare the summer Sentinel-2 image (left) with the TESSERA embedding visualised in false colour (right). The first three dimensions of the 128-dimensional embedding are mapped to RGB. Each colour represents a distinct combination of temporal and spectral characteristics. Individual field boundaries, riparian zones, urban fabric, and forest types are all clearly resolved — far more structure and detail than any single satellite image can show.</figcaption>
 <ImageCompare
   leftSrc="/blog/tessera-2.png"
   rightSrc="/blog/tessera-3.png"
@@ -42,6 +43,7 @@ Here's what a few of these d-pixel tiles look like as they move through the syst
   rightLabel="TESSERA embedding"
   alt="Sentinel-2 image compared with TESSERA false-colour embedding"
 />
+</figure>
 
 The training pipeline comprises roughly 800 million d-pixels drawn from 3000 globally distributed [MGRS](https://en.wikipedia.org/wiki/Military_Grid_Reference_System) tiles, downsampled 400:1 from the full Sentinel archive. The self-supervised trick is that we randomly sample cloud-free subsets of each d-pixel's time series and train the model to produce the same embedding regardless of which subset it sees. This forces the model to learn representations that are invariant to cloud cover and temporal gaps, which overcome the biggest hassle when processing satellite data 'manually'.
 
