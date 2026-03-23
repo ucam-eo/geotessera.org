@@ -12,7 +12,7 @@ draft: true
   import CropUmap from '../../src/components/CropUmap.svelte';
 </script>
 
-We managed to train a major new foundation model at a University, but (unlike LLMs) also had to run it over every 10-metre pixel of the Earth's land surface for every year from 2017 to 2025. This is because the TESSERA geospatial mode supports ready-to-use "map tiles" that make using it for mapping as easy as possible. This post describes how we did the first major run, first training with the [AMD Accelerator Cloud](https://aac.amd.com/), and then inferring on [Vultr](https://vultr.com)'s bare-metal AMD MIX3xx infrastructure that they kindly gave us early access to.
+We managed to train a major new foundation model at a University, but (unlike LLMs) also had to run it over every 10-metre pixel of the Earth's land surface for every year from 2017 to 2025. This is because the TESSERA geospatial mode supports ready-to-use "map tiles" that make using it for mapping as easy as possible. This post describes how we did the first major run, first training with the [AMD Accelerator Cloud](https://aac.amd.com/), and then later inferring on [Vultr](https://vultr.com)'s bare-metal AMD MIX3xx infrastructure that they kindly gave us early access to.
 
 ## Training TESSERA v1
 
@@ -96,3 +96,8 @@ We used the Vultr machines to generate embeddings for all of Europe from 2017 to
 We're really grateful to AMD and Vultr for the hardware access that made the inference on TESSERA v1 possible. In particular, thanks to Joseph Cowell, Rowan Pavlovic, and Kieran Mansley at AMD for their technical support. Thanks especially to Kasia Hilborne and Duncan Ng at Vultr not only for the MI325X bare-metal infrastructure sponsorship, but also their enthusiasm for the project and our environmental goals!
 
 For more on the model architecture and downstream results, see our [CVPR 2026 paper](https://arxiv.org/abs/2506.20380). Thanks to Sadiq Jaffer for creating the crop umap above, and Mark Elvers, Michael Dales, Zhengpeng Feng, David Coomes and Srinivasan Keshav for contributions to this post!
+
+For those curious about [Vultr](https://vultr.com):
+> Vultr is an independent cloud infrastructure provider offering a high-performance alternative to traditional hyperscalers. It delivers cloud compute, bare metal, and GPU-accelerated infrastructure through a globally distributed platform spanning 33 cloud data centre regions
+
+As full disclosure we benefited from machine sponsorship from Vultr and AMD (as described above) but this post was written independently by us.
