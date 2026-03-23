@@ -1,6 +1,6 @@
 ---
 title: "Planetary scale training and inference with AMD and Vultr"
-date: 2026-03-19
+date: 2026-03-23
 tags: [engineering, announcement]
 author: "Anil Madhavapeddy"
 description: "How we used AMD Accelerator Cloud and Vultr's MI325X GPU clusters to train the TESSERA v1 model and generate 250TB of global embeddings."
