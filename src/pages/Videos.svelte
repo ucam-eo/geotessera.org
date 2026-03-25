@@ -3,6 +3,16 @@
 
   const videos = [
     {
+      id: 'exploring-tessera-embeddings',
+      title: 'Exploring Tessera Embeddings',
+      source: 'Srinivasan Keshav',
+      date: 'Mar 2026',
+      description: 'A walkthrough of the TESSERA Embedding Explorer (TEE), demonstrating interactive exploration of geospatial embeddings, manual labelling, and crop classification workflows.',
+      url: 'https://watch.eeg.cl.cam.ac.uk/w/ocp7Mq1R63GM66SPuHBRCX',
+      thumb: 'https://watch.eeg.cl.cam.ac.uk/lazy-static/previews/ec666f09-8144-476d-91b2-ca2e7bf44d8b.jpg',
+      type: 'talk' as const,
+    },
+    {
       id: 'new-earth-language',
       title: 'TESSERA — A New Earth Language',
       source: 'GIS & Research Group',

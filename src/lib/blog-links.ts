@@ -13,6 +13,15 @@ export interface BlogLink {
 
 export const blogLinks: BlogLink[] = [
   {
+    id: 'tee-v3.4-v3.5',
+    title: 'TEE v3.4 and v3.5: Manual labelling and multi-user login',
+    date: '2026-03-25',
+    author: 'Srinivasan Keshav',
+    description: 'Two releases of the TESSERA Embedding Explorer: v3.4 adds manual labelling with pin and polygon tools, per-class similarity sliders, and spatial classifiers. v3.5 adds a multi-user login system to the demo site — request access via the TESSERA channel on eeg.zulipchat.com. See also the walkthroughs of TEE in the videos section.',
+    url: 'https://github.com/ucam-eo/TEE/releases/tag/v3.5.0',
+    tags: ['release', 'tee'],
+  },
+  {
     id: 'geospatial-skills-claude',
     title: 'Claude Code skills for geospatial analysis with TESSERA',
     date: '2026-03-20',
