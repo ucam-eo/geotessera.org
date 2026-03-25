@@ -110,6 +110,11 @@
         <span class="eco-desc">— Jupyter notebook for interactive exploration</span>
       </li>
       <li>
+        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l6 8 6-8"/><path d="M4 8l6 8 6-8"/></svg>
+        <a href="https://www.linkedin.com/pulse/from-pixels-embeddings-tessera-earth-observation-gijs-van-den-dool-uti7e/" target="_blank" rel="noopener">TESSERA on Google Colab&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
+        <span class="eco-desc">— Custom inference pipeline for running TESSERA in Google Colab, by <a href="https://www.linkedin.com/in/gijsvandendool/" target="_blank" rel="noopener">Gijs van den Dool</a> <span class="eco-badge contributed">contributed</span></span>
+      </li>
+      <li>
         <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2h8l4 4v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M12 2v4h4M7 10h6M7 14h4"/></svg>
         <a href="https://geotessera.readthedocs.io/" target="_blank" rel="noopener">Documentation&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
         <span class="eco-desc">— API reference and data documentation</span>
