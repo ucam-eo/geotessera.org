@@ -13,9 +13,19 @@ export interface BlogLink {
 
 export const blogLinks: BlogLink[] = [
   {
+    id: 'pixels-to-embeddings-customisation',
+    title: 'From Pixels to Embeddings: TESSERA Customisation',
+    date: '2026-03-25',
+    author: 'Gijs van den Dool',
+    description: 'A contributed walkthrough of a custom Master-Worker pipeline for running TESSERA inference in Google Colab, with analysis of optimal cloud cover thresholds for West Africa.',
+    url: 'https://www.linkedin.com/pulse/from-pixels-embeddings-tessera-earth-observation-gijs-van-den-dool-uti7e/',
+    tags: ['community'],
+    minor: true,
+  },
+  {
     id: 'tee-v3.4-v3.5',
     title: 'TEE v3.4 and v3.5: Manual labelling and multi-user login',
-    date: '2026-03-25',
+    date: '2026-03-24',
     author: 'Srinivasan Keshav',
     description: 'Two releases of the TESSERA Embedding Explorer: v3.4 adds manual labelling with pin and polygon tools, per-class similarity sliders, and spatial classifiers. v3.5 adds a multi-user login system to the demo site — request access via the TESSERA channel on eeg.zulipchat.com. See also the walkthroughs of TEE in the videos section.',
     url: 'https://github.com/ucam-eo/TEE/releases/tag/v3.5.0',
