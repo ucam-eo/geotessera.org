@@ -117,7 +117,7 @@
         <div>
           <span class="ex-title">CROME-TESSERA 3D Crop UMAP</span>
           <span class="ex-author">Sadiq Jaffer</span>
-          <span class="ex-desc">— Interactive 3D UMAP of 210k crop cells from England's CROME 2024, coloured by crop class and linked to satellite imagery. <a href="#umap-fullscreen" class="fullscreen-reveal" onclick={(e) => { e.preventDefault(); const el = document.querySelector('.umap-wrapper'); if (el) (el as HTMLElement).requestFullscreen(); }}>Click here for a fullscreen version.</a></span>
+          <span class="ex-desc">— Interactive 3D UMAP of 210k crop cells from England's CROME 2024, coloured by crop class and linked to satellite imagery. <a href="/crop-umap" class="fullscreen-reveal">Open dedicated viewer.</a></span>
         </div>
       </li>
     </ul>

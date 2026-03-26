@@ -89,6 +89,7 @@ const routes: { path: string; route: Route }[] = [
   '/papers',
   '/videos',
   '/coverage',
+  '/crop-umap',
 ].map((path) => ({ path, route: compileRoute(path) }));
 
 export const currentRoute = derived(currentPath, ($path) => {

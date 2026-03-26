@@ -12,6 +12,7 @@
   import Papers from './pages/Papers.svelte';
   import Videos from './pages/Videos.svelte';
   import Coverage from './pages/Coverage.svelte';
+  import CropUmapPage from './pages/CropUmapPage.svelte';
 
   let route = $derived($currentRoute);
   let isHome = $derived(route.path === '/');
@@ -45,6 +46,8 @@
         <Papers />
       {:else if route.path === '/videos'}
         <Videos />
+      {:else if route.path === '/crop-umap'}
+        <CropUmapPage />
       {:else}
         <div class="placeholder">
           <h2>404</h2>
