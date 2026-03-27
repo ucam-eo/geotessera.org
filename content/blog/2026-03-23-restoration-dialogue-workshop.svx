@@ -1,0 +1,21 @@
+---
+title: "Restoration Dialogue: AI and Habitat Monitoring in the UK"
+date: 2026-03-23
+tags: [workshop, community]
+author: "David Coomes"
+description: "Over 30 researchers from universities, statutory agencies and NGOs gathered in Cambridge to explore whether geospatial foundation models like TESSERA can support mapping and monitoring nature across the UK."
+---
+
+# Restoration Dialogue: AI and Habitat Monitoring in the UK
+
+The [Centre for Landscape Regeneration](https://www.clr.conservation.cam.ac.uk/) hosted a two-day Restoration Dialogue workshop in Cambridge this week, bringing together over 30 participants from universities, statutory agencies and NGOs to discuss advances in habitat monitoring in the UK. The workshop was funded by the [Endangered Landscapes & Seascapes Programme](https://www.endangeredlandscapes.org/) (ELSP).
+
+![A presentation on restoring ecosystems at the Restoration Dialogue workshop in Cambridge](/blog/restoration-dialogue-talk.jpg)
+
+The discussions ranged across current habitat monitoring approaches, remote sensing technologies, and the potential for AI to improve how we map and monitor nature. A central question was whether geospatial foundation models — including [TESSERA](/) — could provide practical solutions for landscape regeneration and nature restoration.
+
+With participants drawn from across the conservation and research community, the workshop was a valuable opportunity to connect ongoing UK and EU biodiversity initiatives with the latest advances in Earth observation. We presented TESSERA's capabilities for [habitat classification, change detection, and temporal analysis](/about#projects), and had productive discussions about how these tools might integrate into existing monitoring workflows.
+
+![Workshop participants gathered by the River Cam after the event](/blog/restoration-dialogue-group.jpg)
+
+The organisers will be publishing a summary report compiling the workshop discussions. For more details, see the [Centre for Landscape Regeneration's post on LinkedIn](https://www.linkedin.com/posts/centre-for-landscape-regeneration_geospatialfoundationmodels-earthobservation-activity-7442962745634914304-Dg2w/).
