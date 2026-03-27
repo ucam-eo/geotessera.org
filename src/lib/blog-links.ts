@@ -13,6 +13,15 @@ export interface BlogLink {
 
 export const blogLinks: BlogLink[] = [
   {
+    id: 'tessera-embeddings-convention',
+    title: 'TESSERA adopts the Zarr geo-embeddings convention',
+    date: '2026-03-27',
+    author: 'Anil Madhavapeddy',
+    description: 'TESSERA will migrate from separate annual stores to a unified MegaZarr with time as a primary dimension, adopting the emerging geo-embeddings Zarr convention for broader compatibility across embedding models.',
+    url: 'https://anil.recoil.org/notes/tessera-embeddings-convention',
+    tags: ['engineering'],
+  },
+  {
     id: 'pixels-to-embeddings-customisation',
     title: 'From Pixels to Embeddings: TESSERA Customisation',
     date: '2026-03-25',
