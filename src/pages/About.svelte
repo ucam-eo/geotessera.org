@@ -234,11 +234,11 @@
         </div>
         <div class="person">
           <a class="person-name" href="https://scholar.google.com/citations?user=lBhFXdIAAAAJ" target="_blank" rel="noopener">Clement Atzberger</a>
-          <span class="person-role">Professor of Remote Sensing, BOKU Vienna</span>
+          <span class="person-role"><a href="https://www.cyclops.ai/" target="_blank" rel="noopener">Cyclops.AI</a></span>
         </div>
         <div class="person">
           <a class="person-name" href="https://scholar.google.at/citations?user=VwtoQ70AAAAJ" target="_blank" rel="noopener">Markus Immitzer</a>
-          <span class="person-role">BOKU Vienna</span>
+          <span class="person-role"><a href="https://www.cyclops.ai/" target="_blank" rel="noopener">Cyclops.AI</a></span>
         </div>
       </div>
     </div>
