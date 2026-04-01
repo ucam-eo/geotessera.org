@@ -1,0 +1,45 @@
+---
+title: "Agribound: agricultural field boundary delineation"
+date: 2026-04-01
+tags: [community, announcement, python]
+author: "Anil Madhavapeddy"
+description: "Agribound is a new Python toolkit that uses TESSERA embeddings for unsupervised agricultural field boundary delineation across multiple satellite sources."
+---
+
+[Siddharth Majumdar](https://www.linkedin.com/in/siddharth-majumdar/) at the [Desert Research Institute](https://www.dri.edu/) has released [Agribound](https://github.com/montimaj/agribound), a unified Python toolkit for delineating agricultural field boundaries from satellite imagery. The toolkit integrates TESSERA embeddings as one of its core delineation engines, demonstrating how pre-computed embeddings can power unsupervised field boundary mapping without any labelled training data.
+
+Agribound combines multiple complementary approaches (object detection, semantic segmentation, vision transformers, foundation models, embedding-based clustering, supervised fine-tuning, and multi-engine ensembling) into a single interface supporting eight satellite data sources including Sentinel-2, Landsat, NAIP, and of course TESSERA embeddings.
+
+![Unsupervised field boundary delineation over the Argentine Pampas using TESSERA embeddings with LULC filtering and SAM2 refinement](/blog/agribound-pampas-example.png)
+
+## TESSERA for unsupervised delineation
+
+Agribound uses the 128-dimensional pixel-wise TESSERA embeddings to cluster pixels into field boundaries without any labelled data. Several of the 15 included example workflows demonstrate this approach, including [unsupervised delineation over the Argentine Pampas](https://github.com/montimaj/agribound/blob/main/examples/notebooks/05_pampas_embeddings.ipynb) using TESSERA embeddings combined with LULC filtering and SAM2 refinement (see the picture above).
+
+```bash
+pip install agribound[tessera]
+```
+
+```python
+from agribound import delineate
+
+result = delineate(
+    source="tessera",
+    bbox=[-62.0, -35.0, -61.5, -34.5],
+    year=2024,
+    engine="embedding_cluster",
+    lulc_filter="dynamic_world",
+    sam2_refine=True
+)
+```
+
+The toolkit also supports automatic land-use/land-cover filtering to remove non-agricultural features, Dask-based parallelism for large areas, built-in evaluation metrics, and [fiboa](https://fiboa.org/)-compliant output in GeoPackage, GeoJSON, or GeoParquet formats.
+
+## Links
+
+- **GitHub:** [montimaj/agribound](https://github.com/montimaj/agribound)
+- **PyPI:** `pip install agribound`
+- **DOI:** [10.5281/zenodo.19229665](https://doi.org/10.5281/zenodo.19229665)
+- **LinkedIn announcement:** [Siddharth Majumdar's post](https://www.linkedin.com/feed/update/urn:li:activity:7444461276329836544/)
+
+Thanks Siddharth for the contribution! If you're building downstream tools on top of TESSERA embeddings, come say hello on [Zulip](https://eeg.zulipchat.com) or open a discussion on [GitHub](https://github.com/ucam-eo/geotessera).
