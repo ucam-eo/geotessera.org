@@ -38,6 +38,10 @@
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="7" r="3.5"/><path d="M3.5 17.5a6.5 6.5 0 0 1 13 0"/></svg>
         About
       </a>
+      <a href="/projects" use:link class:active={path.startsWith('/projects')} onclick={closeAll}>
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h6v6H3zM11 3h6v6h-6zM3 11h6v6H3zM11 14.5a2.5 2.5 0 1 0 5 0 2.5 2.5 0 0 0-5 0"/></svg>
+        Projects
+      </a>
       <a href="/blog" use:link class:active={path.startsWith('/blog')} onclick={closeAll}>
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h14M3 8h10M3 12h12M3 16h8"/></svg>
         Blog

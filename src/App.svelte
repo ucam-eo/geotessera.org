@@ -5,6 +5,8 @@
   import Home from './pages/Home.svelte';
   import Blog from './pages/Blog.svelte';
   import BlogPost from './pages/BlogPost.svelte';
+  import Projects from './pages/Projects.svelte';
+  import ProjectDetail from './pages/ProjectDetail.svelte';
   import Tasks from './pages/Tasks.svelte';
   import TaskTag from './pages/TaskTag.svelte';
   import TaskExample from './pages/TaskExample.svelte';
@@ -36,6 +38,10 @@
         <Blog />
       {:else if route.path === '/blog/:slug'}
         <BlogPost slug={route.params.slug} />
+      {:else if route.path === '/projects'}
+        <Projects />
+      {:else if route.path === '/projects/:id'}
+        <ProjectDetail id={route.params.id} />
       {:else if route.path === '/tasks'}
         <Tasks />
       {:else if route.path === '/tasks/:tag'}
