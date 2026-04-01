@@ -40,6 +40,6 @@ The toolkit also supports automatic land-use/land-cover filtering to remove non-
 - **GitHub:** [montimaj/agribound](https://github.com/montimaj/agribound)
 - **PyPI:** `pip install agribound`
 - **DOI:** [10.5281/zenodo.19229665](https://doi.org/10.5281/zenodo.19229665)
-- **LinkedIn announcement:** [Siddharth Majumdar's post](https://www.linkedin.com/feed/update/urn:li:activity:7444461276329836544/)
+- **LinkedIn announcement:** [Monty's post](https://www.linkedin.com/feed/update/urn:li:activity:7444461276329836544/)
 
 Thanks Monty for the contribution! If you're building downstream tools on top of TESSERA embeddings, come say hello on [Zulip](https://eeg.zulipchat.com) or open a discussion on [GitHub](https://github.com/ucam-eo/geotessera).
