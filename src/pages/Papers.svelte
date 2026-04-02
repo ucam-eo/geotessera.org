@@ -68,6 +68,17 @@
       doi: '10.1109/JSTARS.2024.3426044',
       tag: 'method',
     },
+    {
+      id: 'iucn-habitats',
+      title: 'A Global Map of Terrestrial Habitat Types (IUCN)',
+      authors: 'Martin Jung et al.',
+      venue: 'Scientific Data',
+      date: '2020',
+      description: 'The first global, spatially explicit characterisation of terrestrial habitat types at 100 m resolution following the IUCN habitat classification scheme. A key reference for the habitat mapping programme.',
+      url: 'https://doi.org/10.1038/s41597-020-00599-8',
+      doi: '10.1038/s41597-020-00599-8',
+      tag: 'background',
+    },
   ];
 
   /** Icon per tag */
@@ -75,6 +86,7 @@
     'foundation model': 'M10 2L3 7v6l7 5 7-5V7z',
     'applications': 'M3 3h6v6H3zM11 3h6v6h-6zM3 11h6v6H3zM11 11h6v6h-6z',
     'method': 'M8 2v3M4.9 4.9l2.1 2.1M2 8h3M4.9 11.1l2.1-2.1M8 14v-3M11.1 11.1l-2.1-2.1M14 8h-3M11.1 4.9L9 7',
+    'background': 'M4 2h8l4 4v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zM12 2v4h4M7 10h6M7 14h4',
   };
 
   function getIcon(tag: string): string {

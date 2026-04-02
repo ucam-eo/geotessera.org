@@ -1,7 +1,15 @@
 <script lang="ts">
   import { link } from '@/lib/router';
   import { siteConfig } from '@/lib/config';
+  import { getPeopleByRole } from '@/lib/data/people';
+  import { projects } from '@/lib/data/projects';
+  import { fundingSources } from '@/lib/data/funding';
+  import { partners } from '@/lib/data/partners';
   import Footer from '@/components/Footer.svelte';
+
+  const faculty = getPeopleByRole('faculty');
+  const researchers = getPeopleByRole('researcher');
+  const collaborators = getPeopleByRole('collaborator');
 
   const aboutJsonLd = JSON.stringify({
     '@context': 'https://schema.org',
@@ -132,12 +140,20 @@
     <h2>Projects</h2>
     <p>Ongoing research projects applying TESSERA embeddings to real-world environmental mapping at scale.</p>
     <ul class="eco-list">
-      <li>
-        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-4.4 0-8 3-8 6.5S7.6 16 12 16s8-3 8-6.5S16.4 3 12 3z"/></svg>
-        <a href="https://ucam-eo.github.io/habitat-mapping/" target="_blank" rel="noopener">Mapping Earth's Habitats with Foundation Models&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
-        <span class="eco-desc">— Species-level ecosystem mapping at 10m resolution, spanning alpine tree species in Italy, neotropical vegetation, and UK landscape restoration</span>
-      </li>
+      {#each projects.slice(0, 5) as project}
+        <li>
+          <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-4.4 0-8 3-8 6.5S7.6 16 12 16s8-3 8-6.5S16.4 3 12 3z"/></svg>
+          {#if project.hasDetailPage}
+            <a href="/projects/{project.id}" use:link>{project.title}&#8288;</a>
+          {:else}
+            <span class="eco-link-muted">{project.title}</span>
+          {/if}
+          <span class="eco-desc">— {project.subtitle}</span>
+          <span class="eco-badge {project.status === 'completed' ? 'mature' : project.status === 'in-progress' ? 'contributed' : 'dev'}">{project.statusLabel}</span>
+        </li>
+      {/each}
     </ul>
+    <p style="margin-top: 12px;"><a href="/projects" use:link style="font-size: 13px; color: var(--accent-dim); text-decoration: none;">View all {projects.length} projects &rarr;</a></p>
   </section>
 
   <!-- Roadmap -->
@@ -161,90 +177,48 @@
     <div class="people-group">
       <h3>Lead Faculty</h3>
       <div class="people-list">
-        <div class="person">
-          <a class="person-name" href="https://www.cst.cam.ac.uk/people/sk818" target="_blank" rel="noopener">Srinivasan Keshav</a>
-          <span class="person-role">Robert Sansom Professor of Computer Science, Cambridge</span>
-        </div>
-        <div class="person">
-          <a class="person-name" href="https://coomeslab.org/research-group/current-members/professor-david-coomes/" target="_blank" rel="noopener">David A. Coomes</a>
-          <span class="person-role">Professor of Forest Ecology, Cambridge</span>
-        </div>
-        <div class="person">
-          <a class="person-name" href="https://anil.recoil.org/" target="_blank" rel="noopener">Anil Madhavapeddy</a>
-          <span class="person-role">Professor of Planetary Computing, Cambridge</span>
-        </div>
-        <div class="person">
-          <a class="person-name" href="https://toao.com" target="_blank" rel="noopener">Sadiq Jaffer</a>
-          <span class="person-role">Assistant Research Professor, Cambridge</span>
-        </div>
+        {#each faculty as person}
+          <div class="person">
+            {#if person.url}
+              <a class="person-name" href={person.url} target="_blank" rel="noopener">{person.name}</a>
+            {:else}
+              <span class="person-name">{person.name}</span>
+            {/if}
+            <span class="person-role">{person.title}{person.affiliation ? `, ${person.affiliation}` : ''}</span>
+          </div>
+        {/each}
       </div>
     </div>
 
     <div class="people-group">
       <h3>Researchers</h3>
       <div class="people-list">
-        <div class="person">
-          <a class="person-name" href="https://www.cst.cam.ac.uk/people/zf281" target="_blank" rel="noopener">Zhengpeng Feng</a>
-          <span class="person-role">PhD student and lead researcher</span>
-        </div>
-        <div class="person">
-          <a class="person-name" href="https://www.cst.cam.ac.uk/people/ray25" target="_blank" rel="noopener">Robin Young</a>
-          <span class="person-role">PhD student</span>
-        </div>
-        <div class="person">
-          <span class="person-name">Jovana Knezevic</span>
-          <span class="person-role">PhD student</span>
-        </div>
-        <div class="person">
-          <a class="person-name" href="https://mlisaius.github.io/" target="_blank" rel="noopener">Madeline C. Lisaius</a>
-          <span class="person-role">Graduated PhD student</span>
-        </div>
-        <div class="person">
-          <span class="person-name">Pedro Sousa</span>
-          <span class="person-role">PhD student</span>
-        </div>
-        <div class="person">
-          <a class="person-name" href="https://patball1.github.io" target="_blank" rel="noopener">James Ball</a>
-          <span class="person-role">Postdoctoral researcher</span>
-        </div>
-        <div class="person">
-          <a class="person-name" href="https://jon.recoil.org" target="_blank" rel="noopener">Jon Ludlam</a>
-          <span class="person-role">Assistant Research Professor, Cambridge</span>
-        </div>
-        <div class="person">
-          <a class="person-name" href="https://tunbury.org" target="_blank" rel="noopener">Mark Elvers</a>
-          <span class="person-role">Senior software engineer</span>
-        </div>
-        <div class="person">
-          <a class="person-name" href="https://digitalflapjack.com" target="_blank" rel="noopener">Michael W. Dales</a>
-          <span class="person-role">Assistant Research Professor, Cambridge</span>
-        </div>
+        {#each researchers as person}
+          <div class="person">
+            {#if person.url}
+              <a class="person-name" href={person.url} target="_blank" rel="noopener">{person.name}</a>
+            {:else}
+              <span class="person-name">{person.name}</span>
+            {/if}
+            <span class="person-role">{person.title}{person.affiliation ? `, ${person.affiliation}` : ''}</span>
+          </div>
+        {/each}
       </div>
     </div>
 
     <div class="people-group">
       <h3>Collaborators</h3>
       <div class="people-list">
-        <div class="person">
-          <a class="person-name" href="https://www.researchgate.net/scientific-contributions/Silja-Sormunen-2168369578" target="_blank" rel="noopener">Silja Sormunen</a>
-          <span class="person-role">Researcher</span>
-        </div>
-        <div class="person">
-          <a class="person-name" href="https://www.bristol.ac.uk/people/person/Toby-Jackson-0f0cc27a-9b35-479c-b2a6-7459834ca871/" target="_blank" rel="noopener">Toby Jackson</a>
-          <span class="person-role">Senior research associate, University of Bristol</span>
-        </div>
-        <div class="person">
-          <a class="person-name" href="https://royalsociety.org/people/andrew-blake-11097/" target="_blank" rel="noopener">Andrew Blake</a>
-          <span class="person-role">Samsung AI Centre</span>
-        </div>
-        <div class="person">
-          <a class="person-name" href="https://scholar.google.com/citations?user=lBhFXdIAAAAJ" target="_blank" rel="noopener">Clement Atzberger</a>
-          <span class="person-role"><a href="https://www.cyclops.ai/" target="_blank" rel="noopener">Cyclops.AI</a></span>
-        </div>
-        <div class="person">
-          <a class="person-name" href="https://scholar.google.at/citations?user=VwtoQ70AAAAJ" target="_blank" rel="noopener">Markus Immitzer</a>
-          <span class="person-role"><a href="https://www.cyclops.ai/" target="_blank" rel="noopener">Cyclops.AI</a></span>
-        </div>
+        {#each collaborators as person}
+          <div class="person">
+            {#if person.url}
+              <a class="person-name" href={person.url} target="_blank" rel="noopener">{person.name}</a>
+            {:else}
+              <span class="person-name">{person.name}</span>
+            {/if}
+            <span class="person-role">{person.title}{person.affiliation ? `, ${person.affiliation}` : ''}</span>
+          </div>
+        {/each}
       </div>
     </div>
   </section>
@@ -276,6 +250,35 @@
     </dl>
   </section>
 
+  <!-- Funding -->
+  <section class="section" id="funding">
+    <h2>Funding</h2>
+    <dl class="involve-list">
+      {#each fundingSources as source}
+        <div class="involve-item">
+          <dt>{source.name}</dt>
+          <dd>{source.description}{#if source.url}{' '}<a href={source.url} target="_blank" rel="noopener">Learn more</a>{/if}</dd>
+        </div>
+      {/each}
+    </dl>
+  </section>
+
+  <!-- Partner Institutions -->
+  <section class="section" id="partners">
+    <h2>Partner Institutions</h2>
+    <div class="people-list">
+      {#each partners as partner}
+        <div class="person">
+          {#if partner.url && partner.url !== '#'}
+            <a class="person-name" href={partner.url} target="_blank" rel="noopener">{partner.name}</a>
+          {:else}
+            <span class="person-name">{partner.name}</span>
+          {/if}
+        </div>
+      {/each}
+    </div>
+  </section>
+
   <!-- Acknowledgments -->
   <section class="section" id="acknowledgments">
     <h2>Acknowledgments</h2>
@@ -287,7 +290,7 @@
       via Sentinel-1 and Sentinel-2.
     </p>
     <p>
-      This work is supported by the UKRI <a href="https://www.ukri.org/news/first-projects-from-ukris-new-interdisciplinary-scheme-announced/" target="_blank" rel="noopener">Cross Research Council Responsive Mode Pilot Scheme</a> grant "Creating foundation systems for environmental planetary intelligence". We also acknowledge compute resources from the <a href="https://www.isambard.ac.uk" target="_blank" rel="noopener">UKRI AIRR Isambard facility</a>, GPU hosting from <a href="https://www.vultr.com" target="_blank" rel="noopener">Vultr</a> and <a href="https://www.amd.com" target="_blank" rel="noopener">AMD</a>, and donations from <a href="https://www.janestreet.com" target="_blank" rel="noopener">Jane Street</a> to the University of Cambridge supporting this research.
+      We also acknowledge compute resources from the <a href="https://www.isambard.ac.uk" target="_blank" rel="noopener">UKRI AIRR Isambard facility</a>, GPU hosting from <a href="https://www.vultr.com" target="_blank" rel="noopener">Vultr</a> and <a href="https://www.amd.com" target="_blank" rel="noopener">AMD</a>, and donations from <a href="https://www.janestreet.com" target="_blank" rel="noopener">Jane Street</a> to the University of Cambridge.
     </p>
   </section>
 

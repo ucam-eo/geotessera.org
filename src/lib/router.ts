@@ -83,6 +83,8 @@ const routes: { path: string; route: Route }[] = [
   '/about',
   '/blog',
   '/blog/:slug',
+  '/projects',
+  '/projects/:id',
   '/tasks',
   '/tasks/:tag',
   '/tasks/:tag/:slug',
