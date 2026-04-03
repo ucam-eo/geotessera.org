@@ -2,7 +2,6 @@
   import { link } from '@/lib/router';
   import { siteConfig } from '@/lib/config';
   import { getPeopleByRole } from '@/lib/data/people';
-  import { projects } from '@/lib/data/projects';
   import { fundingSources } from '@/lib/data/funding';
   import { partners } from '@/lib/data/partners';
   import Footer from '@/components/Footer.svelte';
@@ -53,107 +52,6 @@
       <a href="/tasks/solar" use:link>solar panel detection</a> — with minimal additional training.
       Over 90% of final task performance is achievable using less than 1% of available labelled data.
     </p>
-  </section>
-
-  <!-- Ecosystem -->
-  <section class="section" id="ecosystem">
-    <h2>Ecosystem</h2>
-    <ul class="eco-list">
-      <li>
-        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0-1.4l-1.6-1.6a1 1 0 0 0-1.4 0l-2 2 3 3zM3 13.5V17h3.5L13.4 10l-3-3z"/></svg>
-        <a href="https://github.com/ucam-eo/tessera" target="_blank" rel="noopener">Tessera Training&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
-        <span class="eco-desc">— Foundation model training code (MIT)</span>
-      </li>
-      <li>
-        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><path d="M10 3v14M3 10h14"/></svg>
-        <a href="https://github.com/ucam-eo/geotessera" target="_blank" rel="noopener">GeoTessera Embeddings&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
-        <span class="eco-desc">— Pre-computed global embeddings (CC0 license). <a href="/coverage" use:link>View coverage</a></span>
-      </li>
-    </ul>
-
-    <h3 class="eco-subheading">Language libraries</h3>
-    <ul class="eco-list">
-      <li>
-        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4"/></svg>
-        <a href="https://pypi.org/project/geotessera/" target="_blank" rel="noopener">Python&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
-        <span class="eco-desc">— <code>pip install geotessera</code> <span class="eco-badge mature">mature</span></span>
-      </li>
-      <li>
-        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4"/></svg>
-        <a href="https://lassa-sentinel.github.io/GeoTessera/" target="_blank" rel="noopener">R&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
-        <span class="eco-desc">— Community contribution by <a href="https://www.microsoft.com/en-us/research/people/sdwfrost/" target="_blank" rel="noopener">Simon Frost</a> <span class="eco-badge contributed">contributed</span></span>
-      </li>
-      <li>
-        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4"/></svg>
-        <span class="eco-link-muted">OCaml</span>
-        <span class="eco-desc">— In development by the core team <span class="eco-badge dev">in development</span></span>
-      </li>
-      <li>
-        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h4"/></svg>
-        <span class="eco-link-muted">TypeScript</span>
-        <span class="eco-desc">— In development, powering the <a href="/viewer" use:link>interactive map viewer</a> <span class="eco-badge dev">in development</span></span>
-      </li>
-    </ul>
-
-    <h3 class="eco-subheading">Tools &amp; resources</h3>
-    <ul class="eco-list">
-      <li>
-        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="16" height="11" rx="1.5"/><path d="M6 17h8M10 14v3"/></svg>
-        <a href="https://github.com/ucam-eo/tee" target="_blank" rel="noopener">TEE&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
-        <span class="eco-desc">— TESSERA Embeddings Explorer, interactive map viewer</span>
-      </li>
-      <li>
-        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l6 8 6-8"/><path d="M4 8l6 8 6-8"/></svg>
-        <a href="https://github.com/ucam-eo/geotessera-examples" target="_blank" rel="noopener">Examples&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
-        <span class="eco-desc">— Solar panel detection, UMAP visualisation, and more</span>
-      </li>
-      <li>
-        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3v4l3 2"/><circle cx="10" cy="10" r="7"/></svg>
-        <a href="https://isaac.earth/geospatial-skills" target="_blank" rel="noopener">Geospatial Skills for Claude&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
-        <span class="eco-desc">— Claude Code skills for working with TESSERA via Python and R, by <a href="https://github.com/isaaccorley" target="_blank" rel="noopener">Isaac Corley</a> <span class="eco-badge contributed">contributed</span></span>
-      </li>
-      <li>
-        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M10 2a14 14 0 0 1 0 16M10 2a14 14 0 0 0 0 16M2.5 10h15"/></svg>
-        <a href="https://github.com/ucam-eo/tessera-interactive-map" target="_blank" rel="noopener">Interactive Notebook&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
-        <span class="eco-desc">— Jupyter notebook for interactive exploration</span>
-      </li>
-      <li>
-        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l6 8 6-8"/><path d="M4 8l6 8 6-8"/></svg>
-        <a href="https://www.linkedin.com/pulse/from-pixels-embeddings-tessera-earth-observation-gijs-van-den-dool-uti7e/" target="_blank" rel="noopener">TESSERA on Google Colab&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
-        <span class="eco-desc">— Custom inference pipeline for running TESSERA in Google Colab, by <a href="https://www.linkedin.com/in/gijsvandendool/" target="_blank" rel="noopener">Gijs van den Dool</a> <span class="eco-badge contributed">contributed</span></span>
-      </li>
-      <li>
-        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h14M3 6l2-3h10l2 3M3 6v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V6M8 10h4"/></svg>
-        <a href="https://github.com/montimaj/agribound" target="_blank" rel="noopener">Agribound&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
-        <span class="eco-desc">— Agricultural field boundary delineation using TESSERA embeddings, by <a href="https://www.linkedin.com/in/siddharth-majumdar/" target="_blank" rel="noopener">Siddharth Majumdar</a> <span class="eco-badge contributed">contributed</span></span>
-      </li>
-      <li>
-        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2h8l4 4v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M12 2v4h4M7 10h6M7 14h4"/></svg>
-        <a href="https://geotessera.readthedocs.io/" target="_blank" rel="noopener">Documentation&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></a>
-        <span class="eco-desc">— API reference and data documentation</span>
-      </li>
-    </ul>
-  </section>
-
-  <!-- Projects -->
-  <section class="section" id="projects">
-    <h2>Projects</h2>
-    <p>Ongoing research projects applying TESSERA embeddings to real-world environmental mapping at scale.</p>
-    <ul class="eco-list">
-      {#each projects.slice(0, 5) as project}
-        <li>
-          <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-4.4 0-8 3-8 6.5S7.6 16 12 16s8-3 8-6.5S16.4 3 12 3z"/></svg>
-          {#if project.hasDetailPage}
-            <a href="/projects/{project.id}" use:link>{project.title}&#8288;</a>
-          {:else}
-            <span class="eco-link-muted">{project.title}</span>
-          {/if}
-          <span class="eco-desc">— {project.subtitle}</span>
-          <span class="eco-badge {project.status === 'completed' ? 'mature' : project.status === 'in-progress' ? 'contributed' : 'dev'}">{project.statusLabel}</span>
-        </li>
-      {/each}
-    </ul>
-    <p style="margin-top: 12px;"><a href="/projects" use:link style="font-size: 13px; color: var(--accent-dim); text-decoration: none;">View all {projects.length} projects &rarr;</a></p>
   </section>
 
   <!-- Roadmap -->
@@ -221,33 +119,6 @@
         {/each}
       </div>
     </div>
-  </section>
-
-  <!-- Get involved -->
-  <section class="section" id="get-involved">
-    <h2>Get involved</h2>
-    <dl class="involve-list">
-      <div class="involve-item">
-        <dt>Request embeddings</dt>
-        <dd>Need embeddings for a region or year (2017–2025) not yet covered? Check the <a href="/coverage" use:link>coverage map</a> to see what's available, then open an <a href="https://github.com/ucam-eo/geotessera/issues/new?template=embedding-request.yml&labels=embedding-request" target="_blank" rel="noopener">embedding request</a> with your bounding box and we'll prioritise it.</dd>
-      </div>
-      <div class="involve-item">
-        <dt>Contribute</dt>
-        <dd>Code contributions are welcome across all repositories: <a href="https://github.com/ucam-eo/tessera" target="_blank" rel="noopener">tessera</a> (model training and inference), <a href="https://github.com/ucam-eo/geotessera" target="_blank" rel="noopener">geotessera</a> (Python library and embeddings access), and <a href="https://github.com/ucam-eo/geotessera.org" target="_blank" rel="noopener">geotessera.org</a> (this website — add your own examples and use cases).</dd>
-      </div>
-      <div class="involve-item">
-        <dt>Cite TESSERA</dt>
-        <dd>If you use TESSERA in your research, please cite the <a href="/papers#tessera" use:link>CVPR 2026 paper</a>. See the <a href="/papers" use:link>papers page</a> for all publications.</dd>
-      </div>
-      <div class="involve-item">
-        <dt>Join the community</dt>
-        <dd>We have an active community on <a href="https://eeg.zulipchat.com" target="_blank" rel="noopener">Zulip</a> with open registration — everyone is welcome to join the discussion.</dd>
-      </div>
-      <div class="involve-item">
-        <dt>Report issues</dt>
-        <dd>Found a bug or have a feature request? File an issue on the relevant <a href="https://github.com/ucam-eo" target="_blank" rel="noopener">ucam-eo</a> repository.</dd>
-      </div>
-    </dl>
   </section>
 
   <!-- Funding -->
@@ -350,108 +221,6 @@
 
   .section p a:hover, .involve-item a:hover {
     text-decoration: underline;
-  }
-
-  /* Ecosystem list */
-  .eco-list {
-    list-style: none;
-    border-top: 1px solid var(--border-subtle);
-  }
-
-  .eco-list li {
-    padding: 10px 0;
-    padding-left: 26px;
-    position: relative;
-    border-bottom: 1px solid var(--border-subtle);
-    font-size: 14px;
-    line-height: 1.6;
-  }
-
-  .eco-icon {
-    width: 16px;
-    height: 16px;
-    position: absolute;
-    left: 0;
-    top: 13px;
-    color: var(--accent-dim);
-    opacity: 0.6;
-  }
-
-  .eco-list a {
-    font-weight: 500;
-    color: var(--text-primary);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .eco-list a:hover {
-    color: var(--accent);
-  }
-
-  .ext {
-    display: inline;
-    width: 10px;
-    height: 10px;
-    opacity: 0.35;
-    vertical-align: middle;
-    margin-left: 3px;
-  }
-
-  @media (max-width: 768px) {
-    .ext { display: none; }
-  }
-
-  .eco-desc {
-    color: var(--text-muted);
-    font-size: 13px;
-  }
-
-  .eco-subheading {
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-top: 20px;
-    margin-bottom: 8px;
-  }
-
-  .eco-link-muted {
-    font-weight: 500;
-    color: var(--text-muted);
-  }
-
-  .eco-badge {
-    font-size: 10px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    padding: 1px 6px;
-    border-radius: 8px;
-    margin-left: 4px;
-  }
-
-  .eco-badge.mature {
-    color: #4ade80;
-    background: rgba(74, 222, 128, 0.1);
-  }
-
-  .eco-badge.contributed {
-    color: #60a5fa;
-    background: rgba(96, 165, 250, 0.1);
-  }
-
-  .eco-badge.dev {
-    color: var(--text-muted);
-    background: rgba(255, 255, 255, 0.05);
-  }
-
-  .eco-desc code {
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
-    font-size: 11px;
-    color: var(--text-secondary);
-    background: rgba(255, 255, 255, 0.05);
-    padding: 1px 5px;
-    border-radius: 3px;
   }
 
   /* People */
@@ -559,11 +328,6 @@
   @media (max-width: 768px) {
     .about-page {
       padding: 32px 16px;
-    }
-
-    .eco-list li {
-      padding: 8px 0 8px 26px;
-      font-size: 13px;
     }
 
     .involve-item {
