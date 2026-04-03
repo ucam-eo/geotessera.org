@@ -39,10 +39,10 @@ export default defineConfig({
     }),
     sitemapPlugin({
       siteUrl: 'https://geotessera.org',
-      staticRoutes: ['/', '/about', '/blog', '/projects', '/tasks', '/papers', '/videos', '/coverage'],
+      staticRoutes: ['/', '/about', '/blog', '/projects', '/getting-started', '/papers', '/videos', '/coverage'],
       blogDir: path.resolve(__dirname, 'content/blog'),
     }),
-    spa404Plugin(['/', '/about', '/blog', '/projects', '/tasks', '/papers', '/videos', '/coverage']),
+    spa404Plugin(['/', '/about', '/blog', '/projects', '/getting-started', '/tasks', '/papers', '/videos', '/coverage']),
   ],
   resolve: {
     alias: {
