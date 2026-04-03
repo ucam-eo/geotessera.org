@@ -342,7 +342,7 @@ export const blogLinks: BlogLink[] = [
     id: 'video-ecosystem-resilience',
     title: 'Video: Foundational AI to Forecast Ecosystem Resilience',
     date: '2025-11-24',
-    author: 'Srinivasan Keshav, David Coomes',
+    author: 'Srinivasan Keshav, David A. Coomes',
     description: 'Workshop presentation at Pembroke College on applying foundational AI methods to predict ecosystem health and resilience.',
     url: 'https://watch.eeg.cl.cam.ac.uk/w/hanDLh2nzjXY4yL1akVEYh',
     tags: ['video', 'conservation'],

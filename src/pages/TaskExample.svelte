@@ -1,5 +1,6 @@
 <script lang="ts">
   import { getContentBySlug } from '@/lib/content';
+  import { resolveAuthors } from '@/lib/data/people';
   import TagPill from '@/components/TagPill.svelte';
   import Footer from '@/components/Footer.svelte';
 
@@ -16,7 +17,9 @@
     '@type': 'TechArticle',
     headline: post.title,
     datePublished: post.date,
-    author: post.author ? { '@type': 'Person', name: post.author } : { '@type': 'Organization', name: 'TESSERA Team' },
+    author: post.author
+      ? resolveAuthors(post.author).map((ra) => ({ '@type': 'Person', name: ra.name, ...(ra.person?.url ? { url: ra.person.url } : {}) }))
+      : { '@type': 'Organization', name: 'TESSERA Team' },
     publisher: { '@type': 'Organization', name: 'TESSERA', url: 'https://geotessera.org' },
     mainEntityOfPage: `https://geotessera.org/tasks/${tag}/${slug}`,
     breadcrumb: {
@@ -47,7 +50,7 @@
       </div>
       <h1>{post.title}</h1>
       <div class="meta">
-        {#if post.author}<span>{post.author}</span>{/if}
+        {#if post.author}<span class="post-author">{#each resolveAuthors(post.author) as ra, i}{#if i > 0}, {/if}{#if ra.person?.url}<a href={ra.person.url} target="_blank" rel="noopener" class="author-link">{ra.name}</a>{:else}{ra.name}{/if}{/each}</span>{/if}
         <span>{post.date}</span>
         {#if post.languages?.length}
           <span class="langs">{post.languages.join(' · ')}</span>
@@ -96,6 +99,15 @@
     color: var(--text-muted);
     display: flex;
     gap: 12px;
+  }
+
+  .author-link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .author-link:hover {
+    color: var(--accent-dim);
   }
 
   .langs {

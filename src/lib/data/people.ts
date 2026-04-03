@@ -310,3 +310,20 @@ export function getPeopleByProgramme(programme: string): Person[] {
 export function getPersonById(id: string): Person | undefined {
   return people.find((p) => p.id === id);
 }
+
+export function getPersonByName(name: string): Person | undefined {
+  return people.find((p) => p.name === name);
+}
+
+export interface ResolvedAuthor {
+  name: string;
+  person?: Person;
+}
+
+/** Split a comma-separated author string and resolve each against the people database. */
+export function resolveAuthors(authorStr: string): ResolvedAuthor[] {
+  return authorStr.split(/,\s*/).map((name) => {
+    const trimmed = name.trim();
+    return { name: trimmed, person: getPersonByName(trimmed) };
+  });
+}

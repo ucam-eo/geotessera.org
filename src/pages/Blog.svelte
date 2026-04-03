@@ -1,6 +1,7 @@
 <script lang="ts">
   import { getBlogPosts, type ContentMeta } from '@/lib/content';
   import { link } from '@/lib/router';
+  import { resolveAuthors } from '@/lib/data/people';
   import Footer from '@/components/Footer.svelte';
 
   const allPosts = getBlogPosts();
@@ -135,7 +136,9 @@
               <div class="link-row">
                 <a href={post.externalUrl} target="_blank" rel="noopener" class="link-title">{post.title}<span class="nowrap">&thinsp;<svg class="external-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></span></a>
                 <span class="link-meta">
-                  {#if post.author}<span class="link-author">{post.author}</span>{/if}
+                  {#if post.author}
+                    <span class="link-author">{#each resolveAuthors(post.author) as ra, i}{#if i > 0}, {/if}{#if ra.person?.url}<a href={ra.person.url} target="_blank" rel="noopener" class="author-link">{ra.name}</a>{:else}{ra.name}{/if}{/each}</span>
+                  {/if}
                   <span class="link-date">{formatDate(post.date)}</span>
                 </span>
               </div>
@@ -148,7 +151,7 @@
               <div class="post-meta">
                 {#if post.author}
                   <svg class="meta-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5" r="3"/><path d="M2.5 14a5.5 5.5 0 0 1 11 0"/></svg>
-                  <span class="post-author">{post.author}</span>
+                  <span class="post-author">{#each resolveAuthors(post.author) as ra, i}{#if i > 0}, {/if}{#if ra.person?.url}<a href={ra.person.url} target="_blank" rel="noopener" class="author-link">{ra.name}</a>{:else}{ra.name}{/if}{/each}</span>
                 {/if}
                 <div class="post-tags">
                   {#each post.tags as tag}
@@ -385,6 +388,15 @@
     letter-spacing: 0.3px;
   }
 
+  .post-author :global(.author-link) {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .post-author :global(.author-link:hover) {
+    color: var(--accent-dim);
+  }
+
   .post-tags {
     display: flex;
     gap: 8px;
@@ -462,6 +474,15 @@
   .link-author {
     font-size: 12px;
     color: var(--text-muted);
+  }
+
+  .link-author :global(.author-link) {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .link-author :global(.author-link:hover) {
+    color: var(--accent-dim);
   }
 
   .link-author::after {

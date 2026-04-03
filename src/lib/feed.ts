@@ -1,4 +1,5 @@
 import { blogLinks } from './blog-links';
+import { resolveAuthors } from './data/people';
 
 interface FeedEntry {
   id: string;
@@ -27,7 +28,7 @@ export function generateAtomFeed(
     <title>${escXml(e.title)}</title>
     <link href="${escXml(e.url)}" rel="alternate"/>
     <updated>${toISO(e.date)}</updated>
-    <author><name>${escXml(e.author)}</name></author>
+    ${resolveAuthors(e.author).map((ra) => `<author><name>${escXml(ra.name)}</name>${ra.person?.url ? `<uri>${escXml(ra.person.url)}</uri>` : ''}</author>`).join('\n    ')}
     <summary>${escXml(e.description)}</summary>
     ${e.tags.map((t) => `<category term="${escXml(t)}"/>`).join('\n    ')}
   </entry>`,
