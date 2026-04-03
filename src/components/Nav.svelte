@@ -10,12 +10,10 @@
   let onHome = $derived(path === '/');
   let scrolledToAbout = $derived($homePastStory);
 
-  let docsOpen = $state(false);
   let exploreOpen = $state(false);
   let mobileOpen = $state(false);
 
   function closeDropdown() {
-    docsOpen = false;
     exploreOpen = false;
   }
 
@@ -46,10 +44,6 @@
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h14M3 8h10M3 12h12M3 16h8"/></svg>
         Blog
       </a>
-      <a href="/tasks" use:link class:active={path.startsWith('/tasks')} onclick={closeAll}>
-        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="11" y="3" width="6" height="6" rx="1"/><rect x="3" y="11" width="6" height="6" rx="1"/><rect x="11" y="11" width="6" height="6" rx="1"/></svg>
-        Tasks
-      </a>
       <a href="/papers" use:link class:active={path.startsWith('/papers')} onclick={closeAll}>
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M7 6h6M7 9h6M7 12h4"/><circle cx="13" cy="14" r="1.5"/></svg>
         Papers
@@ -58,41 +52,14 @@
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="12" height="12" rx="1.5"/><path d="M14 8l4-2v8l-4-2"/></svg>
         Videos
       </a>
-      <a href="/coverage" use:link class:active={path.startsWith('/coverage')} onclick={closeAll}>
-        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M2 10h16"/><path d="M10 2c-2.7 2.7-2.7 13.3 0 16"/><path d="M10 2c2.7 2.7 2.7 13.3 0 16"/></svg>
-        Coverage
+      <a href="/getting-started" use:link class:active={path.startsWith('/getting-started') || path.startsWith('/tasks')} onclick={closeAll}>
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2h8l4 4v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M12 2v4h4M7 10h6M7 14h4"/></svg>
+        Getting Started
       </a>
       <div class="dropdown">
         <button
-          class="dd-btn docs-btn"
-          onclick={(e) => { e.stopPropagation(); docsOpen = !docsOpen; exploreOpen = false; }}
-        >
-          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2h8l4 4v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M12 2v4h4M7 10h6M7 14h4"/></svg>
-          Docs
-        </button>
-        {#if docsOpen}
-          <div class="dropdown-menu dd-rich-menu" role="menu" tabindex="-1" onkeydown={(e) => { if (e.key === 'Escape') closeDropdown(); }} onclick={(e) => e.stopPropagation()}>
-            <a href={siteConfig.docs} target="_blank" rel="noopener" onclick={closeAll}>
-              <svg class="dd-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4a1 1 0 0 1 1-1h4l2 2h6a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"/></svg>
-              <div>
-                <span class="dd-label">Geotessera Docs <svg class="external-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></span>
-                <span class="dd-desc">API reference &amp; data documentation</span>
-              </div>
-            </a>
-            <a href="https://tee.cl.cam.ac.uk/user_guide.html" target="_blank" rel="noopener" onclick={closeAll}>
-              <svg class="dd-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="16" height="11" rx="1.5"/><path d="M6 17h8M10 14v3"/></svg>
-              <div>
-                <span class="dd-label">TEE User Guide <svg class="external-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h7v7M10 2L4 8"/></svg></span>
-                <span class="dd-desc">Guide for the Embeddings Explorer</span>
-              </div>
-            </a>
-          </div>
-        {/if}
-      </div>
-      <div class="dropdown">
-        <button
           class="dd-btn explore-btn"
-          onclick={(e) => { e.stopPropagation(); exploreOpen = !exploreOpen; docsOpen = false; }}
+          onclick={(e) => { e.stopPropagation(); exploreOpen = !exploreOpen; }}
         >
           <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M10 2a14 14 0 0 1 0 16M10 2a14 14 0 0 0 0 16M2.5 7.5h15M2.5 12.5h15"/></svg>
           Explore
@@ -111,6 +78,13 @@
               <div>
                 <span class="dd-label">Browser</span>
                 <span class="dd-desc">Lightweight in-browser explorer</span>
+              </div>
+            </a>
+            <a href="/coverage" use:link onclick={closeAll}>
+              <svg class="dd-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M2 10h16"/><path d="M10 2c-2.7 2.7-2.7 13.3 0 16"/><path d="M10 2c2.7 2.7 2.7 13.3 0 16"/></svg>
+              <div>
+                <span class="dd-label">Coverage Globe</span>
+                <span class="dd-desc">Explore satellite coverage data</span>
               </div>
             </a>
           </div>
@@ -258,18 +232,6 @@
     font-weight: 500 !important;
     letter-spacing: 1.5px !important;
     transition: background 0.2s, border-color 0.2s, color 0.2s !important;
-  }
-
-  .docs-btn {
-    background: rgba(255, 255, 255, 0.06) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    color: var(--text-secondary) !important;
-  }
-
-  .docs-btn:hover {
-    background: rgba(255, 255, 255, 0.1) !important;
-    border-color: rgba(255, 255, 255, 0.3) !important;
-    color: #fff !important;
   }
 
   .explore-btn {
