@@ -52,9 +52,9 @@
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="12" height="12" rx="1.5"/><path d="M14 8l4-2v8l-4-2"/></svg>
         Videos
       </a>
-      <a href="/getting-started" use:link class:active={path.startsWith('/getting-started') || path.startsWith('/tasks')} onclick={closeAll}>
+      <a href="/docs" use:link class:active={path.startsWith('/docs') || path.startsWith('/tasks')} onclick={closeAll}>
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2h8l4 4v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M12 2v4h4M7 10h6M7 14h4"/></svg>
-        Getting Started
+        Docs
       </a>
       <div class="dropdown">
         <button

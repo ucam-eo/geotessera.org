@@ -222,7 +222,7 @@
             <a href="/tasks#classification" use:link class="task-link">Classification</a>
             <a href="/tasks#segmentation" use:link class="task-link">Segmentation</a>
             <a href="/tasks#regression" use:link class="task-link">Regression</a>
-            <a href="/tasks#getting-started" use:link class="task-link">Getting started</a>
+            <a href="/docs#tutorials" use:link class="task-link">Tutorials</a>
             <a href="/papers" use:link class="task-link">Papers</a>
           </div>
         </div>

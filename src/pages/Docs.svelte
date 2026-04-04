@@ -23,30 +23,30 @@
 
   const extIcon = 'M3.5 1.5h7v7M10 2L4 8';
 
-  const gettingStartedJsonLd = JSON.stringify({
+  const docsJsonLd = JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    name: 'Getting Started with TESSERA',
-    description: 'Libraries, tools, tutorials, and downstream applications of TESSERA embeddings',
-    url: 'https://geotessera.org/getting-started',
+    name: 'TESSERA Docs',
+    description: 'Documentation, libraries, tools, and downstream applications of TESSERA embeddings',
+    url: 'https://geotessera.org/docs',
     breadcrumb: {
       '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://geotessera.org' },
-        { '@type': 'ListItem', position: 2, name: 'Getting Started' },
+        { '@type': 'ListItem', position: 2, name: 'Docs' },
       ],
     },
   });
 </script>
 
 <svelte:head>
-  {@html `<script type="application/ld+json">${gettingStartedJsonLd}</script>`}
+  {@html `<script type="application/ld+json">${docsJsonLd}</script>`}
 </svelte:head>
 
-<div class="gs-page">
+<div class="docs-page">
   <header>
-    <span class="page-label">Getting Started</span>
-    <p class="subtitle">Libraries, tools, tutorials, and downstream applications of TESSERA embeddings</p>
+    <span class="page-label">Docs</span>
+    <p class="subtitle">Everything you need to start using TESSERA embeddings in your research or applications</p>
   </header>
 
   <!-- Jump links -->
@@ -60,6 +60,7 @@
   <!-- Ecosystem -->
   <section class="section" id="ecosystem">
     <h2>Ecosystem</h2>
+    <p class="section-intro">TESSERA is fully open source. The model training code, pre-computed embeddings, and client libraries are all available under permissive licenses.</p>
     <ul class="eco-list">
       <li>
         <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0-1.4l-1.6-1.6a1 1 0 0 0-1.4 0l-2 2 3 3zM3 13.5V17h3.5L13.4 10l-3-3z"/></svg>
@@ -101,46 +102,57 @@
   <!-- Tools & Resources -->
   <section class="section" id="tools">
     <h2>Tools &amp; Resources</h2>
+    <p class="section-intro">Interactive exploration tools, reference documentation, and community-built integrations for working with TESSERA embeddings.</p>
+
+    <h3 class="eco-subheading">Exploration &amp; visualisation</h3>
     <ul class="eco-list">
       <li>
         <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="16" height="11" rx="1.5"/><path d="M6 17h8M10 14v3"/></svg>
         <a href="https://github.com/ucam-eo/tee" target="_blank" rel="noopener">TEE&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
-        <span class="eco-desc">— TESSERA Embeddings Explorer, interactive map viewer</span>
-      </li>
-      <li>
-        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l6 8 6-8"/><path d="M4 8l6 8 6-8"/></svg>
-        <a href="https://github.com/ucam-eo/geotessera-examples" target="_blank" rel="noopener">Examples&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
-        <span class="eco-desc">— Solar panel detection, UMAP visualisation, and more</span>
-      </li>
-      <li>
-        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3v4l3 2"/><circle cx="10" cy="10" r="7"/></svg>
-        <a href="https://isaac.earth/geospatial-skills" target="_blank" rel="noopener">Geospatial Skills for Claude&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
-        <span class="eco-desc">— Claude Code skills for working with TESSERA via Python and R, by <a href="https://github.com/isaaccorley" target="_blank" rel="noopener">Isaac Corley</a> <span class="eco-badge contributed">contributed</span></span>
+        <span class="eco-desc">— TESSERA Embeddings Explorer: interactive map viewer with built-in classifiers, UMAP projections, and label management</span>
       </li>
       <li>
         <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M10 2a14 14 0 0 1 0 16M10 2a14 14 0 0 0 0 16M2.5 10h15"/></svg>
         <a href="https://github.com/ucam-eo/tessera-interactive-map" target="_blank" rel="noopener">Interactive Notebook&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
-        <span class="eco-desc">— Jupyter notebook for interactive exploration</span>
+        <span class="eco-desc">— Jupyter notebook for interactive exploration and visualisation</span>
       </li>
       <li>
         <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l6 8 6-8"/><path d="M4 8l6 8 6-8"/></svg>
-        <a href="https://www.linkedin.com/pulse/from-pixels-embeddings-tessera-earth-observation-gijs-van-den-dool-uti7e/" target="_blank" rel="noopener">TESSERA on Google Colab&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
-        <span class="eco-desc">— Custom inference pipeline for running TESSERA in Google Colab, by <a href="https://www.linkedin.com/in/gijsvandendool/" target="_blank" rel="noopener">Gijs van den Dool</a> <span class="eco-badge contributed">contributed</span></span>
+        <a href="https://github.com/ucam-eo/geotessera-examples" target="_blank" rel="noopener">Examples&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
+        <span class="eco-desc">— Worked examples: solar panel detection, UMAP visualisation, and more</span>
       </li>
-      <li>
-        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h14M3 6l2-3h10l2 3M3 6v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V6M8 10h4"/></svg>
-        <a href="https://github.com/montimaj/agribound" target="_blank" rel="noopener">Agribound&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
-        <span class="eco-desc">— Agricultural field boundary delineation using TESSERA embeddings, by <a href="https://www.linkedin.com/in/siddharth-majumdar/" target="_blank" rel="noopener">Siddharth Majumdar</a> <span class="eco-badge contributed">contributed</span></span>
-      </li>
+    </ul>
+
+    <h3 class="eco-subheading">Reference documentation</h3>
+    <ul class="eco-list">
       <li>
         <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2h8l4 4v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M12 2v4h4M7 10h6M7 14h4"/></svg>
-        <a href="https://geotessera.readthedocs.io/" target="_blank" rel="noopener">Documentation&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
-        <span class="eco-desc">— API reference and data documentation</span>
+        <a href="https://geotessera.readthedocs.io/" target="_blank" rel="noopener">API Documentation&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
+        <span class="eco-desc">— Full API reference for the geotessera Python library, including data formats and access patterns</span>
       </li>
       <li>
         <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="16" height="11" rx="1.5"/><path d="M6 17h8M10 14v3"/></svg>
         <a href="https://tee.cl.cam.ac.uk/user_guide.html" target="_blank" rel="noopener">TEE User Guide&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
-        <span class="eco-desc">— Guide for the TESSERA Embeddings Explorer</span>
+        <span class="eco-desc">— Step-by-step guide for the TESSERA Embeddings Explorer</span>
+      </li>
+    </ul>
+
+    <h3 class="eco-subheading">Community contributions</h3>
+    <ul class="eco-list">
+      <li>
+        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3v4l3 2"/><circle cx="10" cy="10" r="7"/></svg>
+        <a href="https://isaac.earth/geospatial-skills" target="_blank" rel="noopener">Geospatial Skills for Claude&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
+        <span class="eco-desc">— Claude Code skills for AI-assisted geospatial analysis with TESSERA via Python and R, by <a href="https://github.com/isaaccorley" target="_blank" rel="noopener">Isaac Corley</a> <span class="eco-badge contributed">contributed</span></span>
+      </li>
+      <li>
+        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l6 8 6-8"/><path d="M4 8l6 8 6-8"/></svg>
+        <a href="https://www.linkedin.com/pulse/from-pixels-embeddings-tessera-earth-observation-gijs-van-den-dool-uti7e/" target="_blank" rel="noopener">TESSERA on Google Colab&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
+        <span class="eco-desc">— Custom Master-Worker inference pipeline for running TESSERA in Google Colab, by <a href="https://www.linkedin.com/in/gijsvandendool/" target="_blank" rel="noopener">Gijs van den Dool</a> <span class="eco-badge contributed">contributed</span></span>
+      </li>
+      <li>
+        <svg class="eco-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h14M3 6l2-3h10l2 3M3 6v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V6M8 10h4"/></svg>
+        <a href="https://github.com/montimaj/agribound" target="_blank" rel="noopener">Agribound&#8288;<svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d={extIcon}/></svg></a>
+        <span class="eco-desc">— Agricultural field boundary delineation using TESSERA embeddings, by <a href="https://montimaj.github.io/pwd-lab/" target="_blank" rel="noopener">Sayantan Majumdar</a> <span class="eco-badge contributed">contributed</span></span>
       </li>
     </ul>
   </section>
@@ -360,6 +372,7 @@
   <!-- Get involved -->
   <section class="section" id="get-involved">
     <h2>Get involved</h2>
+    <p class="section-intro">TESSERA is built in the open and we welcome contributions from the community — whether that's requesting coverage for new regions, contributing code, or sharing your use cases.</p>
     <dl class="involve-list">
       <div class="involve-item">
         <dt>Request embeddings</dt>
@@ -388,7 +401,7 @@
 </div>
 
 <style>
-  .gs-page {
+  .docs-page {
     max-width: 800px;
     margin: 0 auto;
     padding: 48px 32px;
@@ -745,7 +758,7 @@
   }
 
   @media (max-width: 768px) {
-    .gs-page {
+    .docs-page {
       padding: 32px 16px;
     }
 

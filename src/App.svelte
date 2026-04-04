@@ -14,7 +14,7 @@
   import Videos from './pages/Videos.svelte';
   import Coverage from './pages/Coverage.svelte';
   import CropUmapPage from './pages/CropUmapPage.svelte';
-  import GettingStarted from './pages/GettingStarted.svelte';
+  import Docs from './pages/Docs.svelte';
 
   let route = $derived($currentRoute);
   let isHome = $derived(route.path === '/');
@@ -43,7 +43,7 @@
       {:else if route.path === '/projects/:id'}
         <ProjectDetail id={route.params.id} />
       {:else if route.path === '/tasks'}
-        <GettingStarted />
+        <Docs />
       {:else if route.path === '/tasks/:tag'}
         <TaskTag tag={route.params.tag} />
       {:else if route.path === '/tasks/:tag/:slug'}
@@ -54,8 +54,8 @@
         <Videos />
       {:else if route.path === '/crop-umap'}
         <CropUmapPage />
-      {:else if route.path === '/getting-started'}
-        <GettingStarted />
+      {:else if route.path === '/docs'}
+        <Docs />
       {:else}
         <div class="placeholder">
           <h2>404</h2>

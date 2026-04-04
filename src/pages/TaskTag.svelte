@@ -9,7 +9,7 @@
   let { tag }: Props = $props();
 
   onMount(() => {
-    navigate('/getting-started');
+    navigate('/docs');
     requestAnimationFrame(() => {
       const el = document.getElementById(tag);
       if (el) el.scrollIntoView({ behavior: 'smooth' });
