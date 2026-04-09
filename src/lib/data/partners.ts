@@ -7,8 +7,8 @@ export interface Partner {
 }
 
 export const partners: Partner[] = [
-  { id: 'plantsci', name: 'Department of Plant Sciences', shortName: 'Plant Sciences', url: 'https://www.plantsci.cam.ac.uk/', programmes: ['tessera', 'habitat-mapping'] },
-  { id: 'cst', name: 'Department of Computer Science and Technology', shortName: 'CST', url: 'https://www.cst.cam.ac.uk/', programmes: ['tessera', 'habitat-mapping'] },
+  { id: 'plantsci', name: 'Department of Plant Sciences, University of Cambridge', shortName: 'Plant Sciences', url: 'https://www.plantsci.cam.ac.uk/', programmes: ['tessera', 'habitat-mapping'] },
+  { id: 'cst', name: 'Department of Computer Science and Technology, University of Cambridge', shortName: 'CST', url: 'https://www.cst.cam.ac.uk/', programmes: ['tessera', 'habitat-mapping'] },
   { id: 'fmach', name: 'Fondazione Edmund Mach', url: 'https://www.fmach.it/eng', programmes: ['habitat-mapping'] },
   { id: 'unitn', name: 'University of Trento', url: 'https://www.unitn.it/en', programmes: ['habitat-mapping'] },
   { id: 'syntreesys', name: 'SynTreeSys', shortName: 'SynTreeSys', url: '#', programmes: ['habitat-mapping'] },
