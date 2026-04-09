@@ -13,6 +13,15 @@ export interface BlogLink {
 
 export const blogLinks: BlogLink[] = [
   {
+    id: 'geotessera-v0.8.0',
+    title: 'geotessera v0.8.0: Zarr v3 store, GeoTIFF memory fixes, and registry improvements',
+    date: '2026-04-05',
+    author: 'geotessera',
+    description: 'Adds cloud-native Zarr v3 access via GeoTesseraZarr with automatic UTM zone routing and point sampling, fixes GeoTIFF memory leaks for large regions, adds download resume for GeoTIFFs, and improves registry scanning with truncated file detection and selective parquet generation. Next up: extended registry support for multiple mirrors, versions, and formats.',
+    url: 'https://github.com/ucam-eo/geotessera/releases/tag/v0.8.0',
+    tags: ['release', 'python'],
+  },
+  {
     id: 'tessera-embeddings-convention',
     title: 'TESSERA adopts the Zarr geo-embeddings convention',
     date: '2026-03-27',
