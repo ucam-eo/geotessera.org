@@ -2,8 +2,6 @@
   import { link } from '@/lib/router';
   import { siteConfig } from '@/lib/config';
   import { getPeopleByRole } from '@/lib/data/people';
-  import { fundingSources } from '@/lib/data/funding';
-  import { partners } from '@/lib/data/partners';
   import Footer from '@/components/Footer.svelte';
 
   const faculty = getPeopleByRole('faculty');
@@ -118,35 +116,6 @@
           </div>
         {/each}
       </div>
-    </div>
-  </section>
-
-  <!-- Funding -->
-  <section class="section" id="funding">
-    <h2>Funding</h2>
-    <dl class="involve-list">
-      {#each fundingSources as source}
-        <div class="involve-item">
-          <dt>{source.name}</dt>
-          <dd>{source.description}{#if source.url}{' '}<a href={source.url} target="_blank" rel="noopener">Learn more</a>{/if}</dd>
-        </div>
-      {/each}
-    </dl>
-  </section>
-
-  <!-- Partner Institutions -->
-  <section class="section" id="partners">
-    <h2>Partner Institutions</h2>
-    <div class="people-list">
-      {#each partners as partner}
-        <div class="person">
-          {#if partner.url && partner.url !== '#'}
-            <a class="person-name" href={partner.url} target="_blank" rel="noopener">{partner.name}</a>
-          {:else}
-            <span class="person-name">{partner.name}</span>
-          {/if}
-        </div>
-      {/each}
     </div>
   </section>
 

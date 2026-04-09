@@ -14,6 +14,7 @@ export interface Project {
   links?: { label: string; url: string }[];
   hasDetailPage: boolean;
   fundingSources?: string[];
+  partners?: string[];
   timeline?: string;
 }
 
@@ -40,6 +41,7 @@ export const projects: Project[] = [
     ],
     hasDetailPage: true,
     fundingSources: ['epic'],
+    partners: ['fmach', 'unitn'],
   },
   {
     id: 'latin-america',
@@ -53,6 +55,7 @@ export const projects: Project[] = [
     team: ['james-ball', 'david-coomes', 'adriane-esquivel-muelbert', 'toby-pennington', 'karl-dexter'],
     hasDetailPage: false,
     fundingSources: ['epic'],
+    partners: ['syntreesys'],
     timeline: 'Jan \u2013 Jul 2026',
   },
   {
@@ -79,6 +82,7 @@ export const projects: Project[] = [
     team: ['amandine-debus', 'barbara-neto-bradley', 'jess-williams', 'david-coomes'],
     hasDetailPage: false,
     fundingSources: ['clr'],
+    partners: ['nerc-clr'],
   },
   {
     id: 'cairngorms',
@@ -92,6 +96,7 @@ export const projects: Project[] = [
     team: ['amandine-debus', 'barbara-neto-bradley', 'jess-williams', 'david-coomes'],
     hasDetailPage: false,
     fundingSources: ['clr'],
+    partners: ['nerc-clr'],
   },
   {
     id: 'spain-nz',
@@ -128,6 +133,7 @@ export const projects: Project[] = [
     description: 'The ultimate goal: a globally consistent habitat map by end of 2026. Powered by the Global Plot Alliance \u2014 assembling a comprehensive database of vegetation plots worldwide, including access to 3.3 million plots through SPlot \u2014 and combining foundation-model embeddings with implicit labelling approaches for scalable habitat classification.',
     team: ['david-coomes', 'lucy-watson'],
     hasDetailPage: false,
+    partners: ['splot', 'bien', 'unep-wcmc'],
   },
   {
     id: 'uk-national',
@@ -140,6 +146,7 @@ export const projects: Project[] = [
     description: 'Developing the next generation of habitat condition mapping systems for the UK, integrating Tessera with EUNIS classification standards. Moving beyond broad land cover categories to fine-scale habitat condition monitoring \u2014 distinguishing, for example, between overgrazed and undergrazed grasslands. Partnership with UK-CEH and DEFRA.',
     team: [],
     hasDetailPage: false,
+    partners: ['uk-ceh'],
     timeline: 'Postdoc starting March\u2013April 2026, completion by May 2027',
   },
 ];

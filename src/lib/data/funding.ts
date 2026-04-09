@@ -8,15 +8,10 @@ export interface FundingSource {
 
 export const fundingSources: FundingSource[] = [
   {
-    id: 'ukri-crcrm',
-    name: 'UKRI Cross Research Council Responsive Mode Pilot Scheme',
-    description: 'Grant "Creating foundation systems for environmental planetary intelligence".',
-    url: 'https://www.ukri.org/news/first-projects-from-ukris-new-interdisciplinary-scheme-announced/',
-  },
-  {
     id: 'epic',
-    name: 'EPIC Grant',
-    description: 'Funds the core postdoctoral research on geospatial foundation models for habitat mapping, supporting the Trentino species mapping project and Latin America vegetation mapping work.',
+    name: 'UKRI Cross Research Council / EPIC',
+    description: 'The UKRI Cross Research Council Responsive Mode Pilot Scheme grant "Creating foundation systems for environmental planetary intelligence" (EPIC) funds the core postdoctoral research on geospatial foundation models for habitat mapping, supporting the Trentino species mapping project and Latin America vegetation mapping work.',
+    url: 'https://www.ukri.org/news/first-projects-from-ukris-new-interdisciplinary-scheme-announced/',
   },
   {
     id: 'clr',

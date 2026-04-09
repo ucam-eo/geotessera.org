@@ -2,7 +2,22 @@
   import { link } from '@/lib/router';
   import { projects } from '@/lib/data/projects';
   import { getPersonById } from '@/lib/data/people';
+  import { fundingSources } from '@/lib/data/funding';
+  import { partners } from '@/lib/data/partners';
   import Footer from '@/components/Footer.svelte';
+
+  function getFundingName(id: string): string {
+    return fundingSources.find(f => f.id === id)?.shortName ?? fundingSources.find(f => f.id === id)?.name ?? id;
+  }
+
+  function getPartnerName(id: string): string {
+    return partners.find(p => p.id === id)?.shortName ?? partners.find(p => p.id === id)?.name ?? id;
+  }
+
+  function getPartnerUrl(id: string): string | undefined {
+    const p = partners.find(p => p.id === id);
+    return p?.url && p.url !== '#' ? p.url : undefined;
+  }
 
   const projectsJsonLd = JSON.stringify({
     '@context': 'https://schema.org',
@@ -77,6 +92,17 @@
           </p>
         {/if}
 
+        {#if project.fundingSources?.length || project.partners?.length}
+          <p class="project-meta">
+            {#if project.fundingSources?.length}
+              <span class="meta-item"><span class="meta-label">Funded by:</span> {project.fundingSources.map(getFundingName).join(', ')}</span>
+            {/if}
+            {#if project.partners?.length}
+              <span class="meta-item"><span class="meta-label">Partners:</span> {#each project.partners as pid, i}{#if i > 0}, {/if}{#if getPartnerUrl(pid)}<a href={getPartnerUrl(pid)} target="_blank" rel="noopener">{getPartnerName(pid)}</a>{:else}{getPartnerName(pid)}{/if}{/each}</span>
+            {/if}
+          </p>
+        {/if}
+
         {#if project.stats}
           <div class="stats">
             {#each project.stats as stat}
@@ -116,6 +142,33 @@
     <p class="callout-partners">
       Partners include SPlot (3.3M plots), SynTreeSys, BIEN, UNEP-WCMC, and others.
     </p>
+  </section>
+
+  <section class="funding-section">
+    <h3>Funding</h3>
+    <dl class="funding-list">
+      {#each fundingSources as source}
+        <div class="funding-item">
+          <dt>{source.name}</dt>
+          <dd>{source.description}{#if source.url}{' '}<a href={source.url} target="_blank" rel="noopener">Learn more</a>{/if}</dd>
+        </div>
+      {/each}
+    </dl>
+  </section>
+
+  <section class="funding-section">
+    <h3>Partner Institutions</h3>
+    <div class="partner-grid">
+      {#each partners as partner}
+        <div class="partner-item">
+          {#if partner.url && partner.url !== '#'}
+            <a href={partner.url} target="_blank" rel="noopener">{partner.name}</a>
+          {:else}
+            <span>{partner.name}</span>
+          {/if}
+        </div>
+      {/each}
+    </div>
   </section>
 
   <Footer />
@@ -358,6 +411,105 @@
     font-style: italic;
   }
 
+  .project-meta {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+  }
+
+  .meta-label {
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+
+  .project-meta a {
+    color: var(--accent-dim);
+    text-decoration: none;
+  }
+
+  .project-meta a:hover {
+    text-decoration: underline;
+  }
+
+  .funding-section {
+    margin-top: 32px;
+    margin-bottom: 32px;
+  }
+
+  .funding-section h3 {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent-dim);
+    margin-bottom: 16px;
+    opacity: 0.8;
+  }
+
+  .funding-list {
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .funding-item {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .funding-item dt {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    letter-spacing: 0.2px;
+  }
+
+  .funding-item dd {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  .funding-item a {
+    color: var(--accent-dim);
+    text-decoration: none;
+  }
+
+  .funding-item a:hover {
+    text-decoration: underline;
+  }
+
+  .partner-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 24px;
+  }
+
+  .partner-item {
+    padding: 8px 0;
+    font-size: 14px;
+  }
+
+  .partner-item a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .partner-item a:hover {
+    color: var(--accent);
+  }
+
+  .partner-item span {
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
   @media (max-width: 768px) {
     .projects-page {
       padding: 32px 16px;
@@ -369,6 +521,10 @@
 
     .stats {
       gap: 16px;
+    }
+
+    .partner-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>
