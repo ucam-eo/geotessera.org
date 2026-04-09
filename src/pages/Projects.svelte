@@ -36,6 +36,11 @@
       organisations worldwide. Each project applies TESSERA and other geospatial foundation model embeddings
       to deliver fine-grained, species-level habitat maps with minimal labelled data.
     </p>
+    <p>
+      These are projects being run in-house by the Cambridge team, but there is a growing amount of
+      work using TESSERA globally. If you'd like yours to be listed here too, get in touch on our
+      <a href="https://eeg.zulipchat.com" target="_blank" rel="noopener">Zulip</a>!
+    </p>
   </section>
 
   <div class="project-list">
