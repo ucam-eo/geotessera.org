@@ -23,6 +23,7 @@ export const fundingSources: FundingSource[] = [
     id: '4c',
     name: '4C Programme',
     description: 'Supports PhD studentships contributing to the change detection and global habitat mapping components of the research programme.',
+    url: 'https://4c.cst.cam.ac.uk',
   },
   {
     id: 'cambridge',
