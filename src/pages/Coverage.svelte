@@ -372,7 +372,7 @@
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: 'TESSERA Coverage Map',
-    description: 'Global coverage of TESSERA v1 embeddings for Sentinel-2 satellite imagery from 2017 to 2025',
+    description: 'Global coverage of TESSERA v1 embeddings for Sentinel-1 and Sentinel-2 satellite imagery from 2017 to 2025',
     url: 'https://geotessera.org/coverage',
     breadcrumb: {
       '@type': 'BreadcrumbList',
@@ -387,7 +387,7 @@
 <div class="coverage-page">
   <header>
     <span class="page-label">Coverage</span>
-    <p class="intro">We are generating <a href="https://github.com/ucam-eo/geotessera" target="_blank" rel="noopener">TESSERA v1</a> embeddings for Sentinel-2 satellite imagery from 2017 to 2025. The globe below shows the <strong>{tileCount.toLocaleString()}</strong> coverage tiles processed so far across <strong>{coverageData ? coverageData.years.length : '—'}</strong>&nbsp;years, out of <strong>{landmaskCount.toLocaleString()}</strong> total land tiles in the global landmask. Hover to inspect per-tile coverage, drag to rotate, and scroll to zoom.</p>
+    <p class="intro">We are generating <a href="https://github.com/ucam-eo/geotessera" target="_blank" rel="noopener">TESSERA v1</a> embeddings for Sentinel-1 and Sentinel-2 satellite imagery from 2017 to 2025. The globe below shows the <strong>{tileCount.toLocaleString()}</strong> coverage tiles processed so far across <strong>{coverageData ? coverageData.years.length : '—'}</strong>&nbsp;years, out of <strong>{landmaskCount.toLocaleString()}</strong> total land tiles in the global landmask. Hover to inspect per-tile coverage, drag to rotate, and scroll to zoom.</p>
   </header>
 
   <div class="globe-card">
