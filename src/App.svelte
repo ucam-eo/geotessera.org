@@ -42,8 +42,6 @@
         <Projects />
       {:else if route.path === '/projects/:id'}
         <ProjectDetail id={route.params.id} />
-      {:else if route.path === '/tasks'}
-        <Docs />
       {:else if route.path === '/tasks/:tag'}
         <TaskTag tag={route.params.tag} />
       {:else if route.path === '/tasks/:tag/:slug'}

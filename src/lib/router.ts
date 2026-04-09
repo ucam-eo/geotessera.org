@@ -15,7 +15,14 @@ function stripBase(pathname: string): string {
   return p;
 }
 
-export const currentPath = writable(stripBase(window.location.pathname));
+/** Permanent redirects — old URL → new URL. Uses replaceState so the old path never appears in history. */
+const redirects: Record<string, string> = {
+  '/tasks': '/docs#tasks',
+  '/getting-started': '/docs',
+};
+
+const initialPath = stripBase(window.location.pathname);
+export const currentPath = writable(initialPath);
 
 /** Notify Matomo of a client-side navigation. */
 function trackPageView() {
@@ -26,13 +33,36 @@ function trackPageView() {
   _paq.push(['trackPageView']);
 }
 
+/** Check for redirects and apply them with replaceState. Returns true if redirected. */
+function applyRedirect(pathname: string): boolean {
+  const target = redirects[pathname];
+  if (!target) return false;
+  const [newPath, hash] = target.split('#');
+  const fullPath = base + newPath + (hash ? `#${hash}` : '');
+  window.history.replaceState(null, '', fullPath);
+  currentPath.set(newPath);
+  if (hash) {
+    requestAnimationFrame(() => {
+      const el = document.getElementById(hash);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+  return true;
+}
+
+// Apply redirect on initial page load (e.g. direct visit to /tasks)
+applyRedirect(initialPath);
+
 window.addEventListener('popstate', () => {
-  currentPath.set(stripBase(window.location.pathname));
+  const p = stripBase(window.location.pathname);
+  if (applyRedirect(p)) return;
+  currentPath.set(p);
   trackPageView();
 });
 
 export function navigate(path: string) {
   const [pathname, hash] = path.split('#');
+  if (applyRedirect(pathname)) return;
   const fullPath = base + (pathname === '/' ? '/' : pathname) + (hash ? `#${hash}` : '');
   if (fullPath === window.location.pathname + window.location.hash && !hash) return;
   window.history.pushState(null, '', fullPath);
@@ -85,7 +115,6 @@ const routes: { path: string; route: Route }[] = [
   '/blog/:slug',
   '/projects',
   '/projects/:id',
-  '/tasks',
   '/tasks/:tag',
   '/tasks/:tag/:slug',
   '/papers',
