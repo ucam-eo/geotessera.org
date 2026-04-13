@@ -13,6 +13,16 @@ export interface BlogLink {
 
 export const blogLinks: BlogLink[] = [
   {
+    id: 'intel-amx-inference',
+    title: 'Can a CPU with Intel AMX Match a GPU for ML Inference?',
+    date: '2026-04-08',
+    author: 'Mark Elvers',
+    description: 'Benchmarking the TESSERA pipeline on Intel Xeon with AMX bfloat16 acceleration, finding an 8-core AMX CPU achieves ~$0.29/tile versus $0.23/tile on a T4 GPU at similar price points.',
+    url: 'https://www.tunbury.org/2026/04/08/intel-amx/',
+    tags: ['engineering'],
+    minor: true,
+  },
+  {
     id: 'geotessera-v0.8.0',
     title: 'geotessera v0.8.0: Zarr v3 store, GeoTIFF memory fixes, and registry improvements',
     date: '2026-04-05',
