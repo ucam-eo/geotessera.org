@@ -1,0 +1,25 @@
+---
+title: "Calibrated biomass and below-ground biodiversity with TESSERA"
+date: 2026-04-17
+tags: [research, ecology]
+author: "Robin Young"
+description: "Two new preprints use TESSERA embeddings for calibrated biomass gap-filling and below-ground fungal biodiversity prediction."
+---
+
+Two recent preprints demonstrate what TESSERA embeddings enable in ecological machine learning. One is about forest carbon, the other about mycorrhizal fungi living underneath forests.
+
+## Filling GEDI's gaps with calibrated uncertainty
+
+The first paper, [*Neural Processes Maintain Calibrated Biomass Estimates Across Spatiotemporal Gaps and Disturbance*](https://arxiv.org/abs/2604.03874), addresses a gap for ecological data that is sparse in time and space. NASA's GEDI LIDAR instrument hibernated on the ISS from March 2023 to April 2024, leaving a 13 month gap in the global biomass record. Disturbance events that happened during that window were not directly observed.
+
+The paper extended the Attentive Neural Process framework previously validated on spatial-only GEDI to jointly sparse spatiotemporal settings, concatenating temporal coordinates onto the spatial ones so the model interpolates over space and time symmetrically. TESSERA embeddings do the heavy lifting as input features, because they encode land surface state at the time of prediction rather than as a static summary.
+
+Across three regions (a deforestation frontier in Guaviare, dense rainforest in Ucayali, and semi-arid Queensland woodland) the ANP keeps its residual standard deviation near the ideal of 1.0, while XGBoost's blows up to 5.67 globally and 13.03 in actively disturbed tiles. Intervals an order of magnitude too narrow are worse than honest ones for carbon accounting because it instills false confidence for decision making. With a calibrated model, large uncertainty in a region of interest can also be seen as a signal about where the next field study or LIDAR acquisition would be most valuable.
+
+## Mapping below-ground fungi from space
+
+[*Below-ground Fungal Biodiversity Can be Monitored Using Self-Supervised Learning Satellite Features*](https://arxiv.org/abs/2604.09818), is a collaboration with the Society for the Protection of Underground Networks. The question is: can satellite-derived features predict the species richness of ectomycorrhizal fungi from what the satellites can see above ground?
+
+Using about 12,000 soil samples from the [GlobalFungi database](https://globalfungi.com/) across Europe and Asia, a LightGBM model trained on TESSERA embeddings hits R² ≈ 0.54. Combining TESSERA with conventional predictors (WorldClim, SoilGrids, ESA WorldCover) increases this only marginally to 0.55, suggesting the embeddings have already absorbed most of what those coarser datasets contribute. TESSERA-only roughly matches climate-only, soil-only, and land-cover-only models individually, while operating at 10m rather than 1km.
+
+Mycorrhizal fungi influence plant physiology and phenology, which should show up in vegetation spectra and seasonal dynamics that TESSERA picks up. The paper also demonstrates a temporal triage analysis across UK National Park woodlands, suggesting that ancient semi natural woodlands in the Lake District and Cairngorms may be losing ectomycorrhizal diversity at higher rates than non-ancient forests.
