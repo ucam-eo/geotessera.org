@@ -1,0 +1,21 @@
+---
+title: "A year of Tessera embeddings, and GeoTessera 0.10"
+date: 2026-08-27
+tags: [news, release, python]
+author: "Anil Madhavapeddy"
+description: "The geotessera library turns one, and version 0.10 moves the embedding archive onto Source Cooperative with CloudFlare edge caching, adds UTM-native Zarr routing and matryoshka embedding support."
+---
+
+<a href="https://www.cl.cam.ac.uk/~avsm2/embedding_request_map.html"><figure class="cover-image">
+  <img src="/blog/embedding-requests-map.gif" alt="An animated world map in which markers for public TESSERA embedding requests appear one by one across Europe, Africa, the Americas and Asia over the course of a year" />
+  <figcaption>A year of public TESSERA embedding requests.</figcaption>
+</figure></a>
+
+It is a year since we released [geotessera](https://pypi.org/project/geotessera/). The map above plots some of the public embedding requests since then. GeoTessera 0.10 is also out now:
+
+- Hosting has moved to [Source Cooperative](https://source.coop/tessera/tessera) with CloudFlare edge caching in front, improving global latency and stability.
+- UTM-native Zarr routing sends coordinates to the right UTM zone subgroup, minimising coordinate skew wherever you work.
+- Matryoshka embeddings (v2 beta) let you pull just the first 4 or 16 of the 128 dimensions for faster exploratory analysis.
+- A new `cache_dir=` argument disambiguates the local cache between model versions.
+
+Anil's full write-up is [on his site](https://anil.recoil.org/notes/geotessera-a-year-on).
