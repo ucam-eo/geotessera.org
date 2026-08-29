@@ -86,7 +86,7 @@
     {
       id: 'fungi',
       title: 'Below-ground Fungal Biodiversity Can be Monitored Using Self-Supervised Learning Satellite Features',
-      authors: 'Robin Young and Michael E. Van Nuland and E. Toby Kiers and Tomáš Větrovský and Petr Kohout and Petr Baldrian and Srinivasan Keshav',
+      authors: 'Robin Young, Michael E. Van Nuland, E. Toby Kiers, Tomáš Větrovský, Petr Kohout, Petr Baldrian, Srinivasan Keshav',
       venue: 'arXiv preprint',
       date: 'Apr 2026',
       description: 'This paper shows that self-supervised learning features from satellite imagery can predict below ground ectomycorrhizal fungal species richness across ~12,000 field samples, achieving a 10,000-fold resolution improvement over existing methods and enabling temporal monitoring of fungal biodiversity at landscape scales.',

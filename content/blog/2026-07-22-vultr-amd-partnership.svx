@@ -37,6 +37,8 @@ Read Vultr and AMD's jointly published [blog](https://blogs.vultr.com/tessera-am
 
 Tessera embeddings are available now through the [Geotessera library](https://geotessera.org). If you build something with them, we would love to [hear about it](mailto:cp918@cam.ac.uk).
 
+*For more information contact [Constantino Panagopulos](mailto:cp918@cam.ac.uk), TESSERA communications, Department of Computer Science and Technology, +44 (0)7356 104 073.*
+
 <style>
   .cover-image {
     margin: 0 0 2rem 0;
