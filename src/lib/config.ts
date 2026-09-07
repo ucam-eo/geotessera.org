@@ -5,6 +5,7 @@ export const siteConfig = {
     github: 'https://github.com/ucam-eo',
     bluesky: 'https://bsky.app/profile/geotessera.org',
     twitter: 'https://x.com/geotessera',
+    linkedin: 'https://www.linkedin.com/company/ucam-eeg/',
     zulip: 'https://eeg.zulipchat.com',
   },
   tasks: [

@@ -6,6 +6,7 @@
 
   const faculty = getPeopleByRole('faculty');
   const researchers = getPeopleByRole('researcher');
+  const affiliates = getPeopleByRole('affiliate');
   const collaborators = getPeopleByRole('collaborator');
 
   const aboutJsonLd = JSON.stringify({
@@ -70,18 +71,49 @@
   <section class="section" id="people">
     <h2>People</h2>
 
+    {#snippet personRow(person)}
+      {#if person.url}
+        <a class="person" href={person.url} target="_blank" rel="noopener">
+          <div class="avatar">
+            {#if person.photo}
+              <img src={person.photo} alt="Portrait of {person.name}" />
+            {:else}
+              {person.initials}
+            {/if}
+          </div>
+          <div class="person-text">
+            <span class="person-name">{person.name}</span>
+            <span class="person-role">
+              {#if person.title}<span class="role-line">{person.title}</span>{/if}
+              {#if person.affiliation}<span class="role-line">{person.affiliation}</span>{/if}
+            </span>
+          </div>
+        </a>
+      {:else}
+        <div class="person">
+          <div class="avatar">
+            {#if person.photo}
+              <img src={person.photo} alt="Portrait of {person.name}" />
+            {:else}
+              {person.initials}
+            {/if}
+          </div>
+          <div class="person-text">
+            <span class="person-name">{person.name}</span>
+            <span class="person-role">
+              {#if person.title}<span class="role-line">{person.title}</span>{/if}
+              {#if person.affiliation}<span class="role-line">{person.affiliation}</span>{/if}
+            </span>
+          </div>
+        </div>
+      {/if}
+    {/snippet}
+
     <div class="people-group">
       <h3>Lead Faculty</h3>
       <div class="people-list">
         {#each faculty as person}
-          <div class="person">
-            {#if person.url}
-              <a class="person-name" href={person.url} target="_blank" rel="noopener">{person.name}</a>
-            {:else}
-              <span class="person-name">{person.name}</span>
-            {/if}
-            <span class="person-role">{person.title}{person.affiliation ? `, ${person.affiliation}` : ''}</span>
-          </div>
+          {@render personRow(person)}
         {/each}
       </div>
     </div>
@@ -90,21 +122,23 @@
       <h3>Researchers</h3>
       <div class="people-list">
         {#each researchers as person}
-          <div class="person">
-            {#if person.url}
-              <a class="person-name" href={person.url} target="_blank" rel="noopener">{person.name}</a>
-            {:else}
-              <span class="person-name">{person.name}</span>
-            {/if}
-            <span class="person-role">{person.title}{person.affiliation ? `, ${person.affiliation}` : ''}</span>
-          </div>
+          {@render personRow(person)}
         {/each}
       </div>
     </div>
 
     <div class="people-group">
-      <h3>Collaborators</h3>
+      <h3>Research Affiliates</h3>
       <div class="people-list">
+        {#each affiliates as person}
+          {@render personRow(person)}
+        {/each}
+      </div>
+    </div>
+
+    <div class="people-group">
+      <h3>Project Collaborators</h3>
+      <div class="people-list collab">
         {#each collaborators as person}
           <div class="person">
             {#if person.url}
@@ -112,9 +146,23 @@
             {:else}
               <span class="person-name">{person.name}</span>
             {/if}
-            <span class="person-role">{person.title}{person.affiliation ? `, ${person.affiliation}` : ''}</span>
+            {#if person.affiliation || person.title}
+              <span class="person-affil">{person.affiliation || person.title}</span>
+            {/if}
           </div>
         {/each}
+      </div>
+    </div>
+
+    <div class="people-group">
+      <h3>Media &amp; Communications</h3>
+      <div class="media-contact">
+        <div class="media-contact-name">Constantino Panagopulos</div>
+        <div class="media-contact-role">Communications Coordinator, Tessera</div>
+        <div class="media-contact-lines">
+          <a href="tel:+447356104073">+44 (0)7356 104 073</a>
+          <a href="mailto:cp918@cam.ac.uk">cp918@cam.ac.uk</a>
+        </div>
       </div>
     </div>
   </section>
@@ -194,7 +242,7 @@
 
   /* People */
   .people-group {
-    margin-bottom: 24px;
+    margin-bottom: 30px;
   }
 
   .people-group h3 {
@@ -203,39 +251,193 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--text-muted);
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
 
   .people-list {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px 24px;
+    grid-template-columns: 1fr;
   }
 
   .person {
-    padding: 8px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    min-width: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition:
+      color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+      background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+      text-decoration-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .avatar {
+    flex: none;
+    width: 80px;
+    height: 80px;
+    align-self: flex-start;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    color: var(--accent-dim);
+  }
+
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.45s cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .person:hover .avatar img {
+    transform: scale(1.06);
+  }
+
+  .person-text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
   }
 
   .person-name {
     display: block;
-    font-size: 15px;
-    font-weight: 500;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
     color: var(--text-primary);
     letter-spacing: 0.2px;
-    text-decoration: none;
-    transition: color 0.2s;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 3px;
+    transition:
+      text-decoration-color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+      color 0.2s;
   }
 
   a.person-name:hover {
     color: var(--accent);
   }
 
+  .person:hover .person-name {
+    text-decoration-color: rgba(0, 210, 255, 0.55);
+  }
+
   .person-role {
-    display: block;
-    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--text-secondary);
+  }
+
+  .person-role .role-line:last-child {
     color: var(--text-muted);
-    margin-top: 2px;
+  }
+
+  /* Project Collaborators — plain list of name + institution, no photo, no title */
+  .people-list.collab {
+    display: block;
+  }
+
+  .people-list.collab .person {
+    display: block;
+    padding: 9px 0;
+    min-width: 0;
+    border-bottom: 1px solid var(--border-subtle);
+    background: none;
+    border-radius: 0;
+    gap: 0;
+    cursor: default;
+  }
+
+  .people-list.collab .person:last-child {
+    border-bottom: none;
+  }
+
+  .people-list.collab .person-name {
+    display: inline;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.5;
+    text-decoration: none;
+  }
+
+  .people-list.collab .person-affil {
+    display: inline;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .people-list.collab .person-affil::before {
+    content: '\00a0\2014\00a0';
+  }
+
+  /* Media & Communications — static single-entry card, toned down to the
+     same type scale as Project Collaborators rather than the photo rows */
+  .media-contact-name {
+    font-size: 15px;
+    font-weight: 500;
     line-height: 1.4;
+    color: var(--text-primary);
+  }
+
+  .media-contact-role {
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--text-muted);
+    margin-top: 3px;
+  }
+
+  .media-contact-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-top: 8px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .media-contact-lines a {
+    display: block;
+    color: var(--accent-dim);
+    text-decoration: none;
+    width: fit-content;
+  }
+
+  .media-contact-lines a:hover {
+    text-decoration: underline;
+  }
+
+  @media (min-width: 640px) {
+    .person {
+      gap: 24px;
+      padding: 24px 0;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      font-size: 30px;
+    }
+
+    .person-text {
+      gap: 12px;
+    }
   }
 
   /* Get involved */
@@ -305,8 +507,9 @@
   }
 
   @media (max-width: 640px) {
-    .people-list {
-      grid-template-columns: 1fr;
+    .person-name {
+      font-size: 18px;
+      line-height: 26px;
     }
   }
 </style>
