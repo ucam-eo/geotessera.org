@@ -9,6 +9,24 @@
   }
 
   let { slug }: Props = $props();
+
+  function handleContentClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const btn = target.closest<HTMLButtonElement>('.copy-code-btn');
+    if (!btn) return;
+    const block = btn.closest('.code-block');
+    const codeEl = block?.querySelector('pre');
+    const text = codeEl?.innerText ?? '';
+    navigator.clipboard.writeText(text).then(() => {
+      const original = btn.textContent;
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.classList.remove('copied');
+      }, 1500);
+    });
+  }
   let post = $derived(getContentBySlug(slug));
   let Component = $derived(post?.component);
   let section = $derived(post && hasNewsTag(post.tags) ? 'news' : 'blog');
@@ -55,7 +73,7 @@
         {#if post.draft}<span class="draft-badge">DRAFT</span>{/if}
       </div>
     </header>
-    <div class="content">
+    <div class="content" onclick={handleContentClick}>
       {#if Component}
         <Component />
       {/if}
@@ -150,6 +168,64 @@
 
   .content :global(code) {
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  }
+
+  .content :global(:not(pre) > code) {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 0.9em;
+    color: var(--text-primary);
+  }
+
+  .content :global(ul),
+  .content :global(ol) {
+    margin: 0 0 24px 0;
+    padding-left: 1.5em;
+  }
+
+  .content :global(li) {
+    margin-bottom: 8px;
+  }
+
+  .content :global(li:last-child) {
+    margin-bottom: 0;
+  }
+
+  .content :global(.code-block) {
+    position: relative;
+    margin-bottom: 16px;
+  }
+
+  .content :global(.code-block pre) {
+    margin-bottom: 0;
+  }
+
+  .content :global(.copy-code-btn) {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-family: inherit;
+    font-size: 11px;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .content :global(.code-block:hover .copy-code-btn),
+  .content :global(.copy-code-btn:focus-visible) {
+    opacity: 1;
+  }
+
+  .content :global(.copy-code-btn.copied) {
+    color: var(--accent-dim);
+    border-color: var(--accent-dim);
   }
 
   .content :global(img) {
