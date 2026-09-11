@@ -13,7 +13,8 @@ export default {
             lang: lang || 'text',
             theme: 'github-dark',
           });
-          return `{@html \`${html.replace(/`/g, '\\`')}\`}`;
+          const wrapped = `<div class="code-block">${html}<button type="button" class="copy-code-btn" aria-label="Copy code">Copy</button></div>`;
+          return `{@html \`${wrapped.replace(/`/g, '\\`')}\`}`;
         },
       },
     }),

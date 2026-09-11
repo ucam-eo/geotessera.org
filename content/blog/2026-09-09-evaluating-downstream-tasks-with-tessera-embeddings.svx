@@ -1,0 +1,87 @@
+---
+title: "Evaluating your downstream task with Tessera embeddings"
+date: 2026-09-09
+tags: [python, research]
+author: "Srinivasan Keshav"
+description: "tessera-eval turns a ground-truth shapefile into an honest accuracy estimate for Tessera embeddings — cross-validation, learning curves, and spatial splits."
+---
+
+*tessera-eval turns a ground-truth shapefile into an honest accuracy estimate for Tessera embeddings — cross-validation, learning curves, and spatial splits.*
+
+<figure class="cover-image">
+  <img src="/blog/tessera-eval-austria-cover.jpg" alt="A false-colour TESSERA embedding map of farmland northeast of Vienna, Austria, showing sharp-edged agricultural fields in blues, greens and purples set against a magenta backdrop of built-up areas and roads" />
+  <figcaption>TESSERA 2.0 embeddings over the fields northeast of Vienna, Austria — the same area used in the crop-classification example below. Credit: Tessera Zarr Explorer, University of Cambridge; basemap Sentinel-2 cloudless by EOX, contains modified Copernicus Sentinel data.</figcaption>
+</figure>
+
+[Tessera](https://geotessera.org) compresses a year of Sentinel-1 and Sentinel-2 imagery into a single 128-dimensional embedding for every 10 m pixel, which serves as a general-purpose summary of what that patch of ground looked like and how it changed. For an ecologist the practical question is: are these embeddings good enough for my task, and which ML model should I use? The `tessera-eval` Python package helps to answer that.
+
+Assuming that your ground truth is in a shapefile, the basic idea is that each labelled pixel is matched with a corresponding embedding vector; your labels plus those vectors then become a standard supervised-learning problem. `tessera-eval` handles the details, fetching and mosaicking the Tessera tiles, sampling pixels from your polygons, and scoring models. It supports both classification (habitat class, land cover) and regression (canopy height, biomass, percent cover).
+
+It supports:
+
+- **k-fold cross-validation** — a robust accuracy estimate (macro-F1, or R²/RMSE/MAE for regression) with the fold-to-fold spread.
+- **Learning curves** — accuracy versus training-set size, so you can see whether collecting more labels would still help.
+- **Confusion matrices**, and predicted-vs-actual scatters for regression.
+- **Spatial train/test splits** — hold out a whole region instead of random pixels, so nearby look-alike pixels can't inflate the score.
+- **Spatial-context models** — MLPs over a 3×3 or 5×5 neighbourhood, alongside per-pixel k-NN, random forest, XGBoost and MLP.
+
+Here is a minimal run. [`austria_crops.geojson`](https://raw.githubusercontent.com/ucam-eo/tessera-eval/main/examples/austria_crops.geojson) is 349 field parcels near Vienna labelled by crop type:
+
+```python
+import geopandas as gpd
+from geotessera import GeoTessera
+from tessera_eval import load_embeddings_for_shapefile, run_kfold_cv
+
+gdf = gpd.read_file("austria_crops.geojson").to_crs(4326)   # polygons with a "crop" column
+
+# One embedding per 10 m pixel inside your polygons (downloads tiles on first run)
+vectors, labels, class_names, stats = load_embeddings_for_shapefile(
+    gdf, field="crop", year=2024, gt_instance=GeoTessera()
+)
+print(f"{len(labels):,} labelled pixels across {len(class_names)} classes")
+
+# 5-fold cross-validation, random forest on the raw embeddings
+for event in run_kfold_cv(vectors, labels, ["rf"], k=5, task="classification"):
+    if event["type"] == "aggregate":
+        m = event["models"]["rf"]
+        print(f"macro-F1: {m['mean_f1']:.3f} ± {m['std_f1']:.3f}")
+```
+
+That prints macro-F1: 0.796 ± 0.004, a reasonable result for 10-way crop classification from embeddings alone. Replace ["rf"] with ["nn", "rf", "xgboost", "mlp"] to compare all four per-pixel models at once. For a continuous target (canopy height, biomass, percent cover), pass task="regression" with the regressor names — ["nn_reg", "rf_reg", "xgboost_reg", "mlp_reg"] to get R²/RMSE/MAE instead of F1. One caveat: random k-fold on satellite data is optimistic because neighbouring pixels are correlated. For a realistic comparison, use a spatial split.
+
+Install with `pip install "tessera-eval[geotessera,xgboost]"`. A follow-up post will cover the command-line interface, which runs the same evaluations without writing any Python.
+
+To find out more, here is the link to the [git repo](https://github.com/ucam-eo/tessera-eval).
+
+---
+
+*This post was first published on [Keshav's own blog](https://svr-sk818-web.cl.cam.ac.uk/keshav/blog/posts/2026-09-09-evaluating-downstream-tasks-with-tessera-embeddings.html) on 9 September 2026.*
+
+<style>
+  .cover-image {
+    margin: 0 0 2rem 0;
+    width: 100%;
+  }
+
+  .cover-image img {
+    width: 100%;
+    height: auto;
+    max-height: 520px;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+    border-radius: 4px;
+  }
+
+  figure {
+    margin: 0;
+  }
+
+  figcaption {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 6px;
+    line-height: 1.5;
+    font-style: italic;
+  }
+</style>
