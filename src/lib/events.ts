@@ -52,6 +52,23 @@ export interface TesseraEvent {
 export const tesseraEvents: TesseraEvent[] = [
   // --- Add events below, newest first ---
   {
+    id: 'clr-conference-2026',
+    title: 'CLR Conference 2026: Regenerating the British Countryside, From Evidence to Action',
+    date: '2026-09-18',
+    location: 'Constance Tipper Lecture Theatre, Department of Engineering, Cambridge',
+    organiser: 'Centre for Landscape Regeneration (CLR)',
+    links: [
+      { label: 'Event page', url: 'https://www.clr.conservation.cam.ac.uk/CLR-Conference-2026' },
+      { label: 'Programme (PDF)', url: 'https://www.clr.conservation.cam.ac.uk/sites/default/files/CLR-Conference-Programme.pdf' },
+    ],
+    speakers: [
+      { name: 'David Coomes', url: 'https://coomeslab.org/research-group/current-members/professor-david-coomes/' },
+      { name: 'Aneesh Naik', url: 'https://www.plantsci.cam.ac.uk/people/aneesh-naik' },
+    ],
+    talk: 'Change at Scale: Tessera and the Future of Environmental Monitoring',
+    description: "The Centre for Landscape Regeneration (CLR), which David Coomes co-directs, holds its 2026 conference, 'Regenerating the British Countryside, From Evidence to Action', looking at landscape regeneration in the Fens, Cairngorms and Lake District. David Coomes opens with 'Landscape Regeneration in the UK'; Dr Aneesh Naik (Department of Plant Sciences, CLR) speaks on how Tessera and geospatial foundation models are changing ecological monitoring. In-person tickets have sold out, but the conference will be live-streamed (see event page for link).",
+  },
+  {
     id: 'ukeo-2026',
     title: 'UK Earth Observation Conference (UKEO) 2026',
     date: '2026-09-15',
