@@ -3,6 +3,7 @@
   import { siteConfig } from '@/lib/config';
   import { getPeopleByRole } from '@/lib/data/people';
   import Footer from '@/components/Footer.svelte';
+  import FundingList from '@/components/FundingList.svelte';
 
   const faculty = getPeopleByRole('faculty');
   const researchers = getPeopleByRole('researcher');
@@ -177,19 +178,10 @@
     </div>
   </section>
 
-  <!-- Acknowledgments -->
+  <!-- Acknowledgements -->
   <section class="section" id="acknowledgments">
-    <h2>Acknowledgments</h2>
-    <p>
-      We are grateful to <a href="https://www.hpc.cam.ac.uk/d-w-n" target="_blank" rel="noopener">DAWN</a>,
-      the AI supercomputer at the University of Cambridge, and AMD for their generous support
-      in computational resources and technical assistance. Satellite data is provided by the
-      <a href="https://browser.dataspace.copernicus.eu/" target="_blank" rel="noopener">Copernicus programme</a>
-      via Sentinel-1 and Sentinel-2.
-    </p>
-    <p>
-      We also acknowledge compute resources from the <a href="https://www.isambard.ac.uk" target="_blank" rel="noopener">UKRI AIRR Isambard facility</a>, GPU hosting from <a href="https://www.vultr.com" target="_blank" rel="noopener">Vultr</a> and <a href="https://www.amd.com" target="_blank" rel="noopener">AMD</a>, and donations from <a href="https://www.janestreet.com" target="_blank" rel="noopener">Jane Street</a> and Dr Robert Sansom to the University of Cambridge.
-    </p>
+    <h2>Acknowledgements</h2>
+    <FundingList />
   </section>
 
   <Footer />
