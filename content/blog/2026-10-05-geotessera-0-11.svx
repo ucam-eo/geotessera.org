@@ -1,0 +1,49 @@
+---
+title: "Global 2017-2025 v1.1 embeddings now available in geotessera 0.11.0"
+date: 2026-10-05
+tags: [announcement, release, python]
+author: "Anil Madhavapeddy"
+description: "GeoTessera 0.11 defaults to a complete global run of v1.1 embeddings, streamed straight from AWS. Open the dataset, point it at a region, and read."
+---
+
+With [GeoTessera 0.11](https://pypi.org/project/geotessera/), global embeddings
+for the whole terrestrial surface of the planet are now available for every year
+from 2017 through to 2025! These are available for use straight away, with no
+separate registration step required.
+
+## What changes for you?
+
+- You don't need to request coverage any more! The embeddings for your region already
+  exist. Ask us only if you want the v2 beta embeddings, which is only for specialised research at this point.
+- You can download only what you need, due to Zarr and Icechunk. The `GeoTesseraZarr()` Python class fetches just the points or
+  areas you ask for. It streams from AWS over HTTPS, with no sign-up or credentials needed.
+- Your workflow can stay the same. Most geotessera download commands work as before, so if you were using
+  v1.0 then v1.1 is a dropin improvement (see the [v1.1 announcement](/blog/2026-06-09-tessera-v1-1)). Just be careful
+  not to mix embedding versions within the same analysis.
+
+```bash
+pip install -U geotessera
+geotessera download --bbox 0.05,52.15,0.20,52.25 --output tiles
+```
+
+Run `geotessera info` to list every dataset. It marks `v1.1-dclimate (Zarr)` as
+the default.
+
+## Collaborating embeddings generation
+
+Our community member [dClimate](https://blog.dclimate.net/dclimate-collaborates-with-aws-to-bring-tesseras-global-land-intelligence-to-the-world/)
+and AWS ran the model over the whole world to make this dataset possible. The data is now stored on
+[AWS Open Data](https://aws.amazon.com/blogs/publicsector/tessera-global-earth-observation-embeddings-now-available-on-aws-open-data/)
+and the [Source Cooperative](https://source.coop/tessera/tessera/), and so you dont need to pay any download fees (but please do be reasonable about your use).
+
+dClimate also publish the data in a format called [Icechunk](https://icechunk.io) which has more
+advanced features. We [converted](https://anil.recoil.org/notes/2026w38) to plain Zarr v3 for hosting on Source Coop to maximise the 
+accessibility.  GeoTessera 0.11 reads both so you don't have to worry about it unless you are running into some performance tuning needs, and more [technical details](https://anil.recoil.org/notes/2026w40) explain how the two formats compare.
+
+Key points are:
+
+- The Cambridge v1.1 run is a separate (and incomplete) embeddings dataset, so we keep it separate from dClimate's.
+- We are phasing out NPY tile downloads now that we have global streamed reads over Zarr. Tell us if you still need NPY.
+- Older versions and variants, including v1.0, still work and we aim to maintain that archive for as long as we can.
+
+Enjoy v1.1, and as always [feel free to share](https://eeg.zulipchat.com) your usage or ask questions on our community channels!
