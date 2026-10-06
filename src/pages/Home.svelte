@@ -74,9 +74,10 @@
   let openStep4 = $derived(scrollVh >= 13);
   let coverageVisible = $derived(scrollVh >= 15);
   let coverageV1 = $derived(scrollVh >= 15.5);
-  let coverageV1Zarr = $derived(scrollVh >= 16);
-  let coverageV11 = $derived(scrollVh >= 16.5);
+  let coverageV11 = $derived(scrollVh >= 16);
+  let coverageV11Zarr = $derived(scrollVh >= 16.5);
   let coverageV2 = $derived(scrollVh >= 17);
+  let coverageV2Zarr = $derived(scrollVh >= 17.5);
 
   function onScroll() {
     scrollTop = scrollContainer?.scrollTop ?? 0;
@@ -288,7 +289,7 @@
           <p class="open-intro">Global terrestrial coverage at 10m resolution. Built in the open at Cambridge. <a href="/about#roadmap" use:link>Full roadmap →</a></p>
           <div class="coverage-timeline">
             {#each siteConfig.roadmap as item, i}
-              {@const revealed = i === 0 ? coverageV1 : i === 1 ? coverageV1Zarr : i === 2 ? coverageV11 : coverageV2}
+              {@const revealed = [coverageV1, coverageV11, coverageV11Zarr, coverageV2, coverageV2Zarr][i]}
               <div class="cov-entry" class:revealed>
                 <div class="cov-marker {item.status}"></div>
                 <div class="cov-content">
