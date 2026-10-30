@@ -152,7 +152,7 @@
     <section class="project-section community">
       <h2 class="section-heading">Projects using Tessera</h2>
       <p class="section-intro">
-        Tessera is open, and researchers outside Cambridge are applying it to problems of their own.
+        Tessera is open, and researchers across campus and outside Cambridge are applying it to problems of their own.
         These projects are led and run independently by their own teams. If you're using Tessera and
         would like your work listed here, get in touch on our
         <a href="https://eeg.zulipchat.com" target="_blank" rel="noopener">Zulip</a>.

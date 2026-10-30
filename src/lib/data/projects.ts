@@ -164,6 +164,25 @@ export const projects: Project[] = [
     origin: 'community',
     leadInstitution: 'DRSRS, JRC, EFI',
   },
+  {
+    id: 'ghana-gold-mining',
+    title: 'Artisanal gold mine mapping in Ghana',
+    subtitle: 'Mapping small-scale gold mines with Tessera embeddings',
+    status: 'in-progress',
+    statusLabel: 'In progress',
+    region: 'Western and Ashanti regions, Ghana',
+    tags: ['Mining', 'Artisanal gold', 'Land-use change', 'AlphaEarth comparison'],
+    // Wording signed off by Leonie Hodel (Oct 2026), with David Edwards added as a researcher at her request.
+    description: 'In Ghana, artisanal gold mining has expanded across forest and farmland, yet its small, irregular and spectrally ambiguous pits are poorly captured by existing satellite-based mine maps. This project uses Tessera embeddings and a mine density estimation approach to produce annual maps of mining extent for 2017 to 2022, and tests how well the approach transfers across years and regions. Tessera is compared against AlphaEarth Foundations and standard baselines.',
+    // External collaborators: literal names, not people.ts ids.
+    team: ['Leonie Hodel', 'David Edwards'],
+    hasDetailPage: false,
+    // Literal strings rather than funding.ts / partners.ts ids, so they stay out of Tessera's own lists.
+    fundingSources: ['Swiss National Science Foundation'],
+    partners: ['Department of Plant Sciences, University of Cambridge'],
+    origin: 'community',
+    leadInstitution: 'Cambridge Conservation Research Institute, University of Cambridge',
+  },
 ];
 
 export function getProjectById(id: string): Project | undefined {

@@ -52,6 +52,25 @@ export interface TesseraEvent {
 export const tesseraEvents: TesseraEvent[] = [
   // --- Add events below, newest first ---
   {
+    id: 'egu-2027',
+    title: 'EGU General Assembly 2027',
+    date: '2027-04-04',
+    dateEnd: '2027-04-09',
+    location: 'Vienna, Austria and online',
+    organiser: 'European Geosciences Union (EGU)',
+    links: [
+      { label: 'Session page', url: 'https://meetingorganizer.copernicus.org/EGU27/session/61703' },
+    ],
+    speakers: [
+      { name: 'Kyle Gao', url: 'https://www.aalto.fi/en/people/kyle-gao' },
+      { name: 'Madeline Lisaius', url: 'https://mlisaius.github.io/' },
+      { name: 'Jingtao Li', url: 'https://jingtao-li-cver.github.io/home_page/' },
+    ],
+    talk: 'ESSI1.2: Geospatial Foundation Models for Earth Observation and Earth Sciences: From Foundations to Applications (session)',
+    // TODO: add the session day, time and room once EGU publishes the programme.
+    description: "Tessera research affiliate Kyle Gao (Aalto University) convenes session ESSI1.2 at the EGU General Assembly 2027, co-convened by Madeline Lisaius (former Cambridge PhD student), Jingtao Li (Cambridge), Nikolaos Ioannis Bountos and Rahul Ramachandran. The session invites work on new geospatial foundation models, pre-training, datasets and benchmarks, multisensor learning, evaluation and transferability, embeddings and real-world applications. The abstract deadline is 12 January 2027 (13:00 CET). Chairs and keynote speakers include colleagues from the Cambridge Energy and Environment Group, ESA Phi-lab and Ai2, representing Tessera, TerraMind, THOR and OlmoEarth.",
+  },
+  {
     id: 'openuk-space-tech-radar-2026',
     title: 'OpenUK Launch of Space Tech Radar',
     date: '2026-10-29',
