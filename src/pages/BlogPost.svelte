@@ -27,6 +27,15 @@
       }, 1500);
     });
   }
+  function formatDate(date: string): string {
+    return new Date(date).toLocaleDateString('en-GB', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+      timeZone: 'UTC',
+    });
+  }
+
   let post = $derived(getContentBySlug(slug));
   let Component = $derived(post?.component);
   let section = $derived(post && hasNewsTag(post.tags) ? 'news' : 'blog');
@@ -69,7 +78,7 @@
       <h1>{post.title}</h1>
       <div class="meta">
         {#if post.author}<span class="post-author">{#each resolveAuthors(post.author) as ra, i}{#if i > 0}, {/if}{#if ra.person?.url}<a href={ra.person.url} target="_blank" rel="noopener" class="author-link">{ra.name}</a>{:else}{ra.name}{/if}{/each}</span>{/if}
-        <span>{post.date}</span>
+        <span>{formatDate(post.date)}</span>
         {#if post.draft}<span class="draft-badge">DRAFT</span>{/if}
       </div>
     </header>

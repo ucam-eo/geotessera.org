@@ -1,0 +1,104 @@
+---
+title: "Cambridge's Tessera named joint best software at OpenUK Awards"
+date: 2026-11-12
+tags: [announcement, news]
+author: "Constantino Panagopulos"
+description: "The open-source AI model is already helping researchers map smallholder crops in Senegal, tree species in Italy and hedgehog habitats across the UK. It has now shared the top software prize at the OpenUK Awards."
+---
+
+<script>
+  import ImageZoom from '../../src/components/ImageZoom.svelte';
+</script>
+
+<figure class="cover-image">
+  <img src="/blog/openuk-awards-winners.webp" alt="Five winners at the OpenUK Awards 2026 stand together on a small stage in front of an event banner, four of them holding glass trophies" />
+  <figcaption>OpenUK CEO Amanda Brock (far left) with winners at the 7th OpenUK Awards, held at the House of Commons on 5 November. University of Cambridge Professor Anil Madhavapeddy, who accepted the software award on behalf of Tessera, is second from right. Credit: OpenUK.</figcaption>
+</figure>
+
+[Tessera](https://www.cst.cam.ac.uk/research/eeg/cambridge-ai-tool-promises-new-era-earth-intelligence-space), the geospatial artificial intelligence model from the University of Cambridge, has been named joint winner of the software category at the [7th OpenUK Awards](https://openuk.uk/awards/). Presented on 5 November at a House of Commons event to [Professor of Planetary Computing, Anil Madhavapeddy](https://www.cst.cam.ac.uk/people/avsm2), who co-leads Tessera's development, the award recognises projects that demonstrate excellence and impact in open-source software development and adoption within the UK.
+
+Tessera condenses petabytes of satellite imagery into downloadable embeddings, which researchers can use to analyse the Earth's surface and landscapes without the need for expensive computing. The approach holds enormous promise for a wide range of applications, from informing agricultural policy to monitoring the impacts of climate change and even improving weather forecasts.
+
+"It's very gratifying to see Tessera recognised and we're grateful to OpenUK," said Tessera co-lead [Srinivasan Keshav, Robert Sansom Professor of Computer Science](https://www.cst.cam.ac.uk/people/sk818) in the [Department of Computer Science and Technology](https://www.cst.cam.ac.uk), and a Fellow of Fitzwilliam College. "We started out scrappy, running on donated compute and a lot of goodwill, so it's rewarding to see hundreds of groups around the world using it."
+
+Launched in August 2025 with just a handful of users, Tessera's embeddings have since found use by academic, government and commercial research groups in over 65 countries. The model is trained on images captured by [Copernicus Sentinel satellites](https://sentinels.copernicus.eu/), which are condensed into a numerical fingerprint for every 10-metre square of land on Earth.
+
+The fingerprints, collectively known as embeddings, are especially well suited for ecological applications because they capture seasonal cycles in the landscape. These cycles can reveal plant species that might not be discernible from individual satellite images. Because the embeddings capture change, they can also be used to detect unexpected events such as deforestation, disease or illegal dumping.
+
+Keshav said that Tessera was opening up capabilities that were once out of reach for many, especially for UK environmental monitoring organisations, where resources and funding for computational modelling are often limited.
+
+"Our aim was to make satellite data something you can pick up and use without being an AI specialist," he said. "It's open, it was built here in the UK, and it only exists because of our students and early-career researchers. I hope this shows young people what they can contribute as scientists."
+
+The OpenUK Awards, now in their seventh year, recognise open technology across software, hardware, data and AI. Tessera shared the Open Source Software award, sponsored by Red Badger, with StackHPC. Other winners included Raspberry Pi's Eben Upton (an alumnus of the department) and Wikipedia co-founder Jimmy Wales. Previous software winners include the Cilium project and BBC Research & Development.
+
+<figure class="wide-image">
+  <ImageZoom src="/blog/openuk-awards-2026-winners.webp" alt="OpenUK Awards 2026 winners graphic listing each category with its winner, including StackHPC and Tessera at the University of Cambridge for Open Source Software, over a night sky and Westminster skyline" />
+  <figcaption>The winners of the 2026 OpenUK Awards. Credit: OpenUK.</figcaption>
+</figure>
+
+"Tessera shows the power of open source when it is pointed at a global problem," said OpenUK CEO Amanda Brock. "Cambridge has not only published its model and code, it has made the data usable by all, including researchers and organisations everywhere. This is in part what OpenUK exists to celebrate, and celebrate we did."
+
+Tessera and its training code are free to use and adapt, and the global embeddings are free to download and reuse. The embeddings are pre-generated and come with a suite of tools, including a browser-based explorer that lets users label habitats and test classifiers on their own data without writing code.
+
+<figure class="thumb-image">
+  <ImageZoom src="/blog/openuk-anil-commons.webp" alt="Anil Madhavapeddy in a bow tie, smiling in a selfie in front of the illuminated Elizabeth Tower at night" />
+  <figcaption>Professor Anil Madhavapeddy outside the House of Commons on the night of the awards. Credit: Anil Madhavapeddy.</figcaption>
+</figure>
+
+Madhavapeddy was recently a keynote speaker at the launch of [OpenUK's Space Tech Radar](https://openuk.uk/event-calendar/openukspacetechradar/) (a report that maps open-source technology projects across the space sector) and was previously a member of OpenUK's sustainability board.
+
+"The best bit of getting an award like this is the recognition it gives environmental science, and how we as computer programmers can contribute our skills towards helping the planet," he said.
+
+Read Madhavapeddy's account of the awards ceremony [at his blog](https://anil.recoil.org/notes/openuk-tessera-award).
+
+Tessera is made possible by the generous support of Dr Robert Sansom, UK Research and Innovation and Jane Street, with computing resources from UK national facilities and donations from AMD, Vultr, NVIDIA and dClimate. A full list of supporters is at [geotessera.org/about](https://geotessera.org/about).
+
+*For more information contact [Constantino Panagopulos](mailto:cp918@cam.ac.uk), Tessera communications, Department of Computer Science and Technology, +44 (0)7356 104 073.*
+
+<style>
+  .cover-image {
+    margin: 0 0 2rem 0;
+    width: 100%;
+  }
+
+  .cover-image img {
+    width: 100%;
+    height: auto;
+    max-height: 520px;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+    border-radius: 4px;
+  }
+
+  .wide-image {
+    margin: 2rem 0;
+    width: 100%;
+  }
+
+  .thumb-image {
+    float: right;
+    width: 28%;
+    margin: 0.25rem 0 1rem 1.5rem;
+  }
+
+  figure {
+    margin: 0;
+  }
+
+  figcaption {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 6px;
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  @media (max-width: 640px) {
+    .thumb-image {
+      float: none;
+      width: 60%;
+      margin: 0 0 1.5rem 0;
+    }
+  }
+</style>

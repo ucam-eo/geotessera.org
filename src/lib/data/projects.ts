@@ -57,7 +57,7 @@ export const projects: Project[] = [
     region: 'Cumbria, UK',
     tags: ['86,500 hectares', 'Landscape Recovery', 'CLR funded', 'National Trust'],
     description: 'Establishing baseline habitat maps across approximately 86,500 hectares encompassing Cumbria\u2019s five Landscape Recovery schemes, the Cumbria Connect initiative, and National Trust estates. Using Tessera to classify natural, semi-natural, and farmed habitats from 2017 to 2025, providing essential reference points for tracking 20\u201330 year restoration outcomes. Cumbria accounts for roughly 20% of the total Landscape Recovery area nationally.',
-    team: ['amandine-debus', 'barbara-neto-bradley', 'jess-williams', 'david-coomes'],
+    team: ['amandine-debus', 'jess-williams', 'david-coomes'],
     hasDetailPage: false,
     fundingSources: ['clr'],
     partners: ['nerc-clr'],
@@ -71,7 +71,7 @@ export const projects: Project[] = [
     region: 'Cairngorms, Scotland',
     tags: ['Tessera + LiDAR', 'Rewilding', 'CLR funded', '3D habitat mapping'],
     description: 'Supporting the Cairngorm Connect initiative \u2014 an ambitious 200-year vision for rewilding across the Cairngorms \u2014 by integrating Tessera embeddings with Scotland\u2019s National LIDAR Programme. The combination of continuous spectral-temporal monitoring with structural 3D data enables automated assessment of ecosystem recovery trajectories, distinguishing between spectrally similar but structurally distinct habitats.',
-    team: ['amandine-debus', 'barbara-neto-bradley', 'jess-williams', 'david-coomes'],
+    team: ['amandine-debus', 'jess-williams', 'david-coomes'],
     hasDetailPage: false,
     fundingSources: ['clr'],
     partners: ['nerc-clr'],
@@ -182,6 +182,25 @@ export const projects: Project[] = [
     partners: ['Department of Plant Sciences, University of Cambridge'],
     origin: 'community',
     leadInstitution: 'Cambridge Conservation Research Institute, University of Cambridge',
+  },
+  {
+    id: 'guinea-bissau-habitat-mapping',
+    title: 'Label-efficient habitat mapping in Guinea-Bissau',
+    subtitle: 'Mapping critical habitats and agricultural land use in Guinea-Bissau with Tessera embeddings',
+    status: 'in-progress',
+    statusLabel: 'In progress',
+    region: 'Guinea-Bissau',
+    tags: ['Habitat mapping', 'Land cover', 'Conservation', 'Label-efficient'],
+    // Wording signed off by Andrew Houldcroft (Nov 2026).
+    description: 'This project evaluates Tessera embeddings, paired with a range of classification model heads, for mapping critical habitats and agricultural land use across Guinea-Bissau, where field data are scarce and landscapes are highly fragmented. The aim is to produce accurate, detailed land-cover maps to support evidence-based conservation and sustainable development.',
+    // External collaborators: literal names, not people.ts ids.
+    team: ['Andrew Houldcroft'],
+    links: [{ label: 'Visit the project website', url: 'https://cantanhezchimpanzeeproject.com' }],
+    hasDetailPage: false,
+    // Literal strings rather than funding.ts / partners.ts ids, so they stay out of Tessera's own lists.
+    fundingSources: ['UKRI AI Centre for Doctoral Training in Environmental Intelligence'],
+    origin: 'community',
+    leadInstitution: 'University of Exeter',
   },
 ];
 

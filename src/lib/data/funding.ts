@@ -47,11 +47,13 @@ export const fundingSources: FundingSource[] = [
   {
     id: 'microsoft-ai-for-good',
     name: 'Microsoft AI for Good Lab',
+    url: 'https://www.microsoft.com/en-us/research/group/ai-for-good-research-lab/',
   },
   {
     id: 'clr',
     name: 'NERC Centre for Landscape Regeneration',
     shortName: 'CLR',
+    url: 'https://www.clr.conservation.cam.ac.uk/about-centre',
   },
   {
     id: 'nvidia',
@@ -64,6 +66,7 @@ export const fundingSources: FundingSource[] = [
   {
     id: 'source-coop',
     name: 'Source Coop',
+    url: 'https://source.coop/',
   },
   {
     id: 'dirac',

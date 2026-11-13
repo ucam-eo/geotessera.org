@@ -302,15 +302,6 @@ export const people: Person[] = [
     programmes: ['tessera'],
   },
   {
-    id: 'barbara-neto-bradley',
-    name: 'Barbara Neto-Bradley',
-    role: 'affiliate',
-    title: 'CLR Postdoc',
-    affiliation: 'Centre for Landscape Regeneration',
-    initials: 'BN',
-    programmes: ['habitat-mapping', 'clr'],
-  },
-  {
     id: 'thomas-ratsakatika',
     name: 'Thomas Ratsakatika',
     role: 'affiliate',
@@ -333,11 +324,14 @@ export const people: Person[] = [
   },
   {
     id: 'jess-williams',
-    name: 'Jess Williams',
+    name: 'Jessica Williams',
     role: 'affiliate',
-    title: 'CLR Coordinator',
-    affiliation: 'Centre for Landscape Regeneration',
+    title: 'MPhil student and Research Programme Coordinator for the Centre for Landscape Regeneration',
+    affiliation: 'Department of Plant Sciences, Cambridge',
+    url: 'https://www.plantsci.cam.ac.uk/people/jessica-williams',
     initials: 'JW',
+    photo: '/people/jess-williams.jpg',
+    aliases: ['Jess Williams'],
     programmes: ['habitat-mapping', 'clr'],
   },
 
